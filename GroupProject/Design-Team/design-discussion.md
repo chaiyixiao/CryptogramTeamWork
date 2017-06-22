@@ -2,7 +2,7 @@
 
 ## Design 1 (xliang70)
 
-![Screen Shot 2017-06-22 at 10.39.46 A](media/Screen%20Shot%202017-06-22%20at%2010.39.46%20AM.png)
+![Screen Shot xliang70](media/xliang70.png)
 
 There are several good aspects in this design.
 
@@ -15,7 +15,7 @@ Classes can be created in a hierarchical manner if it can be abstracted out into
 Even though, there are minor enhancements that can be made, this is a very good design.
 
 ## Design 2 (lfan42)
-![Screen Shot 2017-06-22 at 10.39.14 A](media/Screen%20Shot%202017-06-22%20at%2010.39.14%20AM.png)
+![Screen Shot lfan42](media/lfan42.png)
 
 **Pros:**
 On the whole, it is a very straightforward and precise design. It covers almost every requirement(attribute and operation) from the instructions. The relationships between classes make good sense. The quantitative relations between classes are also described clearly.
@@ -23,8 +23,16 @@ On the whole, it is a very straightforward and precise design. It covers almost 
 **Cons:**
 There are also some improvements can be made. First, Duplicate *ExternalWebService* can be reduced to one instance. Secondly, an extra utility class *CentralServer* can be used to assign identifiers to cryptograms, keeping the responsibility of *ExternalWebService* simple. Likewise, a *LocalServer* can be store local data and used for user rankings calculation. Besides, similar to the Library System in lecture video, *PlayerCryptogram* can be an association class.
 
-## Design 3
+## Design 3 (ychai37)
 
+![Screen Shot ycha37](media/ychai37.png)
+
+**Pros:**
+
+It is a great design which shows almost all the requirements of the game clearly and precicesly. The most brilliant part is that the `OperatingSystemWithStorage` and the `CentralServer` utilities are added to fully present the working flows between the local game and the center server. Together with the `ExternalWebService`, the processes of both the adding/request of cryptograms and the update/request of player ratings are clearly illustrated.
+
+**Cons:**
+First the player rating list should be sorted by the `totalNumberOfCryptogramsSolved` attribute per the requirements, not the `rating` attribute. The latter is a derived attribute, however the designer didn't explain how it is derived from other attributes. Second the `PlayerCryptogram` class might be inherited from the `Cryptogram` class as an unique id is required for it.
 
 ## Design 4
 
