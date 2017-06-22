@@ -96,7 +96,7 @@
 			<key>BackgroundGraphic</key>
 			<dict>
 				<key>Bounds</key>
-				<string>{{-2877.909090909091, -1389.9999999999998}, {6976.3636363636369, 3803.636363636364}}</string>
+				<string>{{-2877.909090909091, -1248.1818181818182}, {6976.3636363636369, 3520}}</string>
 				<key>Class</key>
 				<string>ShapedGraphic</string>
 				<key>ID</key>
@@ -144,7 +144,7 @@
 						<real>23</real>
 					</dict>
 					<key>ID</key>
-					<integer>98</integer>
+					<integer>3</integer>
 					<key>Style</key>
 					<dict>
 						<key>fill</key>
@@ -168,7 +168,7 @@
 					<key>Text</key>
 					<dict>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg936\cocoartf1504\cocoasubrtf830
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
 {\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
@@ -195,7 +195,7 @@
 						<real>23</real>
 					</dict>
 					<key>ID</key>
-					<integer>97</integer>
+					<integer>4</integer>
 					<key>Style</key>
 					<dict>
 						<key>fill</key>
@@ -217,7 +217,7 @@
 					<key>Text</key>
 					<dict>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg936\cocoartf1504\cocoasubrtf830
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
 {\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
@@ -244,7 +244,7 @@
 						<real>23</real>
 					</dict>
 					<key>ID</key>
-					<integer>96</integer>
+					<integer>5</integer>
 					<key>Style</key>
 					<dict>
 						<key>fill</key>
@@ -266,7 +266,7 @@
 					<key>Text</key>
 					<dict>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg936\cocoartf1504\cocoasubrtf830
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
 {\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
@@ -288,7 +288,7 @@
 					<key>Flow</key>
 					<string>Resize</string>
 					<key>ID</key>
-					<integer>95</integer>
+					<integer>6</integer>
 					<key>Style</key>
 					<dict>
 						<key>fill</key>
@@ -310,7 +310,7 @@
 					<key>Text</key>
 					<dict>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg936\cocoartf1504\cocoasubrtf830
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
 {\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
@@ -332,7 +332,7 @@
 					<key>Flow</key>
 					<string>Resize</string>
 					<key>ID</key>
-					<integer>94</integer>
+					<integer>7</integer>
 					<key>Style</key>
 					<dict>
 						<key>fill</key>
@@ -354,7 +354,7 @@
 					<key>Text</key>
 					<dict>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg936\cocoartf1504\cocoasubrtf830
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
 {\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
@@ -379,10 +379,10 @@
 					<key>Head</key>
 					<dict>
 						<key>ID</key>
-						<integer>44</integer>
+						<integer>60</integer>
 					</dict>
 					<key>ID</key>
-					<integer>93</integer>
+					<integer>8</integer>
 					<key>Points</key>
 					<array>
 						<string>{-353.17755681818181, 318}</string>
@@ -432,7 +432,7 @@
 						<real>23</real>
 					</dict>
 					<key>ID</key>
-					<integer>92</integer>
+					<integer>9</integer>
 					<key>Style</key>
 					<dict>
 						<key>fill</key>
@@ -454,7 +454,7 @@
 					<key>Text</key>
 					<dict>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg936\cocoartf1504\cocoasubrtf830
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
 {\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
@@ -476,7 +476,7 @@
 					<key>Flow</key>
 					<string>Resize</string>
 					<key>ID</key>
-					<integer>91</integer>
+					<integer>10</integer>
 					<key>Style</key>
 					<dict>
 						<key>fill</key>
@@ -498,7 +498,7 @@
 					<key>Text</key>
 					<dict>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg936\cocoartf1504\cocoasubrtf830
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
 {\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
@@ -520,7 +520,7 @@
 					<key>Flow</key>
 					<string>Resize</string>
 					<key>ID</key>
-					<integer>89</integer>
+					<integer>11</integer>
 					<key>Style</key>
 					<dict>
 						<key>fill</key>
@@ -542,7 +542,7 @@
 					<key>Text</key>
 					<dict>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg936\cocoartf1504\cocoasubrtf830
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
 {\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
@@ -564,7 +564,7 @@
 					<key>Flow</key>
 					<string>Resize</string>
 					<key>ID</key>
-					<integer>83</integer>
+					<integer>12</integer>
 					<key>Style</key>
 					<dict>
 						<key>fill</key>
@@ -588,7 +588,7 @@
 					<key>Text</key>
 					<dict>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg936\cocoartf1504\cocoasubrtf830
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
 {\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
@@ -611,15 +611,15 @@
 						<real>23</real>
 					</dict>
 					<key>ID</key>
-					<integer>86</integer>
+					<integer>13</integer>
 					<key>Line</key>
 					<dict>
 						<key>ID</key>
-						<integer>85</integer>
+						<integer>15</integer>
 						<key>Offset</key>
-						<real>3.571428571429351</real>
+						<real>3.5714285373687744</real>
 						<key>Position</key>
-						<real>0.021248377165388441</real>
+						<real>0.021248377859592438</real>
 						<key>RotationType</key>
 						<integer>0</integer>
 					</dict>
@@ -646,7 +646,7 @@
 					<key>Text</key>
 					<dict>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg936\cocoartf1504\cocoasubrtf830
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
 {\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
@@ -668,7 +668,7 @@
 					<key>Flow</key>
 					<string>Resize</string>
 					<key>ID</key>
-					<integer>81</integer>
+					<integer>14</integer>
 					<key>Style</key>
 					<dict>
 						<key>fill</key>
@@ -692,7 +692,7 @@
 						<key>Align</key>
 						<integer>0</integer>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg936\cocoartf1504\cocoasubrtf830
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
 {\fonttbl\f0\fswiss\fcharset0 ArialMT;}
 {\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
 {\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
@@ -717,10 +717,10 @@ editCryptogramAndSolution}</string>
 					<key>Head</key>
 					<dict>
 						<key>ID</key>
-						<integer>61</integer>
+						<integer>25</integer>
 					</dict>
 					<key>ID</key>
-					<integer>85</integer>
+					<integer>15</integer>
 					<key>OrthogonalBarAutomatic</key>
 					<true/>
 					<key>OrthogonalBarPoint</key>
@@ -777,7 +777,7 @@ editCryptogramAndSolution}</string>
 						<real>23</real>
 					</dict>
 					<key>ID</key>
-					<integer>79</integer>
+					<integer>16</integer>
 					<key>Style</key>
 					<dict>
 						<key>fill</key>
@@ -799,7 +799,7 @@ editCryptogramAndSolution}</string>
 					<key>Text</key>
 					<dict>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg936\cocoartf1504\cocoasubrtf830
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
 {\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
@@ -821,7 +821,7 @@ editCryptogramAndSolution}</string>
 					<key>Flow</key>
 					<string>Resize</string>
 					<key>ID</key>
-					<integer>78</integer>
+					<integer>17</integer>
 					<key>Style</key>
 					<dict>
 						<key>fill</key>
@@ -843,7 +843,7 @@ editCryptogramAndSolution}</string>
 					<key>Text</key>
 					<dict>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg936\cocoartf1504\cocoasubrtf830
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
 {\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
@@ -865,7 +865,7 @@ editCryptogramAndSolution}</string>
 					<key>Flow</key>
 					<string>Resize</string>
 					<key>ID</key>
-					<integer>77</integer>
+					<integer>18</integer>
 					<key>Style</key>
 					<dict>
 						<key>fill</key>
@@ -887,7 +887,7 @@ editCryptogramAndSolution}</string>
 					<key>Text</key>
 					<dict>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg936\cocoartf1504\cocoasubrtf830
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
 {\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
@@ -911,7 +911,7 @@ editCryptogramAndSolution}</string>
 						<real>12</real>
 					</dict>
 					<key>ID</key>
-					<integer>73</integer>
+					<integer>19</integer>
 					<key>Points</key>
 					<array>
 						<string>{573, -76.5}</string>
@@ -947,7 +947,7 @@ editCryptogramAndSolution}</string>
 					<key>Tail</key>
 					<dict>
 						<key>ID</key>
-						<integer>28</integer>
+						<integer>47</integer>
 					</dict>
 				</dict>
 				<dict>
@@ -961,7 +961,7 @@ editCryptogramAndSolution}</string>
 						<real>12</real>
 					</dict>
 					<key>ID</key>
-					<integer>70</integer>
+					<integer>20</integer>
 					<key>Points</key>
 					<array>
 						<string>{750, -65}</string>
@@ -1004,7 +1004,7 @@ editCryptogramAndSolution}</string>
 					<key>Flow</key>
 					<string>Resize</string>
 					<key>ID</key>
-					<integer>65</integer>
+					<integer>21</integer>
 					<key>Style</key>
 					<dict>
 						<key>fill</key>
@@ -1028,7 +1028,7 @@ editCryptogramAndSolution}</string>
 					<key>Text</key>
 					<dict>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg936\cocoartf1504\cocoasubrtf830
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
 {\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
@@ -1053,10 +1053,10 @@ editCryptogramAndSolution}</string>
 					<key>Head</key>
 					<dict>
 						<key>ID</key>
-						<integer>61</integer>
+						<integer>25</integer>
 					</dict>
 					<key>ID</key>
-					<integer>87</integer>
+					<integer>22</integer>
 					<key>OrthogonalBarAutomatic</key>
 					<true/>
 					<key>OrthogonalBarPoint</key>
@@ -1117,7 +1117,7 @@ editCryptogramAndSolution}</string>
 						</dict>
 					</dict>
 					<key>ID</key>
-					<integer>90</integer>
+					<integer>23</integer>
 					<key>Style</key>
 					<dict>
 						<key>fill</key>
@@ -1143,7 +1143,7 @@ editCryptogramAndSolution}</string>
 						<key>Align</key>
 						<integer>0</integer>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg936\cocoartf1504\cocoasubrtf830
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
 {\fonttbl\f0\fswiss\fcharset0 ArialMT;}
 {\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
 {\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
@@ -1167,7 +1167,7 @@ addCryptogramWithSolution\
 						<real>23</real>
 					</dict>
 					<key>ID</key>
-					<integer>62</integer>
+					<integer>24</integer>
 					<key>Style</key>
 					<dict>
 						<key>fill</key>
@@ -1191,7 +1191,7 @@ addCryptogramWithSolution\
 					<key>Text</key>
 					<dict>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg936\cocoartf1504\cocoasubrtf830
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
 {\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
@@ -1225,7 +1225,7 @@ addCryptogramWithSolution\
 						<string>ArialMT</string>
 					</dict>
 					<key>ID</key>
-					<integer>61</integer>
+					<integer>25</integer>
 					<key>Style</key>
 					<dict>
 						<key>fill</key>
@@ -1260,7 +1260,7 @@ addCryptogramWithSolution\
 						<key>Pad</key>
 						<real>6</real>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg936\cocoartf1504\cocoasubrtf830
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
 {\fonttbl\f0\fswiss\fcharset0 ArialMT;}
 {\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
 {\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
@@ -1287,12 +1287,12 @@ Administrator}</string>
 					<key>Head</key>
 					<dict>
 						<key>ID</key>
-						<integer>49</integer>
+						<integer>64</integer>
 						<key>Info</key>
 						<integer>3</integer>
 					</dict>
 					<key>ID</key>
-					<integer>55</integer>
+					<integer>26</integer>
 					<key>Points</key>
 					<array>
 						<string>{-653.43750000000023, -138.80000000000001}</string>
@@ -1325,7 +1325,7 @@ Administrator}</string>
 					<key>Tail</key>
 					<dict>
 						<key>ID</key>
-						<integer>33</integer>
+						<integer>52</integer>
 					</dict>
 				</dict>
 				<dict>
@@ -1341,7 +1341,7 @@ Administrator}</string>
 						<real>12</real>
 					</dict>
 					<key>ID</key>
-					<integer>54</integer>
+					<integer>27</integer>
 					<key>Points</key>
 					<array>
 						<string>{-627.88912138200362, 287.33806609547543}</string>
@@ -1375,7 +1375,7 @@ Administrator}</string>
 					<key>Tail</key>
 					<dict>
 						<key>ID</key>
-						<integer>27</integer>
+						<integer>46</integer>
 					</dict>
 				</dict>
 				<dict>
@@ -1391,10 +1391,10 @@ Administrator}</string>
 					<key>Head</key>
 					<dict>
 						<key>ID</key>
-						<integer>6</integer>
+						<integer>31</integer>
 					</dict>
 					<key>ID</key>
-					<integer>3</integer>
+					<integer>28</integer>
 					<key>OrthogonalBarAutomatic</key>
 					<true/>
 					<key>OrthogonalBarPoint</key>
@@ -1435,7 +1435,7 @@ Administrator}</string>
 					<key>Tail</key>
 					<dict>
 						<key>ID</key>
-						<integer>44</integer>
+						<integer>60</integer>
 					</dict>
 				</dict>
 				<dict>
@@ -1465,7 +1465,7 @@ Administrator}</string>
 								<string>Arial-BoldMT</string>
 							</dict>
 							<key>ID</key>
-							<integer>5</integer>
+							<integer>30</integer>
 							<key>Style</key>
 							<dict>
 								<key>fill</key>
@@ -1525,7 +1525,7 @@ Administrator}</string>
 								<string>Arial-BoldMT</string>
 							</dict>
 							<key>ID</key>
-							<integer>6</integer>
+							<integer>31</integer>
 							<key>Style</key>
 							<dict>
 								<key>fill</key>
@@ -1562,7 +1562,7 @@ Administrator}</string>
 								<key>Pad</key>
 								<real>6</real>
 								<key>Text</key>
-								<string>{\rtf1\ansi\ansicpg936\cocoartf1504\cocoasubrtf830
+								<string>{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
 {\fonttbl\f0\fswiss\fcharset0 ArialMT;}
 {\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
 {\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
@@ -1600,7 +1600,7 @@ viewCryptograms\
 								<string>Arial-BoldMT</string>
 							</dict>
 							<key>ID</key>
-							<integer>7</integer>
+							<integer>32</integer>
 							<key>Style</key>
 							<dict>
 								<key>fill</key>
@@ -1635,7 +1635,7 @@ viewCryptograms\
 								<key>Pad</key>
 								<real>6</real>
 								<key>Text</key>
-								<string>{\rtf1\ansi\ansicpg936\cocoartf1504\cocoasubrtf830
+								<string>{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
 {\fonttbl\f0\fswiss\fcharset0 ArialMT;}
 {\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
 {\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
@@ -1649,7 +1649,7 @@ User}</string>
 						</dict>
 					</array>
 					<key>ID</key>
-					<integer>4</integer>
+					<integer>29</integer>
 					<key>Style</key>
 					<dict>
 						<key>fill</key>
@@ -1684,7 +1684,7 @@ User}</string>
 						<real>23</real>
 					</dict>
 					<key>ID</key>
-					<integer>8</integer>
+					<integer>33</integer>
 					<key>Style</key>
 					<dict>
 						<key>fill</key>
@@ -1708,7 +1708,7 @@ User}</string>
 					<key>Text</key>
 					<dict>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg936\cocoartf1504\cocoasubrtf830
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
 {\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
@@ -1735,7 +1735,7 @@ User}</string>
 						<real>23</real>
 					</dict>
 					<key>ID</key>
-					<integer>9</integer>
+					<integer>34</integer>
 					<key>Style</key>
 					<dict>
 						<key>fill</key>
@@ -1759,7 +1759,7 @@ User}</string>
 					<key>Text</key>
 					<dict>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg936\cocoartf1504\cocoasubrtf830
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
 {\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
@@ -1781,7 +1781,7 @@ User}</string>
 					<key>Flow</key>
 					<string>Resize</string>
 					<key>ID</key>
-					<integer>69</integer>
+					<integer>35</integer>
 					<key>Style</key>
 					<dict>
 						<key>fill</key>
@@ -1805,7 +1805,7 @@ User}</string>
 					<key>Text</key>
 					<dict>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg936\cocoartf1504\cocoasubrtf830
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
 {\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
@@ -1828,7 +1828,7 @@ User}</string>
 						<real>12</real>
 					</dict>
 					<key>ID</key>
-					<integer>12</integer>
+					<integer>36</integer>
 					<key>Points</key>
 					<array>
 						<string>{230.50000000000003, 383}</string>
@@ -1869,7 +1869,7 @@ User}</string>
 					<key>Flow</key>
 					<string>Resize</string>
 					<key>ID</key>
-					<integer>15</integer>
+					<integer>37</integer>
 					<key>Style</key>
 					<dict>
 						<key>fill</key>
@@ -1895,7 +1895,7 @@ User}</string>
 						<key>Align</key>
 						<integer>0</integer>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg936\cocoartf1504\cocoasubrtf830
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
 {\fonttbl\f0\fswiss\fcharset0 ArialMT;\f1\fnil\fcharset0 HelveticaNeue;}
 {\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
 {\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
@@ -1920,7 +1920,7 @@ storeCryptogram
 						<real>12</real>
 					</dict>
 					<key>ID</key>
-					<integer>16</integer>
+					<integer>38</integer>
 					<key>Points</key>
 					<array>
 						<string>{-522.58823529411779, 444.61666666666713}</string>
@@ -1977,7 +1977,7 @@ storeCryptogram
 						</dict>
 					</dict>
 					<key>ID</key>
-					<integer>19</integer>
+					<integer>39</integer>
 					<key>Style</key>
 					<dict>
 						<key>fill</key>
@@ -2001,7 +2001,7 @@ storeCryptogram
 					<key>Text</key>
 					<dict>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg936\cocoartf1504\cocoasubrtf830
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
 {\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
 {\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
 {\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
@@ -2028,7 +2028,7 @@ storeCryptogram
 						<real>23</real>
 					</dict>
 					<key>ID</key>
-					<integer>20</integer>
+					<integer>40</integer>
 					<key>Style</key>
 					<dict>
 						<key>fill</key>
@@ -2052,7 +2052,7 @@ storeCryptogram
 					<key>Text</key>
 					<dict>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg936\cocoartf1504\cocoasubrtf830
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
 {\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
@@ -2077,10 +2077,10 @@ storeCryptogram
 					<key>Head</key>
 					<dict>
 						<key>ID</key>
-						<integer>6</integer>
+						<integer>31</integer>
 					</dict>
 					<key>ID</key>
-					<integer>22</integer>
+					<integer>41</integer>
 					<key>OrthogonalBarAutomatic</key>
 					<true/>
 					<key>OrthogonalBarPoint</key>
@@ -2131,7 +2131,7 @@ storeCryptogram
 					<key>Tail</key>
 					<dict>
 						<key>ID</key>
-						<integer>61</integer>
+						<integer>25</integer>
 					</dict>
 				</dict>
 				<dict>
@@ -2162,7 +2162,7 @@ storeCryptogram
 						<real>23</real>
 					</dict>
 					<key>ID</key>
-					<integer>23</integer>
+					<integer>42</integer>
 					<key>Style</key>
 					<dict>
 						<key>fill</key>
@@ -2186,7 +2186,7 @@ storeCryptogram
 					<key>Text</key>
 					<dict>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg936\cocoartf1504\cocoasubrtf830
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
 {\fonttbl\f0\fswiss\fcharset0 ArialMT;}
 {\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
 {\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
@@ -2225,7 +2225,7 @@ storeCryptogram
 						<string>ArialMT</string>
 					</dict>
 					<key>ID</key>
-					<integer>24</integer>
+					<integer>43</integer>
 					<key>Style</key>
 					<dict>
 						<key>fill</key>
@@ -2249,7 +2249,7 @@ storeCryptogram
 					<key>Text</key>
 					<dict>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg936\cocoartf1504\cocoasubrtf830
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
 {\fonttbl\f0\fswiss\fcharset0 ArialMT;}
 {\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
 {\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
@@ -2274,14 +2274,14 @@ storeCryptogram
 					<key>Head</key>
 					<dict>
 						<key>ID</key>
-						<integer>27</integer>
+						<integer>46</integer>
 					</dict>
 					<key>ID</key>
-					<integer>25</integer>
+					<integer>44</integer>
 					<key>Points</key>
 					<array>
-						<string>{-214.24999749081596, 354.9865943275982}</string>
-						<string>{-353.00020155961107, 355.29741915879913}</string>
+						<string>{-214.2499685238418, 355.42861111097909}</string>
+						<string>{-353.00006182306345, 356.52951497012327}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -2310,7 +2310,7 @@ storeCryptogram
 					<key>Tail</key>
 					<dict>
 						<key>ID</key>
-						<integer>6</integer>
+						<integer>31</integer>
 					</dict>
 				</dict>
 				<dict>
@@ -2339,7 +2339,7 @@ storeCryptogram
 						<string>Arial-BoldMT</string>
 					</dict>
 					<key>ID</key>
-					<integer>26</integer>
+					<integer>45</integer>
 					<key>Style</key>
 					<dict>
 						<key>fill</key>
@@ -2374,7 +2374,7 @@ storeCryptogram
 						<key>Pad</key>
 						<real>6</real>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg936\cocoartf1504\cocoasubrtf830
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
 {\fonttbl\f0\fswiss\fcharset0 ArialMT;}
 {\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
 {\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
@@ -2383,7 +2383,7 @@ storeCryptogram
 \f0\b\fs32 \cf2 \expnd0\expndtw0\kerning0
 &lt;&lt;utility&gt;&gt;\
 \
-OperatingSystemWithStorage}</string>
+LocalServer}</string>
 						<key>VerticalPad</key>
 						<real>6</real>
 					</dict>
@@ -2410,7 +2410,7 @@ OperatingSystemWithStorage}</string>
 						<string>Arial-BoldMT</string>
 					</dict>
 					<key>ID</key>
-					<integer>27</integer>
+					<integer>46</integer>
 					<key>Style</key>
 					<dict>
 						<key>fill</key>
@@ -2447,7 +2447,7 @@ OperatingSystemWithStorage}</string>
 						<key>Pad</key>
 						<real>6</real>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg936\cocoartf1504\cocoasubrtf830
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
 {\fonttbl\f0\fswiss\fcharset0 ArialMT;}
 {\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
 {\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
@@ -2494,7 +2494,7 @@ ratePlayers\
 								<string>Arial-BoldMT</string>
 							</dict>
 							<key>ID</key>
-							<integer>29</integer>
+							<integer>48</integer>
 							<key>Style</key>
 							<dict>
 								<key>fill</key>
@@ -2529,7 +2529,7 @@ ratePlayers\
 								<key>Pad</key>
 								<real>6</real>
 								<key>Text</key>
-								<string>{\rtf1\ansi\ansicpg936\cocoartf1504\cocoasubrtf830
+								<string>{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
 {\fonttbl\f0\fswiss\fcharset0 ArialMT;}
 {\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
 {\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
@@ -2563,7 +2563,7 @@ PlayCryptogram}</string>
 								<string>ArialMT</string>
 							</dict>
 							<key>ID</key>
-							<integer>30</integer>
+							<integer>49</integer>
 							<key>Style</key>
 							<dict>
 								<key>shadow</key>
@@ -2584,7 +2584,7 @@ PlayCryptogram}</string>
 								<key>Pad</key>
 								<real>6</real>
 								<key>Text</key>
-								<string>{\rtf1\ansi\ansicpg936\cocoartf1504\cocoasubrtf830
+								<string>{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
 {\fonttbl\f0\fswiss\fcharset0 ArialMT;}
 {\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red255\green255\blue255;}
 {\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c100000\c100000\c100000;}
@@ -2611,7 +2611,7 @@ started: Boolean\
 					<key>GroupConnect</key>
 					<string>YES</string>
 					<key>ID</key>
-					<integer>28</integer>
+					<integer>47</integer>
 					<key>Magnets</key>
 					<array>
 						<string>{0, 1}</string>
@@ -2651,10 +2651,10 @@ started: Boolean\
 					<key>Head</key>
 					<dict>
 						<key>ID</key>
-						<integer>28</integer>
+						<integer>47</integer>
 					</dict>
 					<key>ID</key>
-					<integer>31</integer>
+					<integer>50</integer>
 					<key>Points</key>
 					<array>
 						<string>{555.47216533419146, 253.91652324326583}</string>
@@ -2690,7 +2690,7 @@ started: Boolean\
 					<key>Tail</key>
 					<dict>
 						<key>ID</key>
-						<integer>32</integer>
+						<integer>51</integer>
 						<key>Position</key>
 						<real>0.48266592621803284</real>
 					</dict>
@@ -2706,7 +2706,7 @@ started: Boolean\
 						<real>12</real>
 					</dict>
 					<key>ID</key>
-					<integer>32</integer>
+					<integer>51</integer>
 					<key>Points</key>
 					<array>
 						<string>{425.15236525532259, 253.91652324326583}</string>
@@ -2766,7 +2766,7 @@ started: Boolean\
 								<string>ArialMT</string>
 							</dict>
 							<key>ID</key>
-							<integer>34</integer>
+							<integer>53</integer>
 							<key>Style</key>
 							<dict>
 								<key>fill</key>
@@ -2803,7 +2803,7 @@ started: Boolean\
 								<key>Pad</key>
 								<real>6</real>
 								<key>Text</key>
-								<string>{\rtf1\ansi\ansicpg936\cocoartf1504\cocoasubrtf830
+								<string>{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
 {\fonttbl\f0\fswiss\fcharset0 ArialMT;}
 {\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
 {\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
@@ -2844,7 +2844,7 @@ assignUniqueIDToCryptogramsReceived\
 								<string>Arial-BoldMT</string>
 							</dict>
 							<key>ID</key>
-							<integer>35</integer>
+							<integer>54</integer>
 							<key>Style</key>
 							<dict>
 								<key>fill</key>
@@ -2879,7 +2879,7 @@ assignUniqueIDToCryptogramsReceived\
 								<key>Pad</key>
 								<real>6</real>
 								<key>Text</key>
-								<string>{\rtf1\ansi\ansicpg936\cocoartf1504\cocoasubrtf830
+								<string>{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
 {\fonttbl\f0\fswiss\fcharset0 ArialMT;}
 {\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
 {\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
@@ -2897,7 +2897,7 @@ CentralServer}</string>
 					<key>GroupConnect</key>
 					<string>YES</string>
 					<key>ID</key>
-					<integer>33</integer>
+					<integer>52</integer>
 					<key>Magnets</key>
 					<array>
 						<string>{0, 1}</string>
@@ -2952,7 +2952,7 @@ CentralServer}</string>
 						<string>ArialMT</string>
 					</dict>
 					<key>ID</key>
-					<integer>37</integer>
+					<integer>55</integer>
 					<key>Style</key>
 					<dict>
 						<key>fill</key>
@@ -2976,7 +2976,7 @@ CentralServer}</string>
 					<key>Text</key>
 					<dict>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg936\cocoartf1504\cocoasubrtf830
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
 {\fonttbl\f0\fswiss\fcharset0 ArialMT;}
 {\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
 {\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
@@ -3016,7 +3016,7 @@ Login}</string>
 								<string>Arial-BoldMT</string>
 							</dict>
 							<key>ID</key>
-							<integer>41</integer>
+							<integer>57</integer>
 							<key>Style</key>
 							<dict>
 								<key>fill</key>
@@ -3051,7 +3051,7 @@ Login}</string>
 								<key>Pad</key>
 								<real>6</real>
 								<key>Text</key>
-								<string>{\rtf1\ansi\ansicpg936\cocoartf1504\cocoasubrtf830
+								<string>{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
 {\fonttbl\f0\fswiss\fcharset0 ArialMT;}
 {\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
 {\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
@@ -3085,7 +3085,7 @@ Cryptogram}</string>
 								<string>ArialMT</string>
 							</dict>
 							<key>ID</key>
-							<integer>42</integer>
+							<integer>58</integer>
 							<key>Style</key>
 							<dict>
 								<key>fill</key>
@@ -3122,7 +3122,7 @@ Cryptogram}</string>
 								<key>Pad</key>
 								<real>6</real>
 								<key>Text</key>
-								<string>{\rtf1\ansi\ansicpg936\cocoartf1504\cocoasubrtf830
+								<string>{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
 {\fonttbl\f0\fswiss\fcharset0 ArialMT;}
 {\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
 {\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
@@ -3144,7 +3144,7 @@ uniqueIdentifier: String\
 					<key>GroupConnect</key>
 					<string>YES</string>
 					<key>ID</key>
-					<integer>39</integer>
+					<integer>56</integer>
 					<key>Magnets</key>
 					<array>
 						<string>{0, 1}</string>
@@ -3202,7 +3202,7 @@ uniqueIdentifier: String\
 								<string>ArialMT</string>
 							</dict>
 							<key>ID</key>
-							<integer>44</integer>
+							<integer>60</integer>
 							<key>Style</key>
 							<dict>
 								<key>shadow</key>
@@ -3223,7 +3223,7 @@ uniqueIdentifier: String\
 								<key>Pad</key>
 								<real>6</real>
 								<key>Text</key>
-								<string>{\rtf1\ansi\ansicpg936\cocoartf1504\cocoasubrtf830
+								<string>{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
 {\fonttbl\f0\fswiss\fcharset0 ArialMT;}
 {\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
 {\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
@@ -3271,7 +3271,7 @@ quitGame\
 										<string>Arial-BoldMT</string>
 									</dict>
 									<key>ID</key>
-									<integer>46</integer>
+									<integer>62</integer>
 									<key>Style</key>
 									<dict>
 										<key>shadow</key>
@@ -3290,7 +3290,7 @@ quitGame\
 										<key>Pad</key>
 										<real>6</real>
 										<key>Text</key>
-										<string>{\rtf1\ansi\ansicpg936\cocoartf1504\cocoasubrtf830
+										<string>{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
 {\fonttbl\f0\fswiss\fcharset0 ArialMT;}
 {\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
 {\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
@@ -3324,7 +3324,7 @@ Player}</string>
 										<string>ArialMT</string>
 									</dict>
 									<key>ID</key>
-									<integer>47</integer>
+									<integer>63</integer>
 									<key>Style</key>
 									<dict>
 										<key>shadow</key>
@@ -3345,7 +3345,7 @@ Player}</string>
 										<key>Pad</key>
 										<real>6</real>
 										<key>Text</key>
-										<string>{\rtf1\ansi\ansicpg936\cocoartf1504\cocoasubrtf830
+										<string>{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
 {\fonttbl\f0\fswiss\fcharset0 ArialMT;}
 {\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red255\green255\blue255;}
 {\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c100000\c100000\c100000;}
@@ -3357,7 +3357,7 @@ lastName: String\
 uniqueUsername: String\
 / rating: Integer\
 / totalNumberOfIncorrectSolutionsSubmitted: Integer \uc0\u8232 \cf2 \cb3 / totalNumberOfCryptogramsStarted: Integer\
-/ totalNumberOfCryptogramsSolved: Integer\cf2 \cb3  \
+/ totalNumberOfCryptogramsSolved: Integer \
 / previouslySolvedCryptograms: Cryptogram\cf2 \cb1 \
 }</string>
 										<key>VerticalPad</key>
@@ -3370,7 +3370,7 @@ uniqueUsername: String\
 							<key>GroupConnect</key>
 							<string>YES</string>
 							<key>ID</key>
-							<integer>45</integer>
+							<integer>61</integer>
 							<key>Magnets</key>
 							<array>
 								<string>{0, 1}</string>
@@ -3399,7 +3399,7 @@ uniqueUsername: String\
 						</dict>
 					</array>
 					<key>ID</key>
-					<integer>43</integer>
+					<integer>59</integer>
 					<key>Style</key>
 					<dict>
 						<key>fill</key>
@@ -3451,7 +3451,7 @@ uniqueUsername: String\
 								<string>ArialMT</string>
 							</dict>
 							<key>ID</key>
-							<integer>50</integer>
+							<integer>65</integer>
 							<key>Style</key>
 							<dict>
 								<key>fill</key>
@@ -3488,7 +3488,7 @@ uniqueUsername: String\
 								<key>Pad</key>
 								<real>6</real>
 								<key>Text</key>
-								<string>{\rtf1\ansi\ansicpg936\cocoartf1504\cocoasubrtf830
+								<string>{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
 {\fonttbl\f0\fswiss\fcharset0 ArialMT;}
 {\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
 {\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
@@ -3526,7 +3526,7 @@ communicate\
 								<string>Arial-BoldMT</string>
 							</dict>
 							<key>ID</key>
-							<integer>51</integer>
+							<integer>66</integer>
 							<key>Style</key>
 							<dict>
 								<key>fill</key>
@@ -3561,7 +3561,7 @@ communicate\
 								<key>Pad</key>
 								<real>6</real>
 								<key>Text</key>
-								<string>{\rtf1\ansi\ansicpg936\cocoartf1504\cocoasubrtf830
+								<string>{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
 {\fonttbl\f0\fswiss\fcharset0 ArialMT;}
 {\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
 {\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
@@ -3579,7 +3579,7 @@ ExternalWebServiece}</string>
 					<key>GroupConnect</key>
 					<string>YES</string>
 					<key>ID</key>
-					<integer>49</integer>
+					<integer>64</integer>
 					<key>Magnets</key>
 					<array>
 						<string>{0, 1}</string>
@@ -3690,7 +3690,7 @@ ExternalWebServiece}</string>
 	<key>WindowInfo</key>
 	<dict>
 		<key>Frame</key>
-		<string>{{0, 0}, {1280, 740}}</string>
+		<string>{{279, 47}, {1280, 740}}</string>
 		<key>ShowInfo</key>
 		<true/>
 		<key>ShowRuler</key>
@@ -3702,7 +3702,7 @@ ExternalWebServiece}</string>
 		<key>Sidebar_Tab</key>
 		<integer>1</integer>
 		<key>VisibleRegion</key>
-		<string>{{-1000.6363636363639, -364.54545454545422}, {1750.909090909091, 1199.9999999999998}}</string>
+		<string>{{-1000.6363636363642, -222.72727272727289}, {1750.909090909091, 1058.1818181818182}}</string>
 		<key>ZoomValues</key>
 		<array>
 			<array>
