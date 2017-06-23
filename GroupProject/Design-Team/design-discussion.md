@@ -47,4 +47,11 @@ The first thing should be point out is the class *ExternalWebService* cannot be 
 
 # Summary
 
+The team members were chosen at random from different time-zones around the globe. The team was agile in coming up with a time that worked for everyone and was able to collaborate on the final design. After discussing the pros and cons of every design, we pulled the best of each and assembled them together to form the team design.
 
+By critiquing each other design, we were able to learn on the defects in our design. By working and brainstorming together and revisiting the examples, we were able to learn several aspects like: 
+- a. understand the way the association class can be used. 
+- b. how to apply the derived member variables appropriately.
+- c. appropriate usage of the utilty classes.
+
+All the members were able to contribute and learn from others. Overall, it was a good learning experience, setting up the stage to work on the future deliverables that will be assigned.
