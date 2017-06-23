@@ -34,7 +34,7 @@ It is a great design which shows almost all the requirements of the game clearly
 **Cons:**
 First the player rating list should be sorted by the `totalNumberOfCryptogramsSolved` attribute per the requirements, not the `rating` attribute. The latter is a derived attribute, however the designer didn't explain how it is derived from other attributes. Second the `PlayerCryptogram` class might be inherited from the `Cryptogram` class as an unique id is required for it.
 
-## Design 4
+## Design 4 (bkothandam3)
 ![Screen Shot ycha37](media/bkothandam3.png)
 
 **Pros:**
