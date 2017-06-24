@@ -29,7 +29,7 @@ There are also some improvements can be made. First, Duplicate *ExternalWebServi
 
 **Pros:**
 
-It is a great design which shows almost all the requirements of the game clearly and precicesly. The most brilliant part is that the `OperatingSystemWithStorage` and the `CentralServer` utilities are added to fully present the working flows between the local game and the center server. Together with the `ExternalWebService`, the processes of both the adding/request of cryptograms and the update/request of player ratings are clearly illustrated.
+It is a great design which shows almost all the requirements of the game clearly and precisely. The most brilliant part is that the `OperatingSystemWithStorage` and the `CentralServer` utilities are added to fully present the working flows between the local game and the center server. Together with the `ExternalWebService`, the processes of both the adding/request of cryptograms and the update/request of player ratings are clearly illustrated.
 
 **Cons:**
 First the player rating list should be sorted by the `totalNumberOfCryptogramsSolved` attribute per the requirements, not the `rating` attribute. The latter is a derived attribute, however the designer didn't explain how it is derived from other attributes. Second the `PlayerCryptogram` class might be inherited from the `Cryptogram` class as an unique id is required for it.
@@ -41,7 +41,7 @@ First the player rating list should be sorted by the `totalNumberOfCryptogramsSo
 The strtucture of this UML diagram is clear and you can understand each part quickly and easily. It covers all the required section and their relationships. Since its elegant and concise structure, it can be implemented painless and straightforward by the developers. 
 
 **Cons:**
-The first thing should be point out is the class *ExternalWebService* cannot be isolated with other classes. Some relationship between this class and others should be marked and detailed in the UML. Secondly, some methodes should be detailed, such as *choose a cryptogram to solve*, *see previously solved cryptograms*, and *view the list of player ratings*
+The first thing should be point out is the class *ExternalWebService* cannot be isolated with other classes. Some relationship between this class and others should be marked and detailed in the UML. Secondly, some methods should be detailed, such as *choose a cryptogram to solve*, *see previously solved cryptograms*, and *view the list of player ratings*
 # Team Design
 ![Screen Shot team](media/team.png)
 
