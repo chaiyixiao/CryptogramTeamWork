@@ -45,6 +45,7 @@ The first thing should be point out is the class *ExternalWebService* cannot be 
 # Team Design
 ![Screen Shot team](media/team.png)
 
+When we compare the team design with design 4, you will notice that the *ExternalWebService* that was isolated and standalone has been linked with the rest of the classes to show how it fits into the overall picture. The methods that need to be implemented in the classes has been added. This was a straight forward decision to ensure that the design is complete in all respects. The cardinality of the associations were also added to resolve ambiguity.
 
 # Summary
 
