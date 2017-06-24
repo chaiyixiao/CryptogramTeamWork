@@ -43,6 +43,7 @@ The strtucture of this UML diagram is clear and you can understand each part qui
 **Cons:**
 The first thing should be point out is the class *ExternalWebService* cannot be isolated with other classes. Some relationship between this class and others should be marked and detailed in the UML. Secondly, some methodes should be detailed, such as *choose a cryptogram to solve*, *see previously solved cryptograms*, and *view the list of player ratings*
 # Team Design
+![Screen Shot team](media/team.png)
 
 
 # Summary
