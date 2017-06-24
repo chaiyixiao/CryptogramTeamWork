@@ -33,7 +33,7 @@ There are also some improvements can be made. First, Duplicate *ExternalWebServi
 It is a great design which shows almost all the requirements of the game clearly and precisely. The most brilliant part is that the `OperatingSystemWithStorage` and the `CentralServer` utilities are added to fully present the working flows between the local game and the center server. Together with the `ExternalWebService`, the processes of both the adding/request of cryptograms and the update/request of player ratings are clearly illustrated.
 
 **Cons:**
-First the player rating list should be sorted by the `totalNumberOfCryptogramsSolved` attribute per the requirements, not the `rating` attribute. The latter is a derived attribute, however the designer didn't explain how it is derived from other attributes. Second the `PlayerCryptogram` class might be inherited from the `Cryptogram` class as an unique id is required for it.
+First the player rating list should be sorted by the `totalNumberOfCryptogramsSolved` attribute per the requirements, not the `rating` attribute. The latter is a derived attribute, however the designer didn't explain how it is derived from other attributes. Second a list of `PlayerCryptogram` instances should be added as an attribute of the player.
 
 ## Design 4 (bkothandam3)
 
@@ -48,9 +48,18 @@ The first thing should be point out is the class *ExternalWebService* cannot be 
 # Team Design
 
 ![Screen Shot team](media/team.png)
+
+The four individual designs share the most key classes (`Administrator`, `Player`, and `Cryptogram`), relations (add palyer/cryptogram, solve cryptogram, and so on), and the external utility. Some individual designs may lack a few features, which is explained in details one by one in the following four paragraphs.
+
+With few revisions made on ychai37's design, we now have our team design shown above. It presents all the requirements. The revisons made is talked and explained in the paragraph of _Desing 3 (ychai37)_.
+
 ## Design 1 (xliang70)
 
-The difference between team design and design 1 is although design 1 includes all the requirement parts, the classes could be created in a more clear way. If then, the developer can understand the whole design more easily. If more details could be marked in the UML such as some relationships between the classes should be better. 
+The difference between team design and design 1 is although design 1 includes all the requirement parts, the classes could be created in a more clear way. If then, the developer can understand the whole design more easily. If more details could be marked in the UML such as some relationships between the classes should be better.
+
+## Design 2 (lfan42)
+
+Compared with th design 2, most classes are relations are the same. There are three main differences. First the player ratings class are now moved to be attributes of players. It's not necessary to add a class for it. At the same time the list of player rating is also removed, as it can be derived from attributes of players now. Second the list of `PlayerCryptogram` is also removed, as it can be obtained from information of game progresses of players. Third, a local server and a central server are added to show the working flow more clearly.
 
 ## Design 3 (ychai37)
 
@@ -70,6 +79,5 @@ By critiquing each other design, we were able to learn on the defects in our des
 - c. appropriate usage of the utility classes.
 
 After making the decision about the most suitable UML we would choose for our future team project, we went through all the requirements again and discussed more design details. We discussed how to improve the structure of the UML not only for meeting the requirement expectations, also for the future successful implementation.
-
 
 All the members were able to contribute and learn from others. Overall, it was a good learning experience, setting up the stage to work on the future deliverables that will be assigned.
