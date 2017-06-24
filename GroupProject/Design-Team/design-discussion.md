@@ -51,7 +51,7 @@ The first thing should be point out is the class *ExternalWebService* cannot be 
 
 The four individual designs share the most key classes (`Administrator`, `Player`, and `Cryptogram`), relations (add palyer/cryptogram, solve cryptogram, and so on), and the external utility. Some individual designs may lack a few features, which is explained in details one by one in the following four paragraphs.
 
-With few revisions made on ychai37's design, we now have our team design shown above. It presents all the requirements. The revisons made is talked and explained in the paragraph of _Desing 3 (ychai37)_.
+With few revisions made on ychai37's design, we now have our team design shown above. It presents all the requirements. The revisons made is talked and explained in the paragraph of _Design 3 (ychai37)_.
 
 ## Design 1 (xliang70)
 
