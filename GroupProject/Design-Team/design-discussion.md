@@ -52,9 +52,11 @@ The team members were chosen at random from different time-zones around the glob
 By critiquing each other design, we were able to learn on the defects in our design. By working and brainstorming together and revisiting the examples, we were able to learn several aspects like: 
 - a. understand the way the association class can be used. 
 - b. how to apply the derived member variables appropriately.
-- c. appropriate usage of the utilty classes.
+- c. appropriate usage of the utility classes.
 
-After making the desision about the most suitable UML we would choose for our future team project, we went through all the requirements again and discussed more design details. We discussed how to improve the structure of the UML not only for meeting the requirement expectations, also for the future successful implementation. 
+After making the decision about the most suitable UML we would choose for our future team project, we went through all the requirements again and discussed more design details. We discussed how to improve the structure of the UML not only for meeting the requirement expectations, also for the future successful implementation. 
 
 
 All the members were able to contribute and learn from others. Overall, it was a good learning experience, setting up the stage to work on the future deliverables that will be assigned.
+
+
