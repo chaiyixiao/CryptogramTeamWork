@@ -48,6 +48,9 @@ The first thing should be point out is the class *ExternalWebService* cannot be 
 # Team Design
 
 ![Screen Shot team](media/team.png)
+## Design 1 (xliang70)
+
+The difference between team design and design 1 is although design 1 includes all the requirement parts, the classes could be created in a more clear way. If then, the developer can understand the whole design more easily. If more details could be marked in the UML such as some relationships between the classes should be better. 
 
 ## Design 3 (ychai37)
 
