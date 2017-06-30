@@ -1,6 +1,7 @@
 # Project Plan
 
 **Author**: Team 19
+
 **Version**: V1.0
 
 ## 1 Introduction
@@ -13,10 +14,10 @@ Following the unified process, we have four phases and several activities. Activ
 
 ### I. Inception
 
-- **Business Modeling**: to analyze major users and tentative achitectures of the system; to set up a basic project plan; and to estimate schedule and cost
+- **Business Modeling**: to analyze major users and tentative architecture of the system; to set up a basic project plan; and to estimate schedule and cost
 
 	- _Entrance criteria_: project started
-	- _Exit criteria_: team-wide agreement on scope, definition and shcedule estimations; faithful and credible understanding on requirements, feautures, constraints, and development process; and the following deliverables:
+	- _Exit criteria_: team-wide agreement on scope, definition and schedule estimations; faithful and credible understanding of requirements, features, constraints, and development process; and the following deliverables:
         - vision documents
         - initial use case model
         - initial business case
@@ -32,11 +33,11 @@ Following the unified process, we have four phases and several activities. Activ
 		- almost complete use case model
 		- supplementary requirements
 
-- **Solution Analysis & Design**: to establish a candidate software achitecture, which includes: to design components, functions, and their connections; to analysis how components are deployed on devices; and to design the static class structure
+- **Solution Analysis & Design**: to establish a candidate software architecture, which includes: to design components, functions, and their connections; to analysis how components are deployed on devices; and to design the static class structure
 
 	- _Entrance criteria_: partial business modeling and partial requirements analysis finished; team-wide agreement
-	- _Exit criteria_: stable and validated vision and achitecture; major risks addressed/resovled; a detailed/accurate construction plan; team-wide agreement on the plan; and the following deliverables:
-		- design/achitecture document
+	- _Exit criteria_: stable and validated vision and architecture; major risks addressed/resolved; a detailed/accurate construction plan; team-wide agreement on the plan; and the following deliverables:
+		- design/architecture document
 		- component diagram
 		- deployment diagram
 		- class diagram
@@ -47,10 +48,10 @@ Following the unified process, we have four phases and several activities. Activ
 
 ### III. Construction
 
-- **Implementation**: to write code to realize the components and features of the system; to integrate various components altogether to make the whole system work as expected. The process may be divided into several iterations for completing various components and features.
+- **Implementation**: to build Android UI based on the UI mockups; to write code to realize the components and features of the system; to integrate various components altogether to make the whole system work as expected. The process may be divided into several iterations for completing various components and features.
 
 	- _Entrance criteria_: most part of the solution analysis and design are finished with no questions, team-wide agreement
-	- _Exit criteria_: realized use cases with traceable information, executable and tested code ready for deployment; team-wide agreement on deployment; and the following deliverables
+	- _Exit criteria_: realized use cases with traceable information; full game UI; executable and tested code ready for deployment; team-wide agreement on deployment; and the following deliverables
 		- complete application
 		- user manual
 		- test cases and test manual
@@ -59,21 +60,21 @@ Following the unified process, we have four phases and several activities. Activ
 - **Test**: to develop complete and thorough test cases to verify and validate features based on the requirements, and use cases
 
 	- _Entrance criteria_: once some bulk code for a component is finished, or some integration of components is finished
-	- _Exit criteria_: thorogh test cases created and passed for all the components and features; and the following deliverables
+	- _Exit criteria_: thorough test cases created and passed for all the components and features; and the following deliverables
 		- test cases and test manual
 		- revision on previous deliverables
 
 
 ### IV. Transition
 
-- **Deployment**: to transit the software from development to into real production; to create support materials for users; to carry out end-user test and collect feedback; to plan revisied releases based on issues and feedback received
+- **Deployment**: to transit the software from development to into real production; to create support materials for users; to carry out end-user test and collect feedback; to plan revised releases based on issues and feedback received
 
-	- _Entrance criteria_: an alpha verison of executable and tested application released, team-wide agreement
-    - _Exite criteria_: issued resolved, complete in-use project, user satisfied, cost acceptable, and the following deliverables
-    	- final stable realse of the project
+	- _Entrance criteria_: an alpha version of executable and tested application released, team-wide agreement
+    - _Exite criteria_: issued resolved, completely in-use project, user satisfied, cost acceptable, and the following deliverables
+    	- final stable release of the project
     	- revised user manual
     	- issues and user feedback
-    	- reviion on previous deliverables
+    	- revision on previous deliverables
 
 
 
@@ -95,10 +96,10 @@ Following the unified process, we have four phases and several activities. Activ
 ### Roles Description
 
 - **Project Manager**: the project manager is responsible for communicating with and coordinating other project leaders and members to ensure that project are delivered with good quality according to the project plan on time
-- **Development Leader**: the development leader is responsible for guiding the team to design the achitecture and implement the system with quality code
+- **Development Leader**: the development leader is responsible for guiding the team to design the architecture and implement the system with quality code
 - **Developer**: a developer develops components of the system under the guidance of the development leader
-- **Code Reviewer**: a code reviewer reviews code writen by other team members to find possible bugs and ensure the code quality
-- **QA Leader**: the QA leader is responsible for guiding testers to carry out comprehesive test cases and collect user-end test and feedback
+- **QA Leader**: the QA leader is responsible for guiding testers to carry out comprehensive test cases and collect user-end test and feedback
 - **Tester**: a tester works with the QA leader to implement test cases
-- **UI/UX Leader**: a UI/UX Leader is responible for guiding UI/UX designers to deliver mordern elegent user-friendly UI
+- **Code Reviewer**: a code reviewer reviews code written by other team members to find possible bugs and ensure the code quality
+- **UI/UX Leader**: a UI/UX Leader is responsible for guiding UI/UX designers to deliver modern elegant user-friendly UI
 - **UI/UX Designer**: a UI/UX designer works with the UI/UX leader to implement the application UI
