@@ -2,17 +2,50 @@
 
 *This is the template for your use case model. The parts in italics are concise explanations of what should go in the corresponding sections and should not appear in the final document.*
 
-**Author**: \<person or team name\>
+**Author**: \<Team19\>
 
 ## 1 Use Case Diagram
 
 *This section should contain a use case diagram with all the actors and use cases for the system, suitably connected.*
+![USE case Diagram](Diagrams/team19 use case diagram.png)
 
 ## 2 Use Case Descriptions
 
-*For each use case in the use case diagram, this section should contain a description, with the following elements:*
+* User selects Player or Administrator then enters username to log into the game.
 
-- *Requirements: High-level description of what the use case must allow the user to do.*
-- *Pre-conditions: Conditions that must be true before the use case is run.*
-- *Post-conditions Conditions that must be true once the use case is run.*
-- *Scenarios: Sequence of events that characterize the use case. This part may include multiple scenarios, for normal, alternate, and exceptional event sequences. These scenarios may be expressed as a list of steps in natural language or as sequence diagrams.*
+* If username is valid and user selects as a player, system asks the player to select the desired activity: choose cryptogram to solve, view previously solved cryptograms, view player ratings.
+
+* If player select choose cryptogram to solve, system allows player to request new cryptogram or play the inprogress cryptogram.
+
+* If player select view previously solved cryptograms, system allows player to view solved cryptograms.
+
+* If player select view player ratings, system allows player to view his/her current rate.
+
+* During the gaming, player uses keyboard to choose the coded letter then choose the letter player thinks it stands for.
+
+* The player has three activity to choose: submit, reset and return.
+
+
+* If the player has replaced all letters in the puzzle and is satisfied with such solution, he or she can submit the solution.
+
+* If the player plan to restart the game, he or she can select reset. 
+
+
+* If the player plan to quit the game, he or she can select return button.
+
+
+* Administrator can login by entering username.
+
+
+* If username is valid, system asks the administrator to select the desired activity: add a player, add a cryptogram with solution.
+
+
+* If administrator select add a player, he/she should enter firstname/lastname and username for new player. Then, save and quit.
+
+* If administrator select add cryptogram with solution, he/she should add new game with solution. Then, save and quit.
+
+
+
+
+
+
