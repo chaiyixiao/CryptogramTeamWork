@@ -36,21 +36,21 @@
 ## 2 Architectural Design
 
 ### 2.1 Component Diagram
-![ComponentDiagram](images/ComponentDiagram.png)
+![ComponentDiagram](Diagrams/DesignDocument/Component%20Diagram.png)
 
 ### 2.2 Deployment Diagram
 
-![Deployment Diagram](images/Deployment%20Diagram.png)
+![Deployment Diagram](Diagrams/DesignDocument/Deployment%20Diagram.png)
 
 ## 3 Low-Level Design
 
 ### 3.1 Class Diagram
-![design-team](images/Class%20Diagram.png)
+![Class Diagram](Diagrams/DesignDocument/Class%20Diagram.png)
 
 
 ### 3.2 Other Diagrams
 
-![Add Cryptogram Sequence Diagram](images/Add%20Cryptogram%20Sequence%20Diagram.jpg)
+![Add Cryptogram Sequence Diagram](Diagrams/DesignDocument/Add%20Cryptogram%20Sequence%20Diagram.jpg)
 
 
 ## 4 User Interface Design
