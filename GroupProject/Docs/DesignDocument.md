@@ -63,5 +63,22 @@
 
 
 ## 4 User Interface Design
-*For GUI-based systems, this section should provide the specific format/layout of the user interface of the system (e.g., in the form of graphical mockups).*
+
+![Login and Player Menu](Diagrams/UIMockup/UI1_LoginPlayer.png)
+
+- Left: A user can select to log in as a player or the administrater. Then login with a username.
+- Right: A list of cryptograms will be shown when a player logs in successfully.
+- Central: A player can click the sidebar menu button to choose either "Cryptograms" or "Player Ratings".
+
+![Player and Cryptograms](Diagrams/UIMockup/UI2_PlayerPlay.png)
+
+- Left: It shows the UI when a player is solving a cryptogram. A player can assign replacement characters on the blanks above the encrypted characters.
+- Central: Once a cryptogram is sovled correctly by a player, the palyer can only view it, and cannot take any other activities.
+- Right: A list of player ratings sorted by the number of cryptograms solved.
+
+![Adminstrator Add Player/Cryptograms](Diagrams/UIMockup/UI3_AdminAdd.png)
+
+- Left: Administration menu, from which the administratro can choose to add a new player and add a new cryptogram.
+- Center: UI for adding a new player.
+- Right: UI for adding a new cryptogram.
 
