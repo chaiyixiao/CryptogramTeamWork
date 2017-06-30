@@ -26,17 +26,36 @@ Regression - After the code is complete, during the testing phase, defects may b
 
 *Here you should discuss how you are going to select your test cases, that is, which black-box and/or white-box techniques you will use. If you plan to use different techniques at different testing levels (e.g., unit and system), you should clarify that.*
 
+The test selection for this project will be done using the category partition method.
+
+This technique follows 6 simple steps;
+1. Identify independent testable features
+2. Identify categories among the features
+3. Partition the categories
+4. Identify constraints
+5. Produce/evaluate test case specification
+6. Generate test cases from the above  specification
+
+
 ### 1.3 Adequacy Criterion
 
 *Define how you are going to assess the quality of your test cases. Typically, this involves some form of functional or structural coverage. If you plan to use different techniques at different testing levels (e.g., unit and system), you should clarify that.*
+
+We will use a combination of both Black-box and White-box to ensure all aspects of functionality is covered. If we start enumerating the tests without a proven process, it is always possible to miss a scenario. So, we will follow the category-partition technique to create our test cases. 
+
+Running the Regression tests along with System tests will ensure that we have adequate coverage of all possible scenarios.
 
 ### 1.4 Bug Tracking
 
 *Describe how bugs and enhancement requests will be tracked.*
 
+There are several tools to track bugs like Bugzilla, JIRA, Mantis, etc.. After discussions, we decided to use GitHub. By using GitHub, we can track the bugs and related code changes in one place. 
+
 ### 1.5 Technology
 
 *Describe any testing technology you intend to use or build (e.g., JUnit, Selenium).*
+
+We will use the available technologies to the fullest extent to ensure efficient testing of the applications. We will use JUnit to run all the Unit test cases. Some of the integration test will also be created and run using JUnit. 
 
 ## 2 Test Cases
 
