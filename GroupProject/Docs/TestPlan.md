@@ -1,6 +1,5 @@
 # Test Plan
 
-*This is the template for your test plan. The parts in italics are concise explanations of what should go in the corresponding sections and should not appear in the final document.*
 
 **Author**: Team 19
 
@@ -10,7 +9,6 @@ This test plan is created for the Cryptogram application developed for Boston To
 
 ### 1.1 Overall strategy
 
-*This section should provide details about your unit-, integration-, system-, and regression-testing strategies. In particular, it should discuss which activities you will perform as part of your testing process, and who will perform such activities.*
 
 We need to design, develop, test and deliver this project in a short time frame. Since we are a gang of four, we have limited resources. Given this, we would like to automate most of the test cases, so that we have a good coverage.
  
@@ -24,7 +22,6 @@ Regression - After the code is complete, during the testing phase, defects may b
 
 ### 1.2 Test Selection
 
-*Here you should discuss how you are going to select your test cases, that is, which black-box and/or white-box techniques you will use. If you plan to use different techniques at different testing levels (e.g., unit and system), you should clarify that.*
 
 The test selection for this project will be done using the category partition method.
 
@@ -39,7 +36,6 @@ This technique follows 6 simple steps;
 
 ### 1.3 Adequacy Criterion
 
-*Define how you are going to assess the quality of your test cases. Typically, this involves some form of functional or structural coverage. If you plan to use different techniques at different testing levels (e.g., unit and system), you should clarify that.*
 
 We will use a combination of both Black-box and White-box to ensure all aspects of functionality is covered. If we start enumerating the tests without a proven process, it is always possible to miss a scenario. So, we will follow the category-partition technique to create our test cases. 
 
@@ -47,19 +43,16 @@ Running the Regression tests along with System tests will ensure that we have ad
 
 ### 1.4 Bug Tracking
 
-*Describe how bugs and enhancement requests will be tracked.*
 
 There are several tools to track bugs like Bugzilla, JIRA, Mantis, etc.. After discussions, we decided to use GitHub. By using GitHub, we can track the bugs and related code changes in one place. 
 
 ### 1.5 Technology
 
-*Describe any testing technology you intend to use or build (e.g., JUnit, Selenium).*
 
 We will use the available technologies to the fullest extent to ensure efficient testing of the applications. We will use JUnit to run all the Unit test cases. Some of the integration test will also be created and run using JUnit. 
 
 ## 2 Test Cases
 
-*This section should be the core of this document. You should provide a table of test cases, one per row. For each test case, the table should provide its purpose, the steps necessary to perform the test, the expected result, the actual result (to be filled later), pass/fail information (to be filled later), and any additional information you think is relevant.*
 
 List of tests:
 
