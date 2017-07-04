@@ -17,7 +17,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".AdminMenuActivity"/>
-        <activity android:name=".PlayerMenuActivity"/>
+        <activity
+            android:name=".PlayerMenuActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".AdminAddPlayerActivity"/>
         <activity android:name=".AdminAddCryptogramActivity"/>
     </application>
