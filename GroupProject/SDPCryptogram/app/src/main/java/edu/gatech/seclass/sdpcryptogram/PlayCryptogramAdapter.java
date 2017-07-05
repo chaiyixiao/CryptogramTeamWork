@@ -37,9 +37,9 @@ public class PlayCryptogramAdapter extends RecyclerView.Adapter<PlayCryptogramAd
     }
 
 
-    public PlayCryptogramAdapter(ArrayList<Cryptogram> cryptograms) {
-//        cLetters = cryptogramLetters;
-//        solutionLetters = solution;
+    public PlayCryptogramAdapter(ArrayList<Character> encodedList, ArrayList<Character> solutionList ) {
+        cLetters = encodedList;
+        solutionLetters = solutionList;
     }
 
     @Override
@@ -58,6 +58,6 @@ public class PlayCryptogramAdapter extends RecyclerView.Adapter<PlayCryptogramAd
 
     @Override
     public int getItemCount() {
-        return cLetters.size();
+        return solutionLetters.size();
     }
 }

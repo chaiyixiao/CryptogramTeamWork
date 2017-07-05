@@ -11,9 +11,11 @@ public class Cryptogram {
     public String encodedPhrase;
     public String solutionPhrase;
 
-//    public Cryptogram() {
-//
-//    }
+    public Cryptogram() {
+        this.cryptoId = "";
+        this.encodedPhrase = "";
+        this.solutionPhrase = "";
+    }
 
     public Cryptogram(String encodedPhrase, String solutionPhrase, String cryptoId) {
         this.encodedPhrase = encodedPhrase;

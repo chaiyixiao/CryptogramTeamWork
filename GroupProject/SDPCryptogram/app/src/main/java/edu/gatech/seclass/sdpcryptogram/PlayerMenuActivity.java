@@ -1,10 +1,12 @@
 package edu.gatech.seclass.sdpcryptogram;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -23,14 +25,28 @@ import android.support.v4.app.FragmentTransaction;
 public class PlayerMenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    public String username;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.player_menu);
+
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
+        if(b!=null)
+        {
+            Log.v("^^^^^^^^^",(String) b.get("username"));
+            username = (String) b.get("username");
+        }
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this,
+                drawer,
+                toolbar,
+                R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -96,6 +112,10 @@ public class PlayerMenuActivity extends AppCompatActivity
         }
 
         if (fragment != null) {
+            Bundle b = new Bundle();
+            b.putString("username", username);
+            fragment.setArguments(b);
+
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.content_frame, fragment);
             ft.commit();

@@ -25,7 +25,9 @@ import static edu.gatech.seclass.sdpcryptogram.R.layout.play_cryptogram;
 public class PlayCryptogramActivity extends AppCompatActivity {
 
 
-    private ArrayList<Cryptogram> mCryptogramList;
+    private ArrayList<Character> mEncodedLetters;
+    private ArrayList<Character> mSolutionLetters;
+
 
     private RecyclerView playRecyclerView;
     private GridLayoutManager mGridLayoutManager;
@@ -36,12 +38,32 @@ public class PlayCryptogramActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(play_cryptogram);
 
+        mEncodedLetters = new ArrayList<>();
+        mSolutionLetters = new ArrayList<>();
+
         playRecyclerView = (RecyclerView)findViewById(R.id.play_cryptogram_recycler_view);
         mGridLayoutManager = new GridLayoutManager(this, 10);
         playRecyclerView.setLayoutManager(mGridLayoutManager);
 
-        mAdapter = new PlayCryptogramAdapter(mCryptogramList);
+        mAdapter = new PlayCryptogramAdapter(mEncodedLetters, mSolutionLetters);
         playRecyclerView.setAdapter(mAdapter);
+
+
+        Button back = (Button) findViewById(R.id.back_cryptogram_button);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PlayCryptogramActivity.this.finish();
+            }
+        });
+
+        Button reset = (Button) findViewById(R.id.reset_cryptogram_button);
+        reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSolutionLetters = new ArrayList<>();
+            }
+        });
 
     }
 

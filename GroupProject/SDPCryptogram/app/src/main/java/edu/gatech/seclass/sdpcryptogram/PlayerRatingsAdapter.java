@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+
 import java.util.ArrayList;
 
 /**
@@ -37,8 +39,9 @@ public class PlayerRatingsAdapter extends RecyclerView.Adapter<PlayerRatingsAdap
 
         public void bindPlayer(Player player) {
             mPlayer = player;
-//            mItemDate.setText(photo.getHumanDate());
-//            mItemDescription.setText(photo.getExplanation());
+            playername.setText(player.username);
+            solvedNum.setText(String.valueOf(player.solvedCount));
+            ranking.setText(String.valueOf(player.ranking));
         }
     }
 

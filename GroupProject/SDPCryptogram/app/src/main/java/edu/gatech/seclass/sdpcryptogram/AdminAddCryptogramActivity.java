@@ -40,6 +40,7 @@ public class AdminAddCryptogramActivity extends AppCompatActivity{
         encodedText = (EditText) findViewById(R.id.encoded_phrase);
         solutionText = (EditText) findViewById(R.id.solution_phrase);
 
+
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,6 +52,7 @@ public class AdminAddCryptogramActivity extends AppCompatActivity{
                 // TODO: request id
                 Random r = new Random();
                 String idStr = String.valueOf( r.nextInt(1024));
+
                 Cryptogram crypto = new Cryptogram(encodedStr, solutionStr, idStr);
                 mDatabase.child("cryptograms").child(idStr).setValue(crypto);
             }

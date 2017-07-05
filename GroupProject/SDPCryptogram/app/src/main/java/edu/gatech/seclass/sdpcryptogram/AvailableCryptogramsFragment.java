@@ -6,14 +6,18 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -46,7 +50,20 @@ public class AvailableCryptogramsFragment extends Fragment {
         View v = inflater.inflate(R.layout.available_cryptograms_fragment, container, false);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
-
+//        String username = getArguments().getString("username");
+//        Log.v("**********",getArguments().getString("username"));
+//        mDatabase.child("players").child(username).addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                Player currentPlayer = dataSnapshot.getValue(Player.class);
+//                Log.v("========", currentPlayer.username);
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
 
         mCryptogramList = new ArrayList<>();
         solved = (TextView) v.findViewById(R.id.solved_num);
@@ -72,7 +89,6 @@ public class AvailableCryptogramsFragment extends Fragment {
             public void onClick(View v) {
                 // TODO: request data and sync
                 mCryptogramList.addAll(fetchCryptograms());
-//                mAdapter.notifyItemInserted(mCryptogramList.size());
             }
         });
         return v;
@@ -81,14 +97,33 @@ public class AvailableCryptogramsFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        if (mCryptogramList.size() == 0) {
-            mCryptogramList = fetchCryptograms();
-        }
+
+        mDatabase.child("cryptograms").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                Log.e("Count ", "" + dataSnapshot.getChildrenCount());
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
+                    Cryptogram crypto = snapshot.getValue(Cryptogram.class);
+                    Log.e("Get Data", crypto.solutionPhrase);
+                    mCryptogramList.add(crypto);
+                }
+                mAdapter.notifyItemInserted(mCryptogramList.size());
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
 
     private ArrayList<Cryptogram> fetchCryptograms() {
-        // TODO: fetch cryptograms from database
+        // TODO: fetch cryptograms from externalWebService and store in database
+
         return new ArrayList<>();
     }
 

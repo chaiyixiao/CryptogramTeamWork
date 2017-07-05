@@ -22,6 +22,7 @@
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".AdminAddPlayerActivity"/>
         <activity android:name=".AdminAddCryptogramActivity"/>
+        <activity android:name=".PlayCryptogramActivity"/>
     </application>
 
 </manifest>

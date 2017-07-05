@@ -13,11 +13,16 @@ public class Player {
     public String username;
     public String firstname;
     public String lastname;
-
-//    public Player() {
-//
-//    }
-
+    public int solvedCount;
+    public int ranking;
+    public Player() {
+        this.username = "";
+        this.firstname = "";
+        this.lastname = "";
+        this.solvedCount = 0;
+        this.ranking = -1;
+    }
+    //TODO: set ranking
     public Player(String username, String firstname, String lastname) {
         this.username = username;
         this.firstname = firstname;

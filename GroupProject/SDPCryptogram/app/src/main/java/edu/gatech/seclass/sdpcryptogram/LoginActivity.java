@@ -11,17 +11,28 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import static edu.gatech.seclass.sdpcryptogram.R.layout.login;
 
 public class LoginActivity extends AppCompatActivity {
 
     private Button loginButton;
+
+    private DatabaseReference mDatabase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(login);
 
-        LinearLayout usernameComp = (LinearLayout) findViewById(R.id.username_container);
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+//        LinearLayout usernameComp = (LinearLayout) findViewById(R.id.username_container);
 
         RadioGroup loginRadios = (RadioGroup) findViewById(R.id.radioGroup);
         final RadioButton admin = (RadioButton) findViewById(R.id.admin_radio);
@@ -51,11 +62,32 @@ public class LoginActivity extends AppCompatActivity {
                     EditText username = (EditText) findViewById(R.id.username);
 
                     String usernameStr = username.getText().toString();
+
+
                     if ( usernameStr == null || usernameStr == "") {
                         // Error
                     } else {
+
                         // TODO: validate username
-                        Log.v("PlayerMenuActivity", usernameStr);
+
+                        mDatabase.child("players").addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                Log.e("Count " ,""+dataSnapshot.getChildrenCount());
+                                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
+                                    Player player = snapshot.getValue(Player.class);
+                                    Log.e("Get Data", player.username);
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+
                         Intent login = new Intent(LoginActivity.this, PlayerMenuActivity.class);
                         login.putExtra("username", usernameStr);
                         startActivity(login);
@@ -65,5 +97,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
 }

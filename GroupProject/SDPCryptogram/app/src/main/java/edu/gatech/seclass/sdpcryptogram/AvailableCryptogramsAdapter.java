@@ -2,6 +2,7 @@ package edu.gatech.seclass.sdpcryptogram;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,11 +45,15 @@ public class AvailableCryptogramsAdapter extends RecyclerView.Adapter<AvailableC
 
         public void bindCryptogram(Cryptogram c) {
             mCryptogram = c;
-            // set id progress textView
+            Log.v("Cryptogram", c.solutionPhrase);
+//        TODO:    progress.setText(.); needs PlayCryptogram class
+            cryptogramId.setText(c.cryptoId);
         }
     }
 
     public AvailableCryptogramsAdapter(ArrayList<Cryptogram> cryptograms) {
+        Log.v("All Cryptogram", String.valueOf(cryptograms.size()));
+
         mCryptograms = cryptograms;
     }
 
