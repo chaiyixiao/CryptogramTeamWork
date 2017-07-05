@@ -10,17 +10,15 @@ import com.google.firebase.database.IgnoreExtraProperties;
  */
 @IgnoreExtraProperties
 public class Player {
-    public String username;
-    public String firstname;
-    public String lastname;
-    public int solvedCount;
-    public int ranking;
+    public String username= "";
+    public String firstname= "";
+    public String lastname= "";
+    public int solvedCount = 0;
+    public int ranking = 0;
+    public int started = 0;
+    public int totalIncorrect = 0;
+
     public Player() {
-        this.username = "";
-        this.firstname = "";
-        this.lastname = "";
-        this.solvedCount = 0;
-        this.ranking = -1;
     }
     //TODO: set ranking
     public Player(String username, String firstname, String lastname) {

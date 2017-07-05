@@ -1,6 +1,7 @@
 package edu.gatech.seclass.sdpcryptogram;
 
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -18,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+
 /**
  * Created by chaiyixiao on 04/07/2017.
  */
@@ -25,7 +27,7 @@ import android.support.v4.app.FragmentTransaction;
 public class PlayerMenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    public String username;
+    public String username = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +36,8 @@ public class PlayerMenuActivity extends AppCompatActivity
 
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
-        if(b!=null)
-        {
-            Log.v("^^^^^^^^^",(String) b.get("username"));
-            username = (String) b.get("username");
+        if (b != null) {
+            this.username = (String) b.get("username");
         }
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -53,8 +53,8 @@ public class PlayerMenuActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setCheckedItem(R.id.nav_available_cryptograms);
         navigationView.setNavigationItemSelectedListener(this);
-
-        Fragment fragment =  new AvailableCryptogramsFragment();
+        navigationView.getMenu().findItem(R.id.nav_play_name).setTitle(username);
+        Fragment fragment = new AvailableCryptogramsFragment();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content_frame, fragment);
         ft.commit();
@@ -115,7 +115,6 @@ public class PlayerMenuActivity extends AppCompatActivity
             Bundle b = new Bundle();
             b.putString("username", username);
             fragment.setArguments(b);
-
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.content_frame, fragment);
             ft.commit();

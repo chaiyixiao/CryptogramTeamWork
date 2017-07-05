@@ -7,14 +7,11 @@ import com.google.firebase.database.IgnoreExtraProperties;
  */
 @IgnoreExtraProperties
 public class Cryptogram {
-    public String cryptoId;
-    public String encodedPhrase;
-    public String solutionPhrase;
+    public String cryptoId= "";
+    public String encodedPhrase= "";
+    public String solutionPhrase= "";
 
     public Cryptogram() {
-        this.cryptoId = "";
-        this.encodedPhrase = "";
-        this.solutionPhrase = "";
     }
 
     public Cryptogram(String encodedPhrase, String solutionPhrase, String cryptoId) {

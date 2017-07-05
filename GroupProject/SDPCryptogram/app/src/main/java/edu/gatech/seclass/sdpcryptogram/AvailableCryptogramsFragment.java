@@ -1,5 +1,6 @@
 package edu.gatech.seclass.sdpcryptogram;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -50,20 +51,6 @@ public class AvailableCryptogramsFragment extends Fragment {
         View v = inflater.inflate(R.layout.available_cryptograms_fragment, container, false);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
-//        String username = getArguments().getString("username");
-//        Log.v("**********",getArguments().getString("username"));
-//        mDatabase.child("players").child(username).addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                Player currentPlayer = dataSnapshot.getValue(Player.class);
-//                Log.v("========", currentPlayer.username);
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
 
         mCryptogramList = new ArrayList<>();
         solved = (TextView) v.findViewById(R.id.solved_num);
@@ -97,6 +84,22 @@ public class AvailableCryptogramsFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+
+        String username = getActivity().getIntent().getExtras().getString("username");
+        mDatabase.child("players").child(username).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Player currentPlayer = dataSnapshot.getValue(Player.class);
+                solved.setText(String.valueOf(currentPlayer.solvedCount));
+                started.setText(String.valueOf(currentPlayer.started));
+                totalIncorrect.setText(String.valueOf(currentPlayer.totalIncorrect));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         mDatabase.child("cryptograms").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
