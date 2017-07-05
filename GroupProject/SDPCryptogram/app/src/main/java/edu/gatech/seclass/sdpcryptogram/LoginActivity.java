@@ -54,6 +54,7 @@ public class LoginActivity extends AppCompatActivity {
                     if ( usernameStr == null || usernameStr == "") {
                         // Error
                     } else {
+                        // TODO: validate username
                         Log.v("PlayerMenuActivity", usernameStr);
                         Intent login = new Intent(LoginActivity.this, PlayerMenuActivity.class);
                         login.putExtra("username", usernameStr);

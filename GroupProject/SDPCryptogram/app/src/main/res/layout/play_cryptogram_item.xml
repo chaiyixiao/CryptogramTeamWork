@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <EditText
+        android:id="@+id/cryptogram_letter"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:maxLength="1"
+        style="@style/Widget.AppCompat.EditText"
+        android:gravity="center"
+        android:inputType="text" />
+
+    <TextView
+        android:id="@+id/cryptogram_solution_letter"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:maxLength="1"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:text="TextView" />
+
+</LinearLayout>

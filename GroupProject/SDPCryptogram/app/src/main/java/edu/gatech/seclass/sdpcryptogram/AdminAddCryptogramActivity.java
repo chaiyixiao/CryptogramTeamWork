@@ -34,7 +34,7 @@ public class AdminAddCryptogramActivity extends AppCompatActivity{
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //check encodedText solutionText length match or not
+                //TODO: check encodedText solutionText length match or not
                 // check same encoded letter matches solution?
                 // request id && save to db
             }

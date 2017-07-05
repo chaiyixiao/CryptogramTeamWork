@@ -35,7 +35,13 @@ public class PlayerMenuActivity extends AppCompatActivity
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setCheckedItem(R.id.nav_available_cryptograms);
         navigationView.setNavigationItemSelectedListener(this);
+
+        Fragment fragment =  new AvailableCryptogramsFragment();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.content_frame, fragment);
+        ft.commit();
     }
 
     @Override
@@ -55,20 +61,20 @@ public class PlayerMenuActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+////        int id = item.getItemId();
+////
+////        //noinspection SimplifiableIfStatement
+////        if (id == R.id.action_settings) {
+////            return true;
+////        }
 //
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-
-        return super.onOptionsItemSelected(item);
-    }
+//        return super.onOptionsItemSelected(item);
+//    }
 
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -77,23 +83,14 @@ public class PlayerMenuActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_available_cryptograms) {
-            // Handle the camera action
-        } else if (id == R.id.nav_player_ratings) {
-
-        }
-
         Fragment fragment = null;
-        String title = getString(R.string.app_name);
 
         switch (id) {
             case R.id.nav_available_cryptograms:
-                fragment = new PlayerRatingsFragment();
-                title  = "News";
+                fragment = new AvailableCryptogramsFragment();
                 break;
             case R.id.nav_player_ratings:
-                fragment = new AvailableCryptogramsFragment();
-                title = "Events";
+                fragment = new PlayerRatingsFragment();
                 break;
 
         }
@@ -102,11 +99,6 @@ public class PlayerMenuActivity extends AppCompatActivity
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.content_frame, fragment);
             ft.commit();
-        }
-
-        // set the toolbar title
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle(title);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
