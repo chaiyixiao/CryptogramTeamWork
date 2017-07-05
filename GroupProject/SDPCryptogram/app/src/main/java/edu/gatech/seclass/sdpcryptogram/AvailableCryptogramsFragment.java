@@ -12,6 +12,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 
 /**
@@ -29,6 +32,7 @@ public class AvailableCryptogramsFragment extends Fragment {
 
     private ArrayList<Cryptogram> mCryptogramList;
 
+    private DatabaseReference mDatabase;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,9 @@ public class AvailableCryptogramsFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.available_cryptograms_fragment, container, false);
 
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+
         mCryptogramList = new ArrayList<>();
         solved = (TextView) v.findViewById(R.id.solved_num);
         started = (TextView) v.findViewById(R.id.started_num);
@@ -50,6 +57,8 @@ public class AvailableCryptogramsFragment extends Fragment {
         acLayoutManager = new LinearLayoutManager(getActivity());
         availableCryptogramRecyclerView.setLayoutManager(acLayoutManager);
 
+        mAdapter = new AvailableCryptogramsAdapter(mCryptogramList);
+        availableCryptogramRecyclerView.setAdapter(mAdapter);
         // TODO: fetch data from database
 
         solved.setText("20");

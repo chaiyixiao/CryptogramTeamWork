@@ -44,6 +44,8 @@ public class PlayerRatingsFragment extends Fragment {
         ratingsLayoutManager = new LinearLayoutManager(getActivity());
         playerRatingsRecyclerView.setLayoutManager(ratingsLayoutManager);
 
+        mAdapter = new PlayerRatingsAdapter(mPlayers);
+        playerRatingsRecyclerView.setAdapter(mAdapter);
         return v;
     }
 

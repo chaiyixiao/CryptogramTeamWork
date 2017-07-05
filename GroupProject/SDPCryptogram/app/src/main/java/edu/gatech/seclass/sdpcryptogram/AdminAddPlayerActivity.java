@@ -11,6 +11,9 @@ import android.widget.EditText;
 /**
  * Created by chaiyixiao on 04/07/2017.
  */
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import static edu.gatech.seclass.sdpcryptogram.R.layout.add_player;
 
 public class AdminAddPlayerActivity extends AppCompatActivity {
@@ -19,10 +22,14 @@ public class AdminAddPlayerActivity extends AppCompatActivity {
     private EditText firstname;
     private EditText lastname;
 
+    private DatabaseReference mDatabase;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(add_player);
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         Button saveBtn = (Button) findViewById(R.id.save_player);
         Button cancelBtn = (Button) findViewById(R.id.cancel_add_player);
@@ -38,6 +45,8 @@ public class AdminAddPlayerActivity extends AppCompatActivity {
                 String usernameStr = username.getText().toString();
                 String firstnameStr = firstname.getText().toString();
                 String lastnameStr = lastname.getText().toString();
+                Player newPlayer = new Player(usernameStr, firstnameStr, lastnameStr);
+                mDatabase.child("players").child(usernameStr).setValue(newPlayer);
             }
         });
 

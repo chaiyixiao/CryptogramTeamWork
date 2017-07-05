@@ -48,6 +48,10 @@ public class AvailableCryptogramsAdapter extends RecyclerView.Adapter<AvailableC
         }
     }
 
+    public AvailableCryptogramsAdapter(ArrayList<Cryptogram> cryptograms) {
+        mCryptograms = cryptograms;
+    }
+
 
     @Override
     public AvailableCryptogramsAdapter.CryptogramHolder onCreateViewHolder(ViewGroup parent, int viewType) {
