@@ -76,7 +76,7 @@ This software product and the manual are copyrighted and all rights are
 reserved by 6300Team19.
 ```
 
-## CREDITS
+## TEAM
 
 
 
