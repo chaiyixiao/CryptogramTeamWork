@@ -17,6 +17,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.List;
+
+import edu.gatech.seclass.utilities.ExternalWebService;
+
 import static edu.gatech.seclass.sdpcryptogram.R.layout.login;
 
 public class LoginActivity extends AppCompatActivity {
@@ -31,6 +35,14 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(login);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        // initialize the External Web Service and get the list of usernames
+        // !!! local version, will not persist data between runs
+        // !!! a cloud-synchronizing version may be provided by the instructor later
+        final List<String> usernameList =  ExternalWebService.getInstance().playernameService();
+        for (String username : usernameList) {
+            Log.v("user", username);
+        }
 
 //        LinearLayout usernameComp = (LinearLayout) findViewById(R.id.username_container);
 
@@ -51,6 +63,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         loginButton = (Button) findViewById(R.id.login_button);
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,15 +73,12 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(login);
                 } else if (player.isChecked()) {
                     EditText username = (EditText) findViewById(R.id.username);
-
                     String usernameStr = username.getText().toString();
 
-
-                    if ( usernameStr == null || usernameStr == "") {
+                    // check whether the username is contained in the usernameList
+                    if (usernameList.contains(usernameStr)) {
                         // Error
                     } else {
-
-                        // TODO: validate username
 
                         mDatabase.child("players").addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override

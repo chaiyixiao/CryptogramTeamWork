@@ -19,6 +19,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Random;
 
+import edu.gatech.seclass.utilities.ExternalWebService;
+
 import static edu.gatech.seclass.sdpcryptogram.R.layout.add_cryptogram;
 
 public class AdminAddCryptogramActivity extends AppCompatActivity{
@@ -44,17 +46,23 @@ public class AdminAddCryptogramActivity extends AppCompatActivity{
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: check encodedText solutionText length match or not
-                // check same encoded letter matches solution?
                 // request id && save to db
                 String encodedStr = encodedText.getText().toString();
                 String solutionStr = solutionText.getText().toString();
-                // TODO: request id
-                Random r = new Random();
-                String idStr = String.valueOf( r.nextInt(1024));
+                try {
+                    // submit the new cryptogram to the external webservice
+                    // return id is successful
+                    // throws IllegalArgumentException if puzzle duplicates existing puzzle or solution,
+                    // or if non-letter characters do not match, if capitalization does not match,
+                    // or letter substitutions are inconsistent
+                    String idStr = ExternalWebService.getInstance().addCryptogramService(encodedStr, solutionStr);
 
-                Cryptogram crypto = new Cryptogram(encodedStr, solutionStr, idStr);
-                mDatabase.child("cryptograms").child(idStr).setValue(crypto);
+                    Cryptogram crypto = new Cryptogram(encodedStr, solutionStr, idStr);
+                    mDatabase.child("cryptograms").child(idStr).setValue(crypto);
+                } catch (IllegalArgumentException e) {
+                    System.err.println("IllegalArgumentException: " + e.getMessage());
+                }
+
             }
         });
 
