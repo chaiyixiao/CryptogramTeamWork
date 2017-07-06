@@ -57,6 +57,8 @@ public class AdminAddCryptogramActivity extends AppCompatActivity{
                     // or letter substitutions are inconsistent
                     String idStr = ExternalWebService.getInstance().addCryptogramService(encodedStr, solutionStr);
 
+                    // TODO: pop up confirmation message
+
                     Cryptogram crypto = new Cryptogram(encodedStr, solutionStr, idStr);
                     mDatabase.child("cryptograms").child(idStr).setValue(crypto);
                 } catch (IllegalArgumentException e) {
