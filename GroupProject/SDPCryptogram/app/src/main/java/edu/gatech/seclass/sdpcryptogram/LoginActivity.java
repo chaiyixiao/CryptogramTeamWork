@@ -77,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     // check whether the username is contained in the usernameList
                     if (usernameList.contains(usernameStr)) {
-                        // Error
+                        // TODO: pop up message "invalid username"
                     } else {
 
                         mDatabase.child("players").addListenerForSingleValueEvent(new ValueEventListener() {
