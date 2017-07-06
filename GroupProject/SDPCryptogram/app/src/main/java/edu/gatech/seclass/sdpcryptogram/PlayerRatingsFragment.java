@@ -46,8 +46,6 @@ public class PlayerRatingsFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.player_ratings_fragment, container, false);
 
-        String username = getArguments().getString("username");
-        ((TextView) v.findViewById(R.id.nav_play_name)).setText(username);
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         mPlayers = new ArrayList<>();
