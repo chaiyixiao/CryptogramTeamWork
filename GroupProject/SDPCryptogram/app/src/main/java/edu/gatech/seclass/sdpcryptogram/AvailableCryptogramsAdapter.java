@@ -24,8 +24,6 @@ public class AvailableCryptogramsAdapter extends RecyclerView.Adapter<AvailableC
         private TextView progress;
         private Cryptogram mCryptogram;
 
-        private static final String CRYPTOGRAM_KEY = "CRYPTOGRAM_KEY";
-
 
         public CryptogramHolder(View v) {
             super(v);
@@ -38,15 +36,16 @@ public class AvailableCryptogramsAdapter extends RecyclerView.Adapter<AvailableC
         public void onClick(View v) {
             Context context = itemView.getContext();
             Intent intent = new Intent(context, PlayCryptogramActivity.class);
-            // TODO: passing cryptogram id as param
-            intent.putExtra(CRYPTOGRAM_KEY, cryptogramId.getText().toString());
+            intent.putExtra("CRYPTOGRAM_ID", mCryptogram.cryptoId);
+            intent.putExtra("CRYPTOGRAM_ENCODED", mCryptogram.encodedPhrase);
+            intent.putExtra("CRYPTOGRAM_SOLUTION", mCryptogram.solutionPhrase);
+
             context.startActivity(intent);
         }
 
         public void bindCryptogram(Cryptogram c) {
             mCryptogram = c;
             Log.v("Cryptogram", c.solutionPhrase);
-//        TODO:    progress.setText(.); needs PlayCryptogram class
             cryptogramId.setText(c.cryptoId);
         }
     }

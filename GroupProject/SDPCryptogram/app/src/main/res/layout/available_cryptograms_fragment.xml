@@ -20,7 +20,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Solved:"
-
             android:textAlignment="center" />
 
         <TextView
@@ -73,11 +72,13 @@
         android:layout_height="wrap_content"
         android:text="Request New Cryptograms" />
 
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/available_cryptograms_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
     <!--android:scrollbars="vertical"-->
 </LinearLayout>

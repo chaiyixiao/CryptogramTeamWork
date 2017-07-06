@@ -7,32 +7,30 @@ import com.google.firebase.database.IgnoreExtraProperties;
  */
 @IgnoreExtraProperties
 public class PlayCryptogram {
-    public String username;
-    public String cryptogramId;
-    public String progress;
-    public String priorSolution;
-    public int numIncorrectSubmission;
+    public String username = "";
+    public String cryptogramId = "";
+    public String progress = "Not started";
+    public String priorSolution = "";
+    public int numIncorrectSubmission = 0;
 
-    public PlayCryptogram() {
-        this.username = "";
-    }
+    public PlayCryptogram() {}
 
     public PlayCryptogram(String username, String cryptogramId) {
         this.username = username;
         this.cryptogramId = cryptogramId;
     }
 
-    public void savePriorSolution(String solution) {
-        this.priorSolution = solution;
-    }
-    public void startPlaying() {
-        this.progress = "In progress";
-    }
-    public void addIncorrectsubmit() {
-        this.numIncorrectSubmission++;
-    }
-    public void completePlaying() {
-        this.progress = "Solved";
-    }
+//    public void savePriorSolution(String solution) {
+//        this.priorSolution = solution;
+//    }
+//    public void startPlaying() {
+//        this.progress = "In progress";
+//    }
+//    public void addIncorrectsubmit() {
+//        this.numIncorrectSubmission++;
+//    }
+//    public void completePlaying() {
+//        this.progress = "Solved";
+//    }
 
 }

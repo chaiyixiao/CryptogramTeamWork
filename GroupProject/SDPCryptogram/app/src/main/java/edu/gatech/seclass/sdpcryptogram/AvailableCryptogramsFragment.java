@@ -42,6 +42,7 @@ public class AvailableCryptogramsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -63,12 +64,6 @@ public class AvailableCryptogramsFragment extends Fragment {
 
         mAdapter = new AvailableCryptogramsAdapter(mCryptogramList);
         availableCryptogramRecyclerView.setAdapter(mAdapter);
-        // TODO: fetch data from database
-
-        solved.setText("20");
-        started.setText("15");
-        totalIncorrect.setText("100");
-
 
         Button requestButton = (Button) v.findViewById(R.id.request_new_cryptograms);
         requestButton.setOnClickListener(new View.OnClickListener() {
@@ -78,12 +73,7 @@ public class AvailableCryptogramsFragment extends Fragment {
                 mCryptogramList.addAll(fetchCryptograms());
             }
         });
-        return v;
-    }
 
-    @Override
-    public void onStart() {
-        super.onStart();
 
         String username = getActivity().getIntent().getExtras().getString("username");
         mDatabase.child("players").child(username).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -109,11 +99,9 @@ public class AvailableCryptogramsFragment extends Fragment {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 
                     Cryptogram crypto = snapshot.getValue(Cryptogram.class);
-                    Log.e("Get Data", crypto.solutionPhrase);
                     mCryptogramList.add(crypto);
                 }
                 mAdapter.notifyItemInserted(mCryptogramList.size());
-
             }
 
             @Override
@@ -121,6 +109,13 @@ public class AvailableCryptogramsFragment extends Fragment {
 
             }
         });
+
+        return v;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
     }
 
 
