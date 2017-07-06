@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import edu.gatech.seclass.utilities.ExternalWebService;
+
 import static edu.gatech.seclass.sdpcryptogram.R.layout.add_player;
 
 public class AdminAddPlayerActivity extends AppCompatActivity {
@@ -55,6 +57,19 @@ public class AdminAddPlayerActivity extends AppCompatActivity {
                 String usernameStr = username.getText().toString();
                 String firstnameStr = firstname.getText().toString();
                 String lastnameStr = lastname.getText().toString();
+
+                // save the new player info to the external webservice
+                // true if successfully updated or added player rating,
+                // false if any values are null or empty or cannot add to player ratings
+                // TODO： should pop up confirmation message
+                if (ExternalWebService.getInstance().updateRatingService(
+                        usernameStr, firstnameStr, lastnameStr, 0, 0, 0)) {
+                    Log.v("add a new player: ", "successful");
+                } else {
+                    Log.v("add a new player: ", "unsuccessful");
+                }
+
+
                 Player newPlayer = new Player(usernameStr, firstnameStr, lastnameStr);
                 mDatabase.child("players").child(usernameStr).setValue(newPlayer);
             }
