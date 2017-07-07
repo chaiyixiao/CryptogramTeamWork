@@ -36,9 +36,10 @@ public class AvailableCryptogramsFragment extends Fragment {
     private AvailableCryptogramsAdapter mAdapter;
 
     private ArrayList<Cryptogram> mCryptogramList;
-
+    private ArrayList<PlayCryptogram> mPlayCryptograms;
     private DatabaseReference mDatabase;
 
+    private String username = "";
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +55,8 @@ public class AvailableCryptogramsFragment extends Fragment {
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         mCryptogramList = new ArrayList<>();
+        mPlayCryptograms = new ArrayList<>();
+
         solved = (TextView) v.findViewById(R.id.solved_num);
         started = (TextView) v.findViewById(R.id.started_num);
         totalIncorrect = (TextView) v.findViewById(R.id.incorrect_num);
@@ -62,7 +65,7 @@ public class AvailableCryptogramsFragment extends Fragment {
         acLayoutManager = new LinearLayoutManager(getActivity());
         availableCryptogramRecyclerView.setLayoutManager(acLayoutManager);
 
-        mAdapter = new AvailableCryptogramsAdapter(mCryptogramList);
+        mAdapter = new AvailableCryptogramsAdapter(username, mCryptogramList, mPlayCryptograms);
         availableCryptogramRecyclerView.setAdapter(mAdapter);
 
         Button requestButton = (Button) v.findViewById(R.id.request_new_cryptograms);
@@ -75,7 +78,7 @@ public class AvailableCryptogramsFragment extends Fragment {
         });
 
 
-        String username = getActivity().getIntent().getExtras().getString("username");
+        username = getActivity().getIntent().getExtras().getString("USERNAME");
         mDatabase.child("players").child(username).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -95,13 +98,30 @@ public class AvailableCryptogramsFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                Log.e("Count ", "" + dataSnapshot.getChildrenCount());
+                Log.e("Count=", "" + dataSnapshot.getChildrenCount());
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 
                     Cryptogram crypto = snapshot.getValue(Cryptogram.class);
                     mCryptogramList.add(crypto);
                 }
                 mAdapter.notifyItemInserted(mCryptogramList.size());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        mDatabase.child("playCryptograms").child(username).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    PlayCryptogram pc = snapshot.getValue(PlayCryptogram.class);
+                    mPlayCryptograms.add(pc);
+                }
+                Log.e("mPlayCryptograms Count", "" + mPlayCryptograms.size());
+                mAdapter.notifyDataSetChanged();
             }
 
             @Override

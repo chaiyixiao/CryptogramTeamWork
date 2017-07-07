@@ -17,6 +17,7 @@ import android.widget.Button;
 /**
  * Created by chaiyixiao on 04/07/2017.
  */
+
 import java.util.ArrayList;
 
 import static edu.gatech.seclass.sdpcryptogram.R.layout.play_cryptogram;
@@ -28,6 +29,7 @@ public class PlayCryptogramActivity extends AppCompatActivity {
 
     private String cryptogramId = "";
     private String solutionStr = "";
+    private String username = "";
 
     private RecyclerView playRecyclerView;
     private GridLayoutManager mGridLayoutManager;
@@ -38,14 +40,17 @@ public class PlayCryptogramActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(play_cryptogram);
 
-
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
         if (b != null) {
             this.cryptogramId = (String) b.get("CRYPTOGRAM_KEY");
             char[] encodedArr = ((String) b.get("CRYPTOGRAM_ENCODED")).toCharArray();
             this.solutionStr = (String) b.get("CRYPTOGRAM_SOLUTION");
-            String mySolutionStr = ""; // TODO: this.mySolutionLetters = 从 PlayCryptogram 来
+            this.username = (String) b.get("USERNAME");
+
+            String mySolutionStr = "";
+            // TODO: this.mySolutionLetters = 从 PlayCryptogram 来
+
             char[] mySolutionArr = mySolutionStr.toCharArray();
 
             for (char c : encodedArr) {
@@ -89,8 +94,10 @@ public class PlayCryptogramActivity extends AppCompatActivity {
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                resetEmptyMySolutionLetters();
-                mAdapter.notifyItemChanged(mySolutionLetters.size(), mySolutionLetters);
+                // TODO
+//                resetEmptyMySolutionLetters();
+//                mAdapter.notifyDataSetChanged();
+//                Log.v("resetEmptyMySolutionLetters", mySolutionLetters.toString());
             }
         });
 
@@ -122,24 +129,14 @@ public class PlayCryptogramActivity extends AppCompatActivity {
                     ArrayList<String> mySolutionLettersCopy = new ArrayList<String>(mySolutionLetters);
                     for (int i = 0; i < mEncodedLetters.size(); i++) {
                         if (mEncodedLetters.get(i).equals(encoded)) {
-                            Log.v("before===", mySolutionLetters.toString());
-
                             mySolutionLetters.set(i, replace);
-                            Log.v("after===", mySolutionLetters.toString());
                         }
                     }
-                    Log.v("loop===", mySolutionLetters.toString());
-
                     for (int i = 0; i < mySolutionLetters.size(); i++) {
                         if (!mySolutionLettersCopy.get(i).equals(mySolutionLetters.get(i))) {
                             mAdapter.notifyDataSetChanged();
-                            Log.v("adapter===", mySolutionLetters.toString());
                         }
                     }
-
-////                    if (!mySolutionLetters.toString().equals(mySolutionLettersCopy.toString())) {
-//
-//                    }
                 }
             });
         }

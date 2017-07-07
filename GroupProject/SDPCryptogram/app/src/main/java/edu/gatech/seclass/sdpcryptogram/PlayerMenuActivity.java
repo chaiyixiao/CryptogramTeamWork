@@ -37,7 +37,7 @@ public class PlayerMenuActivity extends AppCompatActivity
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
         if (b != null) {
-            this.username = (String) b.get("username");
+            this.username = (String) b.get("USERNAME");
         }
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -113,7 +113,7 @@ public class PlayerMenuActivity extends AppCompatActivity
 
         if (fragment != null) {
             Bundle b = new Bundle();
-            b.putString("username", username);
+            b.putString("USERNAME", username);
             fragment.setArguments(b);
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.content_frame, fragment);

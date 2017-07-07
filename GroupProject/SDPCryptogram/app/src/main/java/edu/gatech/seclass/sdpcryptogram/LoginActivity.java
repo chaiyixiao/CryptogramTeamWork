@@ -99,7 +99,7 @@ public class LoginActivity extends AppCompatActivity {
                         });
 
                         Intent login = new Intent(LoginActivity.this, PlayerMenuActivity.class);
-                        login.putExtra("username", usernameStr);
+                        login.putExtra("USERNAME", usernameStr);
                         startActivity(login);
                     }
                 } else {
