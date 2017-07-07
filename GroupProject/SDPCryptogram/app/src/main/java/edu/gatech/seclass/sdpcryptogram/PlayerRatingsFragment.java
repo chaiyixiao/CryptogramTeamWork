@@ -45,9 +45,7 @@ public class PlayerRatingsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.player_ratings_fragment, container, false);
-
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-
+        mDatabase = FirebaseGetInstanceClass.GetFirebaseDatabaseInstance().getReference();
         mPlayers = new ArrayList<>();
 
         playerRatingsRecyclerView = (RecyclerView) v.findViewById(R.id.player_ratings_recycler_view);

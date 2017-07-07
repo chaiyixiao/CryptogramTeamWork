@@ -34,8 +34,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(login);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-
+        mDatabase = FirebaseGetInstanceClass.GetFirebaseDatabaseInstance().getReference();
         // initialize the External Web Service and get the list of usernames
         // !!! local version, will not persist data between runs
         // !!! a cloud-synchronizing version may be provided by the instructor later

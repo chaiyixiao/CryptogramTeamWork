@@ -33,8 +33,7 @@ public class AdminAddCryptogramActivity extends AppCompatActivity{
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(add_cryptogram);
-
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase = FirebaseGetInstanceClass.GetFirebaseDatabaseInstance().getReference();
 
         Button saveBtn = (Button) findViewById(R.id.save_button);
         Button resetBtn = (Button) findViewById(R.id.reset_button);

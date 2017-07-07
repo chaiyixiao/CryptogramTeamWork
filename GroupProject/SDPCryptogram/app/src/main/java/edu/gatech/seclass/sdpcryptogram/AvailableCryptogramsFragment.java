@@ -51,9 +51,7 @@ public class AvailableCryptogramsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.available_cryptograms_fragment, container, false);
-
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-
+        mDatabase = FirebaseGetInstanceClass.GetFirebaseDatabaseInstance().getReference();
         mCryptogramList = new ArrayList<>();
         mPlayCryptograms = new ArrayList<>();
 

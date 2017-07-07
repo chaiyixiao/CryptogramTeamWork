@@ -40,8 +40,7 @@ public class AdminAddPlayerActivity extends AppCompatActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(add_player);
-
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase = FirebaseGetInstanceClass.GetFirebaseDatabaseInstance().getReference();
 
         Button saveBtn = (Button) findViewById(R.id.save_player);
         Button cancelBtn = (Button) findViewById(R.id.cancel_add_player);
