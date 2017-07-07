@@ -2,6 +2,7 @@
 
 <resources>
     <integer name="length_of_names">32</integer>
-    <integer name="length_of_cryptogram">100</integer>
-    <integer name="lines_of_cryptogram">4</integer>
+    <integer name="length_of_cryptogram">512</integer>
+    <integer name="lines_of_cryptogram">6</integer>
+    <integer name="max_lines_of_cryptogram">16</integer>
 </resources>

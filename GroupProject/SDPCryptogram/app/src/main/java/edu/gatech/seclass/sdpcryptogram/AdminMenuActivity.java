@@ -21,6 +21,7 @@ public class AdminMenuActivity extends AppCompatActivity {
         Button addPlayer = (Button) findViewById(R.id.add_player);
         Button addCryptogram = (Button) findViewById(R.id.add_cryptogram);
 
+        // jump to add a new player
         addPlayer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -29,6 +30,7 @@ public class AdminMenuActivity extends AppCompatActivity {
             }
         });
 
+        // jump to add a new cryptogram
         addCryptogram.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

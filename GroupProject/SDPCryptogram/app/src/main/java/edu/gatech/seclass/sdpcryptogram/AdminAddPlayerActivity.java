@@ -45,9 +45,6 @@ public class AdminAddPlayerActivity extends AppCompatActivity {
         setContentView(add_player);
         mDatabase = FirebaseGetInstanceClass.GetFirebaseDatabaseInstance().getReference();
 
-        final Context context = getApplicationContext();
-        final int duration = Toast.LENGTH_SHORT;
-
         Button saveBtn = (Button) findViewById(R.id.save_player);
         Button cancelBtn = (Button) findViewById(R.id.cancel_add_player);
 
@@ -55,6 +52,10 @@ public class AdminAddPlayerActivity extends AppCompatActivity {
         firstname = (EditText) findViewById(R.id.add_first_name);
         lastname = (EditText) findViewById(R.id.add_last_name);
 
+        final Context context = getApplicationContext();
+        final int duration = Toast.LENGTH_SHORT;
+
+        // button SAVE clicked
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,7 +73,6 @@ public class AdminAddPlayerActivity extends AppCompatActivity {
                             usernameStr, firstnameStr, lastnameStr, 0, 0, 0);
                     if (addPlayerSuccessful) {
                         // check if the new player is added successfully
-
                         // pop up a confirmation message
                         Toast.makeText(context, "New player created successfully!", duration).show();
                         // reset the input
@@ -82,7 +82,7 @@ public class AdminAddPlayerActivity extends AppCompatActivity {
                         // popup a message to promote administrator to add another player
                         Toast.makeText(context, "Add another player or cancel.", duration).show();
 
-                        // add to the local database created by ourselves
+                        // add the new player to the local database created by ourselves
                         Player newPlayer = new Player(usernameStr, firstnameStr, lastnameStr);
                         mDatabase.child("players").child(usernameStr).setValue(newPlayer);
                     } else {
@@ -96,6 +96,7 @@ public class AdminAddPlayerActivity extends AppCompatActivity {
             }
         });
 
+        // button CANCEL clicked
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
