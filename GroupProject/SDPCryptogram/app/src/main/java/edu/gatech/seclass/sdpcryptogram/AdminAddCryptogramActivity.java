@@ -35,16 +35,16 @@ public class AdminAddCryptogramActivity extends AppCompatActivity{
         setContentView(add_cryptogram);
         mDatabase = FirebaseGetInstanceClass.GetFirebaseDatabaseInstance().getReference();
 
-        final Context context = getApplicationContext();
-        final int duration = Toast.LENGTH_SHORT;
-
         Button saveBtn = (Button) findViewById(R.id.save_button);
         Button resetBtn = (Button) findViewById(R.id.reset_button);
         Button cancelBtn = (Button) findViewById(R.id.cancel_button);
         encodedText = (EditText) findViewById(R.id.encoded_phrase);
         solutionText = (EditText) findViewById(R.id.solution_phrase);
 
+        final Context context = getApplicationContext();
+        final int duration = Toast.LENGTH_SHORT;
 
+        // button SAVE clicked
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,6 +75,7 @@ public class AdminAddCryptogramActivity extends AppCompatActivity{
             }
         });
 
+        // button RESET clicked
         resetBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,6 +84,8 @@ public class AdminAddCryptogramActivity extends AppCompatActivity{
             }
         });
 
+
+        // button CANCEL clicked
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

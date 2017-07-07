@@ -9,7 +9,8 @@
     <!--tools:showIn="@layout/player_menu_app_bar">-->
 
     <FrameLayout
+        android:id="@+id/content_frame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" android:id="@+id/content_frame"/>
+        android:layout_height="match_parent" />
 
 </android.support.constraint.ConstraintLayout>
