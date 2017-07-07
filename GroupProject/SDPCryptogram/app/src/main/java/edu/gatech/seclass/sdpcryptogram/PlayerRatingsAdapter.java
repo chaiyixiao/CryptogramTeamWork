@@ -44,11 +44,11 @@ public class PlayerRatingsAdapter extends RecyclerView.Adapter<PlayerRatingsAdap
 
         public void bindPlayer(Player player) {
             mPlayer = player;
-            playername.setText(player.firstname + " " + player.lastname);
-            solvedNum.setText(String.valueOf(player.solvedCount));
-            ranking.setText(String.valueOf(player.ranking));
-            startedNum.setText(String.valueOf(player.started));
-            incorrectNum.setText(String.valueOf(player.totalIncorrect));
+            playername.setText(player.getFirstname() + " " + player.getLastname());
+            solvedNum.setText(String.valueOf(player.getSolvedCount()));
+            ranking.setText(String.valueOf(player.getRanking()));
+            startedNum.setText(String.valueOf(player.getStarted()));
+            incorrectNum.setText(String.valueOf(player.getTotalIncorrect()));
         }
     }
 
