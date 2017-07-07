@@ -2,36 +2,51 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:gravity="center_horizontal"
+    android:layout_margin="4dp"
+    android:padding="4dp"
+    android:weightSum="32">
 
     <TextView
         android:id="@+id/textView8"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1.5"
         android:textAlignment="viewEnd"
-        android:text="Cryptogram ID:" />
+        android:text="ID: " />
 
     <TextView
         android:id="@+id/available_cryptogram_id"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="6"
         android:text="001" />
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:textAlignment="viewEnd"
-        android:text="Progress:" />
+        android:text="Status: " />
 
     <TextView
         android:id="@+id/available_cryptogram_progress"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="TextView" />
+        android:layout_weight="14"
+        android:text="in progress" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="viewEnd"
+        android:text="Incorrect: " />
+
+    <TextView
+        android:id="@+id/available_cryptogram_incorrect"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="10"
+        android:text="9999" />
 </LinearLayout>
