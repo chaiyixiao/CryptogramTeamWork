@@ -1,5 +1,6 @@
 package edu.gatech.seclass.sdpcryptogram;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 /**
@@ -16,8 +18,6 @@ import android.widget.EditText;
  */
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.Random;
 
 import edu.gatech.seclass.utilities.ExternalWebService;
 
@@ -35,6 +35,9 @@ public class AdminAddCryptogramActivity extends AppCompatActivity{
         setContentView(add_cryptogram);
         mDatabase = FirebaseGetInstanceClass.GetFirebaseDatabaseInstance().getReference();
 
+        final Context context = getApplicationContext();
+        final int duration = Toast.LENGTH_SHORT;
+
         Button saveBtn = (Button) findViewById(R.id.save_button);
         Button resetBtn = (Button) findViewById(R.id.reset_button);
         Button cancelBtn = (Button) findViewById(R.id.cancel_button);
@@ -51,19 +54,24 @@ public class AdminAddCryptogramActivity extends AppCompatActivity{
                 try {
                     // submit the new cryptogram to the external webservice
                     // return id is successful
-                    // throws IllegalArgumentException if puzzle duplicates existing puzzle or solution,
-                    // or if non-letter characters do not match, if capitalization does not match,
-                    // or letter substitutions are inconsistent
                     String idStr = ExternalWebService.getInstance().addCryptogramService(encodedStr, solutionStr);
+                    Toast.makeText(context, "Added successfully! ID: " + idStr + ".", duration).show();
 
-                    // TODO: pop up confirmation message
+                    // reset the input automatically
+                    encodedText.setText("");
+                    solutionText.setText("");
+                    // promote the administrator to add another cryptogram
+                    Toast.makeText(context, "Add another cryptogram or cancel.", duration).show();
 
                     Cryptogram crypto = new Cryptogram(encodedStr, solutionStr, idStr);
                     mDatabase.child("cryptograms").child(idStr).setValue(crypto);
                 } catch (IllegalArgumentException e) {
+                    // throws IllegalArgumentException if puzzle duplicates existing puzzle or solution,
+                    // or if non-letter characters do not match, if capitalization does not match,
+                    // or letter substitutions are inconsistent
                     System.err.println("IllegalArgumentException: " + e.getMessage());
+                    Toast.makeText(context, "Duplicated or invalid cryptogram!", duration).show();
                 }
-
             }
         });
 
