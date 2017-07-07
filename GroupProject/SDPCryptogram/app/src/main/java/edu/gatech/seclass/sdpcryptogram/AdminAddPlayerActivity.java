@@ -1,13 +1,16 @@
 package edu.gatech.seclass.sdpcryptogram;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 /**
  * Created by chaiyixiao on 04/07/2017.
@@ -41,6 +44,9 @@ public class AdminAddPlayerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(add_player);
 
+        final Context context = getApplicationContext();
+        final int duration = Toast.LENGTH_SHORT;
+
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         Button saveBtn = (Button) findViewById(R.id.save_player);
@@ -53,25 +59,41 @@ public class AdminAddPlayerActivity extends AppCompatActivity {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // validate and storage
+                // get the username list from the external webservice
+                List<String> usernameList =  ExternalWebService.getInstance().playernameService();
+
                 String usernameStr = username.getText().toString();
                 String firstnameStr = firstname.getText().toString();
                 String lastnameStr = lastname.getText().toString();
 
                 // save the new player info to the external webservice
-                // true if successfully updated or added player rating,
-                // false if any values are null or empty or cannot add to player ratings
-                // TODO： should pop up confirmation message
-                if (ExternalWebService.getInstance().updateRatingService(
-                        usernameStr, firstnameStr, lastnameStr, 0, 0, 0)) {
-                    Log.v("add a new player: ", "successful");
+                if (!usernameList.contains(usernameStr)) {
+                    // check if username is unique
+                    boolean addPlayerSuccessful = ExternalWebService.getInstance().updateRatingService(
+                            usernameStr, firstnameStr, lastnameStr, 0, 0, 0);
+                    if (addPlayerSuccessful) {
+                        // check if the new player is added successfully
+
+                        // pop up a confirmation message
+                        Toast.makeText(context, "New player created successfully!", duration).show();
+                        // reset the input
+                        username.setText("");
+                        firstname.setText("");
+                        lastname.setText("");
+                        // popup a message to promote administrator to add another player
+                        Toast.makeText(context, "Add another player or cancel.", duration).show();
+
+                        // add to the local database created by ourselves
+                        Player newPlayer = new Player(usernameStr, firstnameStr, lastnameStr);
+                        mDatabase.child("players").child(usernameStr).setValue(newPlayer);
+                    } else {
+                        // failed if any values are null or empty or cannot add to player ratings
+                        Toast.makeText(context, "Invalid input or duplicated username.", duration).show();
+                    }
                 } else {
-                    Log.v("add a new player: ", "unsuccessful");
+                    // failed if any values are null or empty or cannot add to player ratings
+                    Toast.makeText(context, "Invalid input or duplicated username.", duration).show();
                 }
-
-
-                Player newPlayer = new Player(usernameStr, firstnameStr, lastnameStr);
-                mDatabase.child("players").child(usernameStr).setValue(newPlayer);
             }
         });
 
