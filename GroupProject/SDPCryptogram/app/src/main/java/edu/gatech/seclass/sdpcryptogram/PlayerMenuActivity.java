@@ -20,6 +20,10 @@ import android.view.MenuItem;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 
+import java.util.List;
+
+import edu.gatech.seclass.utilities.ExternalWebService;
+
 /**
  * Created by chaiyixiao on 04/07/2017.
  */
@@ -28,7 +32,7 @@ public class PlayerMenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public String username = "";
-
+    public int userIndex = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +42,7 @@ public class PlayerMenuActivity extends AppCompatActivity
         Bundle b = intent.getExtras();
         if (b != null) {
             this.username = (String) b.get("USERNAME");
+            this.userIndex = (int) b.get("USERINDEX");
         }
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -77,22 +82,6 @@ public class PlayerMenuActivity extends AppCompatActivity
         return true;
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-////        int id = item.getItemId();
-////
-////        //noinspection SimplifiableIfStatement
-////        if (id == R.id.action_settings) {
-////            return true;
-////        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
-
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -114,6 +103,7 @@ public class PlayerMenuActivity extends AppCompatActivity
         if (fragment != null) {
             Bundle b = new Bundle();
             b.putString("USERNAME", username);
+            b.putInt("USERINDEX",userIndex);
             fragment.setArguments(b);
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.content_frame, fragment);

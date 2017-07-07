@@ -18,6 +18,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import edu.gatech.seclass.utilities.ExternalWebService;
 
 /**
  * Created by wc on 04/07/2017.
@@ -32,7 +35,7 @@ public class PlayerRatingsFragment extends Fragment {
     private PlayerRatingsAdapter mAdapter;
 
     private ArrayList<Player> mPlayers;
-
+//    private List<ExternalWebService.PlayerRating> playerRatings = new ArrayList<>();
     private DatabaseReference mDatabase;
 
     @Override
@@ -46,7 +49,14 @@ public class PlayerRatingsFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.player_ratings_fragment, container, false);
         mDatabase = FirebaseGetInstanceClass.GetFirebaseDatabaseInstance().getReference();
+
+        List<ExternalWebService.PlayerRating> playerRatings = ExternalWebService.getInstance().syncRatingService();
+        List<String> playerNames = ExternalWebService.getInstance().playernameService();
         mPlayers = new ArrayList<>();
+        for (int i = 0; i < playerRatings.size(); i++) {
+            Player p = new Player(playerNames.get(i), playerRatings.get(i));
+            mPlayers.add(p);
+        }
 
         playerRatingsRecyclerView = (RecyclerView) v.findViewById(R.id.player_ratings_recycler_view);
         ratingsLayoutManager = new LinearLayoutManager(getActivity());
@@ -61,24 +71,24 @@ public class PlayerRatingsFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        mDatabase.child("players").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-
-                    Player player = snapshot.getValue(Player.class);
-                    Log.e("Get Data", player.username);
-                    mPlayers.add(player);
-                }
-                mAdapter.notifyItemInserted(mPlayers.size());
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+//        mDatabase.child("players").addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+//
+//                    Player player = snapshot.getValue(Player.class);
+//                    Log.e("Get Data", player.username);
+//                    mPlayers.add(player);
+//                }
+//                mAdapter.notifyItemInserted(mPlayers.size());
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
     }
 
     public ArrayList<Player> fetchPlayerRatings() {

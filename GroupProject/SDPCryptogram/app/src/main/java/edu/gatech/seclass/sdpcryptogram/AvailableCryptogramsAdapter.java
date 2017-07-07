@@ -21,6 +21,7 @@ public class AvailableCryptogramsAdapter extends RecyclerView.Adapter<AvailableC
     private ArrayList<PlayCryptogram> mPlayCryptograms;
     private String username = "";
     private AdapterCallback mAdapterCallback;
+    private AvailableCryptogramsFragment parent;
 
     public static class CryptogramHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -30,6 +31,7 @@ public class AvailableCryptogramsAdapter extends RecyclerView.Adapter<AvailableC
         private PlayCryptogram mPlayCryptogram;
         private String username = "";
         private AdapterCallback mAdapterCallback;
+        private AvailableCryptogramsFragment mParent;
 
         public CryptogramHolder(View v) {
             super(v);
@@ -42,9 +44,7 @@ public class AvailableCryptogramsAdapter extends RecyclerView.Adapter<AvailableC
         public void onClick(View v) {
             Context context = itemView.getContext();
             mPlayCryptogram.progress = "In progress";
-            // TODO: modify mPlayCryptogram data and store in db (in Activity)
-            Log.e("mCryptogr!!amList", username);
-
+            mParent.setCryptogramStarted(mPlayCryptogram);
             Intent intent = new Intent(context, PlayCryptogramActivity.class);
             intent.putExtra("CRYPTOGRAM_ID", mCryptogram.cryptoId);
             intent.putExtra("CRYPTOGRAM_ENCODED", mCryptogram.encodedPhrase);
@@ -53,19 +53,21 @@ public class AvailableCryptogramsAdapter extends RecyclerView.Adapter<AvailableC
             context.startActivity(intent);
         }
 
-        public void bindCryptogram(String u, Cryptogram c, PlayCryptogram p) {
+        public void bindCryptogram(String u, Cryptogram c, PlayCryptogram p, AvailableCryptogramsFragment pr) {
             username = u;
             mCryptogram = c;
             mPlayCryptogram = p;
+            mParent = pr;
             cryptogramId.setText(c.cryptoId);
             progress.setText(p.progress);
         }
     }
 
-    public AvailableCryptogramsAdapter(String username, ArrayList<Cryptogram> cryptograms, ArrayList<PlayCryptogram> playCryptograms) {
+    public AvailableCryptogramsAdapter(String username, ArrayList<Cryptogram> cryptograms, ArrayList<PlayCryptogram> playCryptograms, AvailableCryptogramsFragment parentFragment) {
         this.username = username;
         this.mCryptograms = cryptograms;
         this.mPlayCryptograms = playCryptograms;
+        this.parent = parentFragment;
     }
 
 
@@ -85,7 +87,7 @@ public class AvailableCryptogramsAdapter extends RecyclerView.Adapter<AvailableC
                 playCryptogram = mPlayCryptogram;
             }
         }
-        holder.bindCryptogram(username, crypto, playCryptogram);
+        holder.bindCryptogram(username, crypto, playCryptogram, parent);
     }
 
     @Override

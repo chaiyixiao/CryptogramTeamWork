@@ -1,25 +1,21 @@
 package edu.gatech.seclass.sdpcryptogram;
 
-import android.content.Context;
 import android.content.Intent;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.gatech.seclass.utilities.ExternalWebService;
@@ -81,31 +77,33 @@ public class LoginActivity extends AppCompatActivity {
 
                     // check whether the username exists
                     List<String> usernameList =  ExternalWebService.getInstance().playernameService();
+
                     if (!usernameList.contains(usernameStr)) {
                         // popup a message to ask for a valid username
                         username.setError("please enter a valid username");
-
                     } else {
-                        mDatabase.child("players").addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                                Log.e("Count " ,""+dataSnapshot.getChildrenCount());
-                                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-
-                                    Player player = snapshot.getValue(Player.class);
-                                    Log.e("Get Data", player.username);
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-
-                            }
-                        });
-
+                        int index = usernameList.indexOf(usernameStr);
+//                        mDatabase.child("players").addListenerForSingleValueEvent(new ValueEventListener() {
+//                            @Override
+//                            public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//                                Log.e("Count " ,""+dataSnapshot.getChildrenCount());
+//                                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+//
+//                                    Player player = snapshot.getValue(Player.class);
+//                                    Log.e("Get Data", player.username);
+//                                }
+//                            }
+//
+//                            @Override
+//                            public void onCancelled(DatabaseError databaseError) {
+//
+//                            }
+//                        });
+//
                         Intent login = new Intent(LoginActivity.this, PlayerMenuActivity.class);
                         login.putExtra("USERNAME", usernameStr);
+                        login.putExtra("USERINDEX", index);
                         startActivity(login);
                     }
                 } else {

@@ -5,6 +5,8 @@ package edu.gatech.seclass.sdpcryptogram;
  */
 import com.google.firebase.database.IgnoreExtraProperties;
 
+import edu.gatech.seclass.utilities.ExternalWebService;
+
 /**
  * Created by wc on 05/07/2017.
  */
@@ -25,5 +27,13 @@ public class Player {
         this.username = username;
         this.firstname = firstname;
         this.lastname = lastname;
+    }
+
+    public Player(String username, ExternalWebService.PlayerRating rating) {
+        this.username = username;
+        this.firstname = rating.getFirstname();
+        this.lastname = rating.getLastname();
+        this.started = rating.getStarted();
+        this.totalIncorrect = rating.getIncorrect();
     }
 }

@@ -20,10 +20,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+
+import edu.gatech.seclass.utilities.ExternalWebService;
 
 import static android.os.Build.VERSION_CODES.M;
 
@@ -45,6 +50,8 @@ public class AvailableCryptogramsFragment extends Fragment{
     private DatabaseReference mDatabase;
 
     private String username = "";
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +75,7 @@ public class AvailableCryptogramsFragment extends Fragment{
         acLayoutManager = new LinearLayoutManager(getActivity());
         availableCryptogramRecyclerView.setLayoutManager(acLayoutManager);
 
-        mAdapter = new AvailableCryptogramsAdapter(username, mCryptogramList, mPlayCryptograms);
+        mAdapter = new AvailableCryptogramsAdapter(username, mCryptogramList, mPlayCryptograms, this);
         availableCryptogramRecyclerView.setAdapter(mAdapter);
 
         Button requestButton = (Button) v.findViewById(R.id.request_new_cryptograms);
@@ -93,44 +100,58 @@ public class AvailableCryptogramsFragment extends Fragment{
         super.onActivityCreated(savedInstanceState);
 
         username = getActivity().getIntent().getExtras().getString("USERNAME");
-        mDatabase.child("players").child(username).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Player currentPlayer = dataSnapshot.getValue(Player.class);
-                solved.setText(String.valueOf(currentPlayer.solvedCount));
-                started.setText(String.valueOf(currentPlayer.started));
-                totalIncorrect.setText(String.valueOf(currentPlayer.totalIncorrect));
-            }
+        List<String> playerNames = ExternalWebService.getInstance().playernameService();
+        List<ExternalWebService.PlayerRating> playerRatings = ExternalWebService.getInstance().syncRatingService();
+        int playerIndex = playerNames.indexOf(username);
+        ExternalWebService.PlayerRating playerRating = playerRatings.get(playerIndex);
+        solved.setText(String.valueOf(playerRating.getSolved()));
+        started.setText(String.valueOf(playerRating.getStarted()));
+        totalIncorrect.setText(String.valueOf(playerRating.getIncorrect()));
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+//        mDatabase.child("players").child(username).addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                Player currentPlayer = dataSnapshot.getValue(Player.class);
+//                solved.setText(String.valueOf(currentPlayer.solvedCount));
+//                started.setText(String.valueOf(currentPlayer.started));
+//                totalIncorrect.setText(String.valueOf(currentPlayer.totalIncorrect));
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
 
-            }
-        });
+        List<String[]> cryptograms = ExternalWebService.getInstance().syncCryptogramService();
 
-        mDatabase.child("cryptograms").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+        for (String[] cryptogram : cryptograms) {
+            List<String> arr = Arrays.asList(cryptogram);
 
-                Log.e("Count=!", "" + dataSnapshot.getChildrenCount());
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Cryptogram crypto = snapshot.getValue(Cryptogram.class);
-                    mCryptogramList.add(crypto);
-                }
-                mAdapter.notifyItemInserted(mCryptogramList.size());
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+            Cryptogram crypt = new Cryptogram(arr.get(1), arr.get(2), arr.get(0));
+            mCryptogramList.add(crypt);
+        }
+//        mDatabase.child("cryptograms").addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//                Log.e("Count=!", "" + dataSnapshot.getChildrenCount());
+//                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+//                    Cryptogram crypto = snapshot.getValue(Cryptogram.class);
+//                    mCryptogramList.add(crypto);
+//                }
+//                mAdapter.notifyItemInserted(mCryptogramList.size());
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
 
         mDatabase.child("playCryptograms").child(username).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.e("mCryptogramList", String.valueOf(dataSnapshot.getChildrenCount()));
-
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     PlayCryptogram pc = snapshot.getValue(PlayCryptogram.class);
                     mPlayCryptograms.add(pc);
@@ -150,7 +171,7 @@ public class AvailableCryptogramsFragment extends Fragment{
         pc.progress = "In progress";
         Map<String, Object> newPc = new HashMap<>();
         newPc.put(pc.cryptogramId, pc);
-        mDatabase.child("playCryptograms").child(username).child(pc.cryptogramId).updateChildren(newPc);
+        mDatabase.child("playCryptograms").child(username).updateChildren(newPc);
     }
 
     private ArrayList<Cryptogram> fetchCryptograms() {

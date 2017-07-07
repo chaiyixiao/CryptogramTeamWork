@@ -18,7 +18,16 @@ import android.widget.Button;
  * Created by chaiyixiao on 04/07/2017.
  */
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import edu.gatech.seclass.utilities.ExternalWebService;
 
 import static edu.gatech.seclass.sdpcryptogram.R.layout.play_cryptogram;
 
@@ -35,6 +44,9 @@ public class PlayCryptogramActivity extends AppCompatActivity {
     private GridLayoutManager mGridLayoutManager;
     private PlayCryptogramAdapter mAdapter;
 
+    private DatabaseReference mDatabase;
+    private PlayCryptogram mPlayCrypt = new PlayCryptogram();
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,14 +55,38 @@ public class PlayCryptogramActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
         if (b != null) {
-            this.cryptogramId = (String) b.get("CRYPTOGRAM_KEY");
+            cryptogramId = (String) b.get("CRYPTOGRAM_ID");
+            Log.v("cryptogramId", cryptogramId);
             char[] encodedArr = ((String) b.get("CRYPTOGRAM_ENCODED")).toCharArray();
-            this.solutionStr = (String) b.get("CRYPTOGRAM_SOLUTION");
-            this.username = (String) b.get("USERNAME");
+            solutionStr = (String) b.get("CRYPTOGRAM_SOLUTION");
+            username = (String) b.get("USERNAME");
 
-            String mySolutionStr = "";
-            // TODO: this.mySolutionLetters = 从 PlayCryptogram 来
+            mDatabase = FirebaseGetInstanceClass.GetFirebaseDatabaseInstance().getReference();
+            mDatabase.child("playCryptograms").child(username).addListenerForSingleValueEvent(new ValueEventListener() {
 
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        if (snapshot != null) {
+                            for (DataSnapshot ss : snapshot.getChildren()) {
+                                if (ss.getKey().equals(cryptogramId)) {
+                                    mPlayCrypt = ss.getValue(PlayCryptogram.class);
+//                                    Log.v("yyyy", mPlayCrypt.priorSolution);
+//                                    Log.v("xxxxx", mPlayCrypt.cryptogramId);
+//                                    Log.v("zzzzz", mPlayCrypt.progress);
+
+                                    mAdapter.notifyDataSetChanged();
+                                }
+                            }
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+            String mySolutionStr = mPlayCrypt.priorSolution;
             char[] mySolutionArr = mySolutionStr.toCharArray();
 
             for (char c : encodedArr) {
@@ -77,7 +113,29 @@ public class PlayCryptogramActivity extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: match
+                String res = "";
+                for (String mySolutionLetter : mySolutionLetters) {
+                    res += mySolutionLetter;
+                }
+                Log.v("res", res);
+                Log.v("solution", solutionStr);
+                if (res.equals(solutionStr)) {
+                    Map<String, Object> newPlayCrypt = new HashMap<>();
+                    mPlayCrypt.progress = "Finished";
+                    newPlayCrypt.put(mPlayCrypt.cryptogramId, mPlayCrypt);
+                    mDatabase.child("playCryptograms").child(username).updateChildren(newPlayCrypt);
+
+                    int index = ExternalWebService.getInstance().playernameService().indexOf(username);
+                    ExternalWebService.PlayerRating rating = ExternalWebService.getInstance().syncRatingService().get(index);
+                    ExternalWebService.getInstance().updateRatingService(username, rating.getFirstname(), rating.getLastname(), rating.getSolved() + 1, rating.getStarted(), rating.getIncorrect());
+//                    PlayCryptogramActivity.this.finish();
+                } else {
+                    mPlayCrypt.priorSolution = res;
+                    mPlayCrypt.numIncorrectSubmission++;
+
+                    Log.v("match error1", res);
+                    Log.v("match error2", solutionStr);
+                }
             }
         });
         // back
