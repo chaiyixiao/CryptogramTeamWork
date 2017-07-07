@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.google.firebase.database.DatabaseReference;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 /**
@@ -25,23 +27,28 @@ public class PlayerRatingsAdapter extends RecyclerView.Adapter<PlayerRatingsAdap
         private TextView ranking;
         private TextView playername;
         private TextView solvedNum;
+        private TextView startedNum;
+        private TextView incorrectNum;
         private Player mPlayer;
 
         private static final String PLAYER_RATING_KEY = "PLAYER_RATING";
 
         public PlayerHolder(View v) {
             super(v);
-
             ranking = (TextView) v.findViewById(R.id.player_ranking_num);
             playername = (TextView) v.findViewById(R.id.player_ranking_name);
             solvedNum = (TextView) v.findViewById(R.id.player_ranking_solved);
+            startedNum = (TextView) v.findViewById(R.id.player_ranking_started);
+            incorrectNum = (TextView) v.findViewById(R.id.player_ranking_incorrect);
         }
 
         public void bindPlayer(Player player) {
             mPlayer = player;
-            playername.setText(player.username);
+            playername.setText(player.firstname + " " + player.lastname);
             solvedNum.setText(String.valueOf(player.solvedCount));
             ranking.setText(String.valueOf(player.ranking));
+            startedNum.setText(String.valueOf(player.started));
+            incorrectNum.setText(String.valueOf(player.totalIncorrect));
         }
     }
 

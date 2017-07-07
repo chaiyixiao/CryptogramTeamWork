@@ -50,10 +50,13 @@ public class PlayerRatingsFragment extends Fragment {
         View v = inflater.inflate(R.layout.player_ratings_fragment, container, false);
         mDatabase = FirebaseGetInstanceClass.GetFirebaseDatabaseInstance().getReference();
 
+        // get the list of player ratings, and the list of player usernames
         List<ExternalWebService.PlayerRating> playerRatings = ExternalWebService.getInstance().syncRatingService();
         List<String> playerNames = ExternalWebService.getInstance().playernameService();
+
         mPlayers = new ArrayList<>();
         for (int i = 0; i < playerRatings.size(); i++) {
+            // TODO: why assuming players are matched in order?
             Player p = new Player(playerNames.get(i), playerRatings.get(i));
             mPlayers.add(p);
         }

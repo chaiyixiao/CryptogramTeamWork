@@ -30,10 +30,12 @@ public class Player {
     }
 
     public Player(String username, ExternalWebService.PlayerRating rating) {
+        // TODO: why assuming the username list and the rating list are matched by each player in order?
         this.username = username;
         this.firstname = rating.getFirstname();
         this.lastname = rating.getLastname();
         this.started = rating.getStarted();
+        this.solvedCount = rating.getSolved();
         this.totalIncorrect = rating.getIncorrect();
     }
 }
