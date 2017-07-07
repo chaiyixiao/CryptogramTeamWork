@@ -9,20 +9,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
-        <activity android:name=".LoginActivity" >
+        <activity android:name=".LoginActivity"
+            android:label="Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AdminMenuActivity"/>
+        <activity android:name=".AdminMenuActivity"
+            android:label="Administration"/>
         <activity
             android:name=".PlayerMenuActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".AdminAddPlayerActivity"/>
-        <activity android:name=".AdminAddCryptogramActivity"/>
-        <activity android:name=".PlayCryptogramActivity"/>
+        <activity android:name=".AdminAddPlayerActivity"
+            android:label="Add new players"/>
+        <activity android:name=".AdminAddCryptogramActivity"
+            android:label="Add new cryptograms"/>
+        <activity android:name=".PlayCryptogramActivity"
+            android:label="Cryptogram"/>
     </application>
 
 </manifest>

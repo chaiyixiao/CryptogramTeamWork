@@ -6,33 +6,47 @@
     android:orientation="vertical"
     tools:context="edu.gatech.seclass.sdpcryptogram.AdminAddCryptogramActivity">
 
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Encoded Phrase:" />
+        android:text="Encoded Phrase:"
+        android:textSize="20sp"/>
 
     <EditText
         android:id="@+id/encoded_phrase"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:lines="@integer/lines_of_cryptogram"
+        android:maxLength="@integer/length_of_cryptogram"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Solution Phrase:" />
+        android:text="Solution Phrase:"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"/>
 
     <EditText
         android:id="@+id/solution_phrase"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:lines="@integer/lines_of_cryptogram"
+        android:maxLength="@integer/length_of_cryptogram"/>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_margin="10dp">
 
         <Button
             android:id="@+id/save_button"
