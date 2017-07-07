@@ -21,12 +21,17 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+
+import static android.os.Build.VERSION_CODES.M;
 
 /**
  * Created by wc on 04/07/2017.
  */
 
-public class AvailableCryptogramsFragment extends Fragment {
+public class AvailableCryptogramsFragment extends Fragment{
 
     private TextView solved;
     private TextView started;
@@ -75,6 +80,17 @@ public class AvailableCryptogramsFragment extends Fragment {
             }
         });
 
+        return v;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
         username = getActivity().getIntent().getExtras().getString("USERNAME");
         mDatabase.child("players").child(username).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -96,9 +112,8 @@ public class AvailableCryptogramsFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                Log.e("Count=", "" + dataSnapshot.getChildrenCount());
+                Log.e("Count=!", "" + dataSnapshot.getChildrenCount());
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-
                     Cryptogram crypto = snapshot.getValue(Cryptogram.class);
                     mCryptogramList.add(crypto);
                 }
@@ -114,11 +129,12 @@ public class AvailableCryptogramsFragment extends Fragment {
         mDatabase.child("playCryptograms").child(username).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.e("mCryptogramList", String.valueOf(dataSnapshot.getChildrenCount()));
+
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     PlayCryptogram pc = snapshot.getValue(PlayCryptogram.class);
                     mPlayCryptograms.add(pc);
                 }
-                Log.e("mPlayCryptograms Count", "" + mPlayCryptograms.size());
                 mAdapter.notifyDataSetChanged();
             }
 
@@ -128,14 +144,14 @@ public class AvailableCryptogramsFragment extends Fragment {
             }
         });
 
-        return v;
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
+    public void setCryptogramStarted(PlayCryptogram pc) {
+        pc.progress = "In progress";
+        Map<String, Object> newPc = new HashMap<>();
+        newPc.put(pc.cryptogramId, pc);
+        mDatabase.child("playCryptograms").child(username).child(pc.cryptogramId).updateChildren(newPc);
     }
-
 
     private ArrayList<Cryptogram> fetchCryptograms() {
         // TODO: fetch cryptograms from externalWebService and store in database

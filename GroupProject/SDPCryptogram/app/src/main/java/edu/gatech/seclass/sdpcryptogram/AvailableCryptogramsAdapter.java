@@ -1,4 +1,5 @@
 package edu.gatech.seclass.sdpcryptogram;
+
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
 /**
  * Created by wc on 05/07/2017.
  */
@@ -18,6 +20,7 @@ public class AvailableCryptogramsAdapter extends RecyclerView.Adapter<AvailableC
     private ArrayList<Cryptogram> mCryptograms;
     private ArrayList<PlayCryptogram> mPlayCryptograms;
     private String username = "";
+    private AdapterCallback mAdapterCallback;
 
     public static class CryptogramHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -26,7 +29,7 @@ public class AvailableCryptogramsAdapter extends RecyclerView.Adapter<AvailableC
         private Cryptogram mCryptogram;
         private PlayCryptogram mPlayCryptogram;
         private String username = "";
-
+        private AdapterCallback mAdapterCallback;
 
         public CryptogramHolder(View v) {
             super(v);
@@ -40,6 +43,7 @@ public class AvailableCryptogramsAdapter extends RecyclerView.Adapter<AvailableC
             Context context = itemView.getContext();
             mPlayCryptogram.progress = "In progress";
             // TODO: modify mPlayCryptogram data and store in db (in Activity)
+            Log.e("mCryptogr!!amList", username);
 
             Intent intent = new Intent(context, PlayCryptogramActivity.class);
             intent.putExtra("CRYPTOGRAM_ID", mCryptogram.cryptoId);
@@ -87,5 +91,9 @@ public class AvailableCryptogramsAdapter extends RecyclerView.Adapter<AvailableC
     @Override
     public int getItemCount() {
         return mCryptograms.size();
+    }
+
+    public interface AdapterCallback {
+        void onMethodCallback();
     }
 }
