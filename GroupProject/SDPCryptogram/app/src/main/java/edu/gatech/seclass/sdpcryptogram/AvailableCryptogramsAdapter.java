@@ -27,6 +27,7 @@ public class AvailableCryptogramsAdapter extends RecyclerView.Adapter<AvailableC
 
         private TextView cryptogramId;
         private TextView progress;
+        private TextView incorrectNum;
         private Cryptogram mCryptogram;
         private PlayCryptogram mPlayCryptogram;
         private String username = "";
@@ -37,6 +38,7 @@ public class AvailableCryptogramsAdapter extends RecyclerView.Adapter<AvailableC
             super(v);
             cryptogramId = (TextView) v.findViewById(R.id.available_cryptogram_id);
             progress = (TextView) v.findViewById(R.id.available_cryptogram_progress);
+            incorrectNum = (TextView) v.findViewById(R.id.available_cryptogram_incorrect);
             v.setOnClickListener(this);
         }
 
@@ -59,6 +61,8 @@ public class AvailableCryptogramsAdapter extends RecyclerView.Adapter<AvailableC
             mParent = pr;
             cryptogramId.setText(c.cryptoId);
             progress.setText(p.progress);
+            incorrectNum.setText(String.valueOf(p.numIncorrectSubmission));
+
         }
     }
 
