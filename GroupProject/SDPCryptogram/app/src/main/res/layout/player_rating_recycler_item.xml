@@ -48,7 +48,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
-                android:text="Justin Bieber"
+                android:text="Stan White"
                 android:textColor="#000000"
                 android:textSize="20sp"/>
 

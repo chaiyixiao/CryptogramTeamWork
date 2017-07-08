@@ -58,7 +58,6 @@ public class PlayerRatingsFragment extends Fragment {
 
         mPlayers = new ArrayList<>();
         for (int i = 0; i < playerRatings.size(); i++) {
-            // TODO: why assuming players are matched in order?
             Player p = new Player(playerNames.get(i), playerRatings.get(i));
             mPlayers.add(p);
         }

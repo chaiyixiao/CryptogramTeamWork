@@ -35,12 +35,11 @@ public class LoginActivity extends AppCompatActivity {
 
         mDatabase = FirebaseGetInstanceClass.GetFirebaseDatabaseInstance().getReference();
         // initialize the External Web Service and get the list of usernames
-        // !!! local version, will not persist data between runs
-        // !!! a cloud-synchronizing version may be provided by the instructor later
-        final List<String> usernameList =  ExternalWebService.getInstance().playernameService();
-        for (String username : usernameList) {
-            Log.v("user", username);
-        }
+        // to be deleted !!!!
+        // List<String> usernameList =  ExternalWebService.getInstance().playernameService();
+        // for (String username : usernameList) {
+        //    Log.v("user", username);
+        // }
 
         RadioGroup loginRadios = (RadioGroup) findViewById(R.id.radioGroup);
         final RadioButton admin = (RadioButton) findViewById(R.id.admin_radio);
