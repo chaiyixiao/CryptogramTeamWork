@@ -163,8 +163,8 @@ public class PlayCryptogramActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // TODO
-                resetEmptyMySolutionLetters();
-                mAdapter.notifyDataSetChanged();
+//                resetEmptyMySolutionLetters();
+//                mAdapter.notifyDataSetChanged();
             }
         });
 
