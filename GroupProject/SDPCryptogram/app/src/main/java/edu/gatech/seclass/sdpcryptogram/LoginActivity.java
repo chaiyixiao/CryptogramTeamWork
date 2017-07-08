@@ -42,8 +42,6 @@ public class LoginActivity extends AppCompatActivity {
             Log.v("user", username);
         }
 
-//        LinearLayout usernameComp = (LinearLayout) findViewById(R.id.username_container);
-
         RadioGroup loginRadios = (RadioGroup) findViewById(R.id.radioGroup);
         final RadioButton admin = (RadioButton) findViewById(R.id.admin_radio);
         final RadioButton player = (RadioButton) findViewById(R.id.player_radio);
@@ -72,43 +70,45 @@ public class LoginActivity extends AppCompatActivity {
 
                 } else if (player.isChecked()) {
                     // log in as a player
-                    EditText username = (EditText) findViewById(R.id.username);
-                    String usernameStr = username.getText().toString();
+                    final EditText username = (EditText) findViewById(R.id.username);
+                    final String usernameStr = username.getText().toString();
 
-                    // check whether the username exists
-                    List<String> usernameList =  ExternalWebService.getInstance().playernameService();
+                    mDatabase.child("players").child(usernameStr).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            Player player = dataSnapshot.getValue(Player.class);
+                            if (player != null) {
+                                Intent login = new Intent(LoginActivity.this, PlayerMenuActivity.class);
+                                login.putExtra("USERNAME", usernameStr);
+                                startActivity(login);
+                            } else {
+                                username.setError("please enter a valid username");
+                            }
+                        }
 
-                    if (!usernameList.contains(usernameStr)) {
-                        // popup a message to ask for a valid username
-                        username.setError("please enter a valid username");
-                    } else {
-                        int index = usernameList.indexOf(usernameStr);
-                        ExternalWebService.PlayerRating rating = ExternalWebService.getInstance().syncRatingService().get(index);
-                        Player currentPlayer = new Player(usernameStr, rating);
-                        mDatabase.child("players").child(usernameStr).setValue(currentPlayer);
-//                        mDatabase.child("players").addListenerForSingleValueEvent(new ValueEventListener() {
-//                            @Override
-//                            public void onDataChange(DataSnapshot dataSnapshot) {
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
+//                    // check whether the username exists
+//                    List<String> usernameList =  ExternalWebService.getInstance().playernameService();
 //
-//                                Log.e("Count " ,""+dataSnapshot.getChildrenCount());
-//                                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+//                    if (!usernameList.contains(usernameStr)) {
+//                        // popup a message to ask for a valid username
+//                        username.setError("please enter a valid username");
+//                    } else {
+//                        int index = usernameList.indexOf(usernameStr);
+//                        ExternalWebService.PlayerRating rating = ExternalWebService.getInstance().syncRatingService().get(index);
+//                        Player currentPlayer = new Player(usernameStr, rating);
+//                        mDatabase.child("players").child(usernameStr).setValue(currentPlayer);
 //
-//                                    Player player = snapshot.getValue(Player.class);
-//                                    Log.e("Get Data", player.username);
-//                                }
-//                            }
-//
-//                            @Override
-//                            public void onCancelled(DatabaseError databaseError) {
-//
-//                            }
-//                        });
-//
-                        Intent login = new Intent(LoginActivity.this, PlayerMenuActivity.class);
-                        login.putExtra("USERNAME", usernameStr);
-                        login.putExtra("USERINDEX", index);
-                        startActivity(login);
-                    }
+//                        Intent login = new Intent(LoginActivity.this, PlayerMenuActivity.class);
+//                        login.putExtra("USERNAME", usernameStr);
+//                        login.putExtra("USERINDEX", index);
+//                        startActivity(login);
+//                    }
                 } else {
                     // ask the user to choose one radio button
                     player.setError("Choose your account type.");

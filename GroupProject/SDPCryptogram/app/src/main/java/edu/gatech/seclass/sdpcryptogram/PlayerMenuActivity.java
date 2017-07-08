@@ -42,7 +42,6 @@ public class PlayerMenuActivity extends AppCompatActivity
         Bundle b = intent.getExtras();
         if (b != null) {
             this.username = (String) b.get("USERNAME");
-            this.userIndex = (int) b.get("USERINDEX");
         }
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
