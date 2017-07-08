@@ -38,6 +38,7 @@ public class PlayCryptogramAdapter extends RecyclerView.Adapter<PlayCryptogramAd
             mySolutionLetter.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View v, boolean hasFocus) {
+                    
                     if(hasFocus) {
                         mySolutionLetter.addTextChangedListener(textWatcher);
                     } else {
@@ -52,13 +53,14 @@ public class PlayCryptogramAdapter extends RecyclerView.Adapter<PlayCryptogramAd
             mySolutionLetter.setEnabled(encodedCryptogram.matches("[a-zA-Z]"));
             mySolutionLetter.setClickable(encodedCryptogram.matches("[a-zA-Z]"));
             encodedTextView.setText(encodedCryptogram);
-            mySolutionLetter.setText(mySolutionCryptogram);
+            mySolutionLetter.setText(mySolutionCryptogram.replace(" ", ""));
             text = encodedCryptogram;
         }
 
         private TextWatcher textWatcher = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
             }
 
             @Override

@@ -1,5 +1,4 @@
 package edu.gatech.seclass.sdpcryptogram;
-
 import com.google.firebase.database.FirebaseDatabase;
 
 /**
@@ -12,9 +11,11 @@ public class FirebaseGetInstanceClass {
 
     public static  FirebaseDatabase GetFirebaseDatabaseInstance(){
 
-        if (firebaseDatabase ==null){
+        if (firebaseDatabase == null){
             firebaseDatabase = FirebaseDatabase.getInstance();
             firebaseDatabase.setPersistenceEnabled(true);
+            firebaseDatabase.getReference().removeValue();
+            firebaseDatabase.getReference().keepSynced(true);
         }
         return firebaseDatabase;
     }

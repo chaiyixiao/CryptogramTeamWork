@@ -43,7 +43,6 @@ public class AvailableCryptogramsAdapter extends RecyclerView.Adapter<AvailableC
         @Override
         public void onClick(View v) {
             Context context = itemView.getContext();
-            mPlayCryptogram.progress = "In progress";
             mParent.setCryptogramStarted(mPlayCryptogram);
             Intent intent = new Intent(context, PlayCryptogramActivity.class);
             intent.putExtra("CRYPTOGRAM_ID", mCryptogram.cryptoId);

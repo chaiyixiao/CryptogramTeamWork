@@ -83,6 +83,9 @@ public class LoginActivity extends AppCompatActivity {
                         username.setError("please enter a valid username");
                     } else {
                         int index = usernameList.indexOf(usernameStr);
+                        ExternalWebService.PlayerRating rating = ExternalWebService.getInstance().syncRatingService().get(index);
+                        Player currentPlayer = new Player(usernameStr, rating);
+                        mDatabase.child("players").child(usernameStr).setValue(currentPlayer);
 //                        mDatabase.child("players").addListenerForSingleValueEvent(new ValueEventListener() {
 //                            @Override
 //                            public void onDataChange(DataSnapshot dataSnapshot) {
