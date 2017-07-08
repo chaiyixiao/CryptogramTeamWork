@@ -1,5 +1,13 @@
 # Extra requirements
 
+**Author**: Team 19
+
+**Version**: 1.0
+
+| Version | Time | Description |
+| --------| -----| ------------|
+| 1.0 | 06/30/2017 | full doc submitted in D2 |
+
 These are some of the requirements that must be taken care of. These are in addition to the ones specified in the Assignment 5.
 
 1. The maximum size of the cryptogram that will be supported will be 100 characters. This requirement is added to make sure that the cryptogram will fit in the handheld device.

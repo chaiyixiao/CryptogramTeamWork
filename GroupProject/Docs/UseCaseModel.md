@@ -1,8 +1,12 @@
 # Use Case Model
 
+**Author**: Team 19
 
+**Version**: 1.0
 
-**Author**: \<Team19\>
+| Version | Time | Description |
+| --------| -----| ------------|
+| 1.0 | 06/30/2017 | full doc submitted in D2 |
 
 ## 1 Use Case Diagram
 

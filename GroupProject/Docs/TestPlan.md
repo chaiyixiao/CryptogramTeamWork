@@ -1,7 +1,12 @@
 # Test Plan
 
-
 **Author**: Team 19
+
+**Version**: 1.0
+
+| Version | Time | Description |
+| --------| -----| ------------|
+| 1.0 | 06/30/2017 | full doc submitted in D2 |
 
 This test plan is created for the Cryptogram application developed for Boston Towers. The primary goal of the application is to keep the kids busy by solving cryptograms and comparing their progress. 
 

@@ -2,6 +2,13 @@
 
 **Author**: Team 19
 
+**Version**: 1.1
+
+| Version | Time | Description |
+| --------| -----| ------------|
+| 1.1 | 07/07/2017 | class diagram modified |
+| 1.0 | 06/30/2017 | full doc submitted in D2 |
+
 ## 1 Design Considerations
 
 ### 1.1 Assumptions
@@ -45,7 +52,7 @@
 ## 3 Low-Level Design
 
 ### 3.1 Class Diagram
-![Class Diagram](Diagrams/DesignDocument/Class%20Diagram.png)
+![Class Diagram](Diagrams/DesignDocument/ClassDiagramV2.png)
 
 
 ### 3.2 Other Diagrams

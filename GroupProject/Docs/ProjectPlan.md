@@ -2,7 +2,12 @@
 
 **Author**: Team 19
 
-**Version**: V1.0
+**Version**: 1.1
+
+| Version | Time | Description |
+| --------| -----| ------------|
+| 1.1 | 07/07/2017 | Rolse changed as one member drop the class |
+| 1.0 | 06/30/2017 | full doc submitted in D2 |
 
 ## 1 Introduction
 
@@ -77,21 +82,13 @@ Following the unified process, we have four phases and several activities. Activ
     	- revision on previous deliverables
 
 
-
 ## 3 Team
-
-*Describe the team and their roles (there may be more roles than there are team members)*
-
-- *Team members' names*
-- *Roles, with a short description of each role*
-- *Table showing which team member(s) has which role(s)*
 
 | Member | Roles |
 | :---------------- | :--------------- |
-| Longfei Fan | Project Manager, Developer, UI/UX Designer |
-| Yixiao Chai | Development Leader, Code Reviewer |
-| Basker Kothandam | QA Leader, Developer |
-| Xue Liang | UI/UX Leader, Developer, Tester |
+| Longfei Fan | Project Manager, Developer, UI/UX Leader |
+| Yixiao Chai | Development Leader, Code Reviewer, UI/UX Designer |
+| Basker Kothandam | QA Leader, Developer, Tester |
 
 ### Roles Description
 
