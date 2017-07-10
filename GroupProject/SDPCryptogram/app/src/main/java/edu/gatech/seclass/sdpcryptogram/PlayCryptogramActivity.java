@@ -55,6 +55,7 @@ public class PlayCryptogramActivity extends AppCompatActivity {
         setContentView(play_cryptogram);
 
         playRecyclerView = (RecyclerView) findViewById(R.id.play_cryptogram_recycler_view);
+        playRecyclerView.setHasFixedSize(true);
         mGridLayoutManager = new GridLayoutManager(this, 10);
         playRecyclerView.setLayoutManager(mGridLayoutManager);
 

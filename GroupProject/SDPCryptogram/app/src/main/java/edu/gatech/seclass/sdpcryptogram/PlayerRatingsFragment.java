@@ -91,6 +91,7 @@ public class PlayerRatingsFragment extends Fragment {
 
         // create recycler view
         playerRatingsRecyclerView = (RecyclerView) v.findViewById(R.id.player_ratings_recycler_view);
+        playerRatingsRecyclerView.setHasFixedSize(true);
         ratingsLayoutManager = new LinearLayoutManager(getActivity());
         playerRatingsRecyclerView.setLayoutManager(ratingsLayoutManager);
         mAdapter = new PlayerRatingsAdapter(mPlayers);

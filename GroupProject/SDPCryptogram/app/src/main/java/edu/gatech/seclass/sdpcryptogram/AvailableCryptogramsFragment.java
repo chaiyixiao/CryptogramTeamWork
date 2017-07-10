@@ -1,8 +1,6 @@
 package edu.gatech.seclass.sdpcryptogram;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.support.constraint.solver.widgets.Snapshot;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,24 +12,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 
 import edu.gatech.seclass.utilities.ExternalWebService;
-
-import static android.os.Build.VERSION_CODES.M;
+import edu.gatech.seclass.sdpcryptogram.AvailableCryptogramsAdapter.OnItemClickListener;
 
 /**
  * Created by wc on 04/07/2017.
@@ -73,6 +66,7 @@ public class AvailableCryptogramsFragment extends Fragment {
         totalIncorrect = (TextView) v.findViewById(R.id.incorrect_num);
 
         availableCryptogramRecyclerView = (RecyclerView) v.findViewById(R.id.available_cryptograms_recycler_view);
+        availableCryptogramRecyclerView.setHasFixedSize(true);
         acLayoutManager = new LinearLayoutManager(getActivity());
         availableCryptogramRecyclerView.setLayoutManager(acLayoutManager);
 
@@ -108,15 +102,28 @@ public class AvailableCryptogramsFragment extends Fragment {
 
         mPlayCryptograms = new ArrayList<>();
 
-        mDatabase.child("playCryptograms").child(username).addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child("playCryptograms");
+        mDatabase.child(username);
+        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     PlayCryptogram pc = snapshot.getValue(PlayCryptogram.class);
                     mPlayCryptograms.add(pc);
                 }
-                mAdapter = new AvailableCryptogramsAdapter(username, mCryptogramList, mPlayCryptograms, AvailableCryptogramsFragment.this);
+                mAdapter = new AvailableCryptogramsAdapter(username, mCryptogramList, mPlayCryptograms);
                 availableCryptogramRecyclerView.setAdapter(mAdapter);
+                mAdapter.setOnItemClickListener(new OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        Intent intent = new Intent(getActivity(), PlayCryptogramActivity.class);
+                        intent.putExtra("CRYPTOGRAM_ID", mCryptogramList.get(position).cryptoId);
+                        intent.putExtra("CRYPTOGRAM_ENCODED", mCryptogramList.get(position).encodedPhrase);
+                        intent.putExtra("CRYPTOGRAM_SOLUTION", mCryptogramList.get(position).solutionPhrase);
+                        intent.putExtra("USERNAME", username);
+                        startActivity(intent);
+                    }
+                });
             }
 
             @Override
@@ -124,7 +131,7 @@ public class AvailableCryptogramsFragment extends Fragment {
 
             }
         });
-        }
+    }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
