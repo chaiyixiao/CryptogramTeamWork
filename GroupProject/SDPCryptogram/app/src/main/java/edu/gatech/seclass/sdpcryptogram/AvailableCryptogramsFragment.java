@@ -83,9 +83,6 @@ public class AvailableCryptogramsFragment extends Fragment {
     }
 
     @Override
-    public void onResume() {  super.onResume(); }
-
-    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
@@ -128,12 +125,9 @@ public class AvailableCryptogramsFragment extends Fragment {
         mDatabase.child("cryptograms").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                mCryptogramList.clear();
-                mPlayCryptograms.clear();
+//                mCryptogramList.clear();
+//                mPlayCryptograms.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Log.v("xxx", snapshot.getKey());
-                    Log.v("xxxyyy", snapshot.getValue().toString());
-
                     Cryptogram cr = snapshot.getValue(Cryptogram.class);
                     PlayCryptogram pc = new PlayCryptogram(username, cr.cryptoId);
                     mCryptogramList.add(cr);
@@ -150,6 +144,8 @@ public class AvailableCryptogramsFragment extends Fragment {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             PlayCryptogram pc = snapshot.getValue(PlayCryptogram.class);
+                            Log.v("xxx", pc.getProgress());
+                            Log.v("xxxyyy", snapshot.getValue().toString());
                             for (int i = 0; i < mPlayCryptograms.size(); i++) {
                                 if (mPlayCryptograms.get(i).getCryptogramId().equals(pc.getCryptogramId())) {
                                     mPlayCryptograms.set(i, pc);
@@ -233,7 +229,7 @@ public class AvailableCryptogramsFragment extends Fragment {
         for (Cryptogram c : mCryptogramList) {
             cryptoMap.put(c.cryptoId, c);
         }
-        mDatabase.child("cryptograms").child(username).setValue(cryptoMap);
+        mDatabase.child("cryptograms").setValue(cryptoMap);
     }
 
     private void storePlayCryptogramList () {
