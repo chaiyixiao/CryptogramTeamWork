@@ -12,13 +12,13 @@ import edu.gatech.seclass.utilities.ExternalWebService;
  */
 @IgnoreExtraProperties
 public class Player {
-    public String username= "";
-    public String firstname= "";
-    public String lastname= "";
-    public Integer solvedCount = 0;
-    public Integer ranking = 0;
-    public Integer started = 0;
-    public Integer totalIncorrect = 0;
+    private String username= "";
+    private String firstname= "";
+    private String lastname= "";
+    private Integer solvedCount = 0;
+    private Integer ranking = 0;
+    private Integer started = 0;
+    private Integer totalIncorrect = 0;
 
     public Player() {
     }
@@ -67,8 +67,8 @@ public class Player {
         return solvedCount;
     }
 
-    public void setSolvedCount(Integer solvedCount) {
-        this.solvedCount = solvedCount;
+    public void addSolvedCount() {
+        this.solvedCount++;
     }
 
     public Integer getRanking() {
@@ -83,15 +83,15 @@ public class Player {
         return started;
     }
 
-    public void setStarted(Integer started) {
-        this.started = started;
+    public void addStarted() {
+        this.started++;
     }
 
     public Integer getTotalIncorrect() {
         return totalIncorrect;
     }
 
-    public void setTotalIncorrect(Integer totalIncorrect) {
-        this.totalIncorrect = totalIncorrect;
+    public void addTotalIncorrect() {
+        this.totalIncorrect++;
     }
 }

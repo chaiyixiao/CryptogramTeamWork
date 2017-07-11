@@ -126,7 +126,7 @@ public class PlayCryptogramActivity extends AppCompatActivity {
 
                     if (sb.toString().equals(solutionStr)) {
                         mPlayCrypt.setProgressComplete();
-                        currentPlayer.solvedCount++;
+                        currentPlayer.addSolvedCount();
 
                         LinearLayout layout = (LinearLayout) findViewById(R.id.right_submit_answer);
                         layout.setVisibility(View.VISIBLE);
@@ -135,12 +135,12 @@ public class PlayCryptogramActivity extends AppCompatActivity {
                         submit.setError("Wrong Answer!");
                         mPlayCrypt.setPriorSolution(sb.toString());
                         mPlayCrypt.setIncorrectSubmit();
-                        currentPlayer.totalIncorrect++;
+                        currentPlayer.addTotalIncorrect();
                     }
                     mDatabase.child("playCryptograms").child(username).child(mPlayCrypt.getCryptogramId()).setValue(mPlayCrypt);
                     mDatabase.child("players").child(username).setValue(currentPlayer);
                     mDatabase.keepSynced(true);
-                    ExternalWebService.getInstance().updateRatingService(username, currentPlayer.firstname, currentPlayer.lastname, currentPlayer.solvedCount, currentPlayer.started, currentPlayer.totalIncorrect);
+                    ExternalWebService.getInstance().updateRatingService(username, currentPlayer.getFirstname(), currentPlayer.getLastname(), currentPlayer.getSolvedCount(), currentPlayer.getStarted(), currentPlayer.getTotalIncorrect());
 
                 } else {
                     submit.hasFocus();
@@ -162,9 +162,8 @@ public class PlayCryptogramActivity extends AppCompatActivity {
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO
-//                resetEmptyMySolutionLetters();
-//                mAdapter.notifyDataSetChanged();
+                resetEmptyMySolutionLetters();
+                mAdapter.notifyDataSetChanged();
             }
         });
 
@@ -176,15 +175,14 @@ public class PlayCryptogramActivity extends AppCompatActivity {
     }
 
     private void resetEmptyMySolutionLetters() {
-        ArrayList<String> emptySol = new ArrayList<>();
+        mySolutionLetters.clear();
         for (String l : mEncodedLetters) {
             if (l.matches("[a-zA-Z]")) {
-                emptySol.add(" ");
+                mySolutionLetters.add(" ");
             } else {
-                emptySol.add(l);
+                mySolutionLetters.add(l);
             }
         }
-        mySolutionLetters = emptySol;
     }
 
     private PlayCryptogramAdapter.OnRefreshRVListener listener = new PlayCryptogramAdapter.OnRefreshRVListener() {

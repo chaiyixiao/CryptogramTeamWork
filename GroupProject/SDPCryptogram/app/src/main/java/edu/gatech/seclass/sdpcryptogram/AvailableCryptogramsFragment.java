@@ -112,9 +112,9 @@ public class AvailableCryptogramsFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 currentPlayer = dataSnapshot.getValue(Player.class);
-                solved.setText(String.valueOf(currentPlayer.solvedCount));
-                started.setText(String.valueOf(currentPlayer.started));
-                totalIncorrect.setText(String.valueOf(currentPlayer.totalIncorrect));
+                solved.setText(String.valueOf(currentPlayer.getSolvedCount()));
+                started.setText(String.valueOf(currentPlayer.getStarted()));
+                totalIncorrect.setText(String.valueOf(currentPlayer.getTotalIncorrect()));
             }
 
             @Override
@@ -125,8 +125,6 @@ public class AvailableCryptogramsFragment extends Fragment {
         mDatabase.child("cryptograms").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-//                mCryptogramList.clear();
-//                mPlayCryptograms.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Cryptogram cr = snapshot.getValue(Cryptogram.class);
                     PlayCryptogram pc = new PlayCryptogram(username, cr.cryptoId);
@@ -136,7 +134,6 @@ public class AvailableCryptogramsFragment extends Fragment {
                 mAdapter.notifyDataSetChanged();
 
                 storeCryptogramList();
-                storePlayCryptogramList();
                 mDatabase.keepSynced(true);
 
                 mDatabase.child("playCryptograms").child(username).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -144,8 +141,6 @@ public class AvailableCryptogramsFragment extends Fragment {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             PlayCryptogram pc = snapshot.getValue(PlayCryptogram.class);
-                            Log.v("xxx", pc.getProgress());
-                            Log.v("xxxyyy", snapshot.getValue().toString());
                             for (int i = 0; i < mPlayCryptograms.size(); i++) {
                                 if (mPlayCryptograms.get(i).getCryptogramId().equals(pc.getCryptogramId())) {
                                     mPlayCryptograms.set(i, pc);
@@ -172,14 +167,14 @@ public class AvailableCryptogramsFragment extends Fragment {
         PlayCryptogram pc = getSelectedPlayCryptogram(cId);
         if (pc != null) {
             if (pc.getProgress().equals("Not started")) {
-                currentPlayer.started++;
-                started.setText(String.valueOf(currentPlayer.started));
+                currentPlayer.addStarted();
+                started.setText(String.valueOf(currentPlayer.getStarted()));
                 mDatabase.child("players").child(username).setValue(currentPlayer);
                 pc.setInProgress();
                 mDatabase.child("playCryptograms").child(username).child(pc.getCryptogramId()).setValue(pc);
                 mDatabase.keepSynced(true);
                 mAdapter.notifyDataSetChanged();
-                ExternalWebService.getInstance().updateRatingService(username, currentPlayer.firstname, currentPlayer.lastname, currentPlayer.solvedCount, currentPlayer.started, currentPlayer.totalIncorrect);
+                ExternalWebService.getInstance().updateRatingService(username, currentPlayer.getFirstname(), currentPlayer.getLastname(), currentPlayer.getSolvedCount(), currentPlayer.getStarted(), currentPlayer.getTotalIncorrect());
             }
         }
     }
@@ -200,7 +195,6 @@ public class AvailableCryptogramsFragment extends Fragment {
                 mPlayCryptograms.add(newPc);
             }
         }
-
         mAdapter.notifyDataSetChanged();
         storeCryptogramList();
         storePlayCryptogramList();

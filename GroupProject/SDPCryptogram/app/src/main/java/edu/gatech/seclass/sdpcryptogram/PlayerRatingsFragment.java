@@ -36,8 +36,7 @@ public class PlayerRatingsFragment extends Fragment {
     private LinearLayoutManager ratingsLayoutManager;
     private PlayerRatingsAdapter mAdapter;
 
-    private ArrayList<Player> mPlayers;
-//    private List<ExternalWebService.PlayerRating> playerRatings = new ArrayList<>();
+    private ArrayList<Player> mPlayers = new ArrayList<>();
     private DatabaseReference mDatabase;
 
     @Override
@@ -47,47 +46,9 @@ public class PlayerRatingsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState)  {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.player_ratings_fragment, container, false);
-        mDatabase = FirebaseGetInstanceClass.GetFirebaseDatabaseInstance().getReference();
-
-        // get the list of player ratings, and the list of player usernames
-        List<ExternalWebService.PlayerRating> playerRatings = ExternalWebService.getInstance().syncRatingService();
-        List<String> playerNames = ExternalWebService.getInstance().playernameService();
-
-        mPlayers = new ArrayList<>();
-        for (int i = 0; i < playerRatings.size(); i++) {
-            Player p = new Player(playerNames.get(i), playerRatings.get(i));
-            mPlayers.add(p);
-        }
-
-        // sort player ratings by solved numbers, then by incorrect numbers, then by started numbers
-        Collections.sort(mPlayers, new Comparator<Player>() {
-            @Override
-            public int compare(Player p1, Player p2) {
-                // the player who solved more ranks first
-                int solvedComp = p2.getSolvedCount().compareTo(p1.getSolvedCount());
-                if (solvedComp != 0) {
-                    return solvedComp;
-                } else {
-                    // the player who has less incorrect submission ranks first
-                    int incorrectComp = p1.getTotalIncorrect().compareTo(p2.getTotalIncorrect());
-                    if (incorrectComp != 0) {
-                        return incorrectComp;
-                    } else {
-                        // the player who starts more ranks first
-                        return p2.getStarted().compareTo(p1.getStarted());
-                    }
-                }
-            }
-        });
-
-        // assign ranking numbers to players given the sorted player list
-        for (int i = 0; i < mPlayers.size(); i++) {
-            Player p = mPlayers.get(i);
-            p.setRanking(i + 1);
-        }
 
         // create recycler view
         playerRatingsRecyclerView = (RecyclerView) v.findViewById(R.id.player_ratings_recycler_view);
@@ -96,35 +57,59 @@ public class PlayerRatingsFragment extends Fragment {
         playerRatingsRecyclerView.setLayoutManager(ratingsLayoutManager);
         mAdapter = new PlayerRatingsAdapter(mPlayers);
         playerRatingsRecyclerView.setAdapter(mAdapter);
+
+        mDatabase = FirebaseGetInstanceClass.GetFirebaseDatabaseInstance().getReference();
+        // get the list of player ratings, and the list of player usernames
+        mDatabase.child("players").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Player player = snapshot.getValue(Player.class);
+                    // Mark: upload to ExternalWebService
+                    ExternalWebService.getInstance().updateRatingService(player.getUsername(), player.getFirstname(), player.getLastname(), player.getSolvedCount(), player.getStarted(), player.getStarted());
+                }
+
+                List<ExternalWebService.PlayerRating> playerRatings = ExternalWebService.getInstance().syncRatingService();
+                for (ExternalWebService.PlayerRating pr : playerRatings) {
+                    Player newP = new Player("", pr);
+                    mPlayers.add(newP);
+                }
+                // sort player ratings by solved numbers, then by incorrect numbers, then by started numbers
+                Collections.sort(mPlayers, new Comparator<Player>() {
+                    @Override
+                    public int compare(Player p1, Player p2) {
+                        // the player who solved more ranks first
+                        int solvedComp = p2.getSolvedCount().compareTo(p1.getSolvedCount());
+                        if (solvedComp != 0) {
+                            return solvedComp;
+                        } else {
+                            // the player who has less incorrect submission ranks first
+                            int incorrectComp = p1.getTotalIncorrect().compareTo(p2.getTotalIncorrect());
+                            if (incorrectComp != 0) {
+                                return incorrectComp;
+                            } else {
+                                // the player who starts more ranks first
+                                return p2.getStarted().compareTo(p1.getStarted());
+                            }
+                        }
+                    }
+                });
+
+                // assign ranking numbers to players given the sorted player list
+                for (int i = 0; i < mPlayers.size(); i++) {
+                    Player p = mPlayers.get(i);
+                    p.setRanking(i + 1);
+                }
+                mAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
         return v;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-//        mDatabase.child("players").addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//
-//                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-//
-//                    Player player = snapshot.getValue(Player.class);
-//                    Log.e("Get Data", player.username);
-//                    mPlayers.add(player);
-//                }
-//                mAdapter.notifyItemInserted(mPlayers.size());
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
-    }
-
-    public ArrayList<Player> fetchPlayerRatings() {
-        // TODO: fetch players from database
-        return new ArrayList<>();
     }
 }
