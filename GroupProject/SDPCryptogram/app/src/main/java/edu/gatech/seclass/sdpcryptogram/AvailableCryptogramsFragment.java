@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Filter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,10 +22,13 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import edu.gatech.seclass.utilities.ExternalWebService;
 import edu.gatech.seclass.sdpcryptogram.AvailableCryptogramsAdapter.OnItemClickListener;
+
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.L;
 
 /**
  * Created by wc on 04/07/2017.
@@ -49,7 +53,6 @@ public class AvailableCryptogramsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -58,8 +61,6 @@ public class AvailableCryptogramsFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.available_cryptograms_fragment, container, false);
         mDatabase = FirebaseGetInstanceClass.GetFirebaseDatabaseInstance().getReference();
-        mCryptogramList = new ArrayList<>();
-        mPlayCryptograms = new ArrayList<>();
 
         solved = (TextView) v.findViewById(R.id.solved_num);
         started = (TextView) v.findViewById(R.id.started_num);
@@ -74,8 +75,7 @@ public class AvailableCryptogramsFragment extends Fragment {
         requestButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: request data and sync
-                mCryptogramList.addAll(fetchCryptograms());
+                syncCryptograms();
             }
         });
 
@@ -83,8 +83,34 @@ public class AvailableCryptogramsFragment extends Fragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onResume() {  super.onResume(); }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        username = getActivity().getIntent().getExtras().getString("USERNAME");
+        mCryptogramList = new ArrayList<>();
+        mPlayCryptograms = new ArrayList<>();
+
+        mAdapter = new AvailableCryptogramsAdapter(username, mCryptogramList, mPlayCryptograms);
+        availableCryptogramRecyclerView.setAdapter(mAdapter);
+        mAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, String cId) {
+                setCryptogramStarted(cId);
+                Intent intent = new Intent(getActivity(), PlayCryptogramActivity.class);
+                intent.putExtra("CRYPTOGRAM_ID", cId);
+                intent.putExtra("USERNAME", username);
+                Cryptogram cryptogram = getSelectedCryptogram(cId);
+                if (cryptogram != null) {
+                    intent.putExtra("CRYPTOGRAM_ENCODED", cryptogram.encodedPhrase);
+                    intent.putExtra("CRYPTOGRAM_SOLUTION", cryptogram.solutionPhrase);
+                    startActivity(intent);
+                }
+            }
+        });
+
         mDatabase.child("players").child(username).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -96,75 +122,125 @@ public class AvailableCryptogramsFragment extends Fragment {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
 
-        mPlayCryptograms = new ArrayList<>();
-
-        mDatabase.child("playCryptograms");
-        mDatabase.child(username);
-        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child("cryptograms").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                mCryptogramList.clear();
+                mPlayCryptograms.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    PlayCryptogram pc = snapshot.getValue(PlayCryptogram.class);
+                    Log.v("xxx", snapshot.getKey());
+                    Log.v("xxxyyy", snapshot.getValue().toString());
+
+                    Cryptogram cr = snapshot.getValue(Cryptogram.class);
+                    PlayCryptogram pc = new PlayCryptogram(username, cr.cryptoId);
+                    mCryptogramList.add(cr);
                     mPlayCryptograms.add(pc);
                 }
-                mAdapter = new AvailableCryptogramsAdapter(username, mCryptogramList, mPlayCryptograms);
-                availableCryptogramRecyclerView.setAdapter(mAdapter);
-                mAdapter.setOnItemClickListener(new OnItemClickListener() {
+                mAdapter.notifyDataSetChanged();
+
+                storeCryptogramList();
+                storePlayCryptogramList();
+                mDatabase.keepSynced(true);
+
+                mDatabase.child("playCryptograms").child(username).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
-                    public void onItemClick(View view, int position) {
-                        Intent intent = new Intent(getActivity(), PlayCryptogramActivity.class);
-                        intent.putExtra("CRYPTOGRAM_ID", mCryptogramList.get(position).cryptoId);
-                        intent.putExtra("CRYPTOGRAM_ENCODED", mCryptogramList.get(position).encodedPhrase);
-                        intent.putExtra("CRYPTOGRAM_SOLUTION", mCryptogramList.get(position).solutionPhrase);
-                        intent.putExtra("USERNAME", username);
-                        startActivity(intent);
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            PlayCryptogram pc = snapshot.getValue(PlayCryptogram.class);
+                            for (int i = 0; i < mPlayCryptograms.size(); i++) {
+                                if (mPlayCryptograms.get(i).getCryptogramId().equals(pc.getCryptogramId())) {
+                                    mPlayCryptograms.set(i, pc);
+                                }
+                            }
+                        }
+                        storePlayCryptogramList();
+                        mAdapter.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
                     }
                 });
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        username = getActivity().getIntent().getExtras().getString("USERNAME");
-
-        List<String[]> cryptograms = ExternalWebService.getInstance().syncCryptogramService();
-
-        for (String[] cryptogram : cryptograms) {
-            List<String> arr = Arrays.asList(cryptogram);
-            Cryptogram crypt = new Cryptogram(arr.get(1), arr.get(2), arr.get(0));
-            mCryptogramList.add(crypt);
-        }
-    }
-
-    public void setCryptogramStarted(PlayCryptogram pc) {
-
-        if (pc.progress.equals("Not started")) {
-            currentPlayer.started++;
-            mDatabase.child("players").child(username).setValue(currentPlayer);
-            pc.progress = "In progress";
-            mDatabase.child("playCryptograms").child(username).child(pc.cryptogramId).setValue(pc);
-            mDatabase.keepSynced(true);
-            ExternalWebService.getInstance().updateRatingService(username, currentPlayer.firstname, currentPlayer.lastname, currentPlayer.solvedCount, currentPlayer.started, currentPlayer.totalIncorrect);
+    public void setCryptogramStarted(String cId) {
+        PlayCryptogram pc = getSelectedPlayCryptogram(cId);
+        if (pc != null) {
+            if (pc.getProgress().equals("Not started")) {
+                currentPlayer.started++;
+                started.setText(String.valueOf(currentPlayer.started));
+                mDatabase.child("players").child(username).setValue(currentPlayer);
+                pc.setInProgress();
+                mDatabase.child("playCryptograms").child(username).child(pc.getCryptogramId()).setValue(pc);
+                mDatabase.keepSynced(true);
+                mAdapter.notifyDataSetChanged();
+                ExternalWebService.getInstance().updateRatingService(username, currentPlayer.firstname, currentPlayer.lastname, currentPlayer.solvedCount, currentPlayer.started, currentPlayer.totalIncorrect);
+            }
         }
     }
 
 
-    private ArrayList<Cryptogram> fetchCryptograms() {
-        // TODO: fetch cryptograms from externalWebService and store in database
+    private void syncCryptograms() {
+        List<String[]> newCrypts = ExternalWebService.getInstance().syncCryptogramService();
+        ArrayList<String> currentIds = new ArrayList<>();
+        for (Cryptogram crypto : mCryptogramList) {
+            currentIds.add(crypto.cryptoId);
+        }
+        for (String[] newCrypt : newCrypts) {
+            List<String> arr = Arrays.asList(newCrypt);
+            if (!currentIds.contains(arr.get(0))) {
+                Cryptogram newCryptogram = new Cryptogram(arr.get(1), arr.get(2), arr.get(0));
+                mCryptogramList.add(newCryptogram);
+                PlayCryptogram newPc = new PlayCryptogram(username, arr.get(1));
+                mPlayCryptograms.add(newPc);
+            }
+        }
 
-        return new ArrayList<>();
+        mAdapter.notifyDataSetChanged();
+        storeCryptogramList();
+        storePlayCryptogramList();
     }
 
+    private Cryptogram getSelectedCryptogram(String cId) {
+        for (Cryptogram cryptogram : mCryptogramList) {
+            if (cryptogram.cryptoId.equals(cId)) {
+                return cryptogram;
+            }
+        }
+        return null;
+    }
+
+    private PlayCryptogram getSelectedPlayCryptogram(String cId) {
+        for (PlayCryptogram pc : mPlayCryptograms) {
+            if (pc.getCryptogramId().equals(cId)) {
+                return pc;
+            }
+        }
+        return null;
+    }
+
+    private void storeCryptogramList () {
+        HashMap<String, Cryptogram> cryptoMap = new HashMap();
+        for (Cryptogram c : mCryptogramList) {
+            cryptoMap.put(c.cryptoId, c);
+        }
+        mDatabase.child("cryptograms").child(username).setValue(cryptoMap);
+    }
+
+    private void storePlayCryptogramList () {
+        HashMap<String, PlayCryptogram> playCryptoMap = new HashMap();
+        for (PlayCryptogram p : mPlayCryptograms) {
+            playCryptoMap.put(p.getCryptogramId(), p);
+        }
+        mDatabase.child("playCryptograms").child(username).setValue(playCryptoMap);
+    }
 }

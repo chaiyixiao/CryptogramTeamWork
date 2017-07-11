@@ -14,8 +14,8 @@ public class FirebaseGetInstanceClass {
         if (firebaseDatabase == null){
             firebaseDatabase = FirebaseDatabase.getInstance();
             firebaseDatabase.setPersistenceEnabled(true);
-            firebaseDatabase.getReference().removeValue();
-            firebaseDatabase.getReference().keepSynced(true);
+//            firebaseDatabase.getReference().removeValue();
+//            firebaseDatabase.getReference().keepSynced(true);
         }
         return firebaseDatabase;
     }

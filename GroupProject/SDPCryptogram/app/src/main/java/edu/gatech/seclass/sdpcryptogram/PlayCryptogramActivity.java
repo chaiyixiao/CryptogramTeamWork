@@ -76,7 +76,7 @@ public class PlayCryptogramActivity extends AppCompatActivity {
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     if (dataSnapshot.getValue(PlayCryptogram.class) != null) {
                         mPlayCrypt = dataSnapshot.getValue(PlayCryptogram.class);
-                        String mySolutionStr = mPlayCrypt.priorSolution;
+                        String mySolutionStr = mPlayCrypt.getPriorSolution();
                         char[] mySolutionArr = mySolutionStr.toCharArray();
 
                         if (!mySolutionStr.isEmpty()) {
@@ -91,7 +91,6 @@ public class PlayCryptogramActivity extends AppCompatActivity {
                     } else {
                         resetEmptyMySolutionLetters();
                         mAdapter = new PlayCryptogramAdapter(mEncodedLetters, mySolutionLetters, listener);
-
                     }
 
                     playRecyclerView.setAdapter(mAdapter);
@@ -126,7 +125,7 @@ public class PlayCryptogramActivity extends AppCompatActivity {
                     currentPlayer = new Player(username, rating);
 
                     if (sb.toString().equals(solutionStr)) {
-                        mPlayCrypt.progress = "Finished";
+                        mPlayCrypt.setProgressComplete();
                         currentPlayer.solvedCount++;
 
                         LinearLayout layout = (LinearLayout) findViewById(R.id.right_submit_answer);
@@ -134,11 +133,11 @@ public class PlayCryptogramActivity extends AppCompatActivity {
 //                    PlayCryptogramActivity.this.finish();
                     } else {
                         submit.setError("Wrong Answer!");
-                        mPlayCrypt.priorSolution = sb.toString();
-                        mPlayCrypt.numIncorrectSubmission += 1;
+                        mPlayCrypt.setPriorSolution(sb.toString());
+                        mPlayCrypt.setIncorrectSubmit();
                         currentPlayer.totalIncorrect++;
                     }
-                    mDatabase.child("playCryptograms").child(username).child(mPlayCrypt.cryptogramId).setValue(mPlayCrypt);
+                    mDatabase.child("playCryptograms").child(username).child(mPlayCrypt.getCryptogramId()).setValue(mPlayCrypt);
                     mDatabase.child("players").child(username).setValue(currentPlayer);
                     mDatabase.keepSynced(true);
                     ExternalWebService.getInstance().updateRatingService(username, currentPlayer.firstname, currentPlayer.lastname, currentPlayer.solvedCount, currentPlayer.started, currentPlayer.totalIncorrect);

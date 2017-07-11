@@ -23,7 +23,7 @@ public class AvailableCryptogramsAdapter extends RecyclerView.Adapter<AvailableC
 
     //define interface
     public interface OnItemClickListener {
-        void onItemClick(View view, int position);
+        void onItemClick(View view, String cId);
     }
 
 
@@ -34,9 +34,7 @@ public class AvailableCryptogramsAdapter extends RecyclerView.Adapter<AvailableC
     @Override
     public void onClick(View v) {
         if (mOnItemClickListener != null) {
-            //注意这里使用getTag方法获取position
-
-            mOnItemClickListener.onItemClick(v, (int) v.getTag());
+            mOnItemClickListener.onItemClick(v, (String) v.getTag());
         }
     }
 
@@ -56,8 +54,8 @@ public class AvailableCryptogramsAdapter extends RecyclerView.Adapter<AvailableC
         public void bindCryptogram(String u, Cryptogram c, PlayCryptogram p) {
 
             cryptogramId.setText(c.cryptoId);
-            progress.setText(p.progress);
-            incorrectNum.setText(String.valueOf(p.numIncorrectSubmission));
+            progress.setText(p.getProgress());
+            incorrectNum.setText(String.valueOf(p.getIncorrectSubmit()));
 
         }
     }
@@ -81,14 +79,9 @@ public class AvailableCryptogramsAdapter extends RecyclerView.Adapter<AvailableC
     @Override
     public void onBindViewHolder(CryptogramHolder holder, int position) {
         Cryptogram crypto = mCryptograms.get(position);
-        PlayCryptogram playCryptogram = new PlayCryptogram(username, crypto.cryptoId);
-        for (PlayCryptogram mPlayCryptogram : mPlayCryptograms) {
-            if (crypto.cryptoId.equals(mPlayCryptogram.cryptogramId)) {
-                playCryptogram = mPlayCryptogram;
-            }
-        }
-        holder.itemView.setTag(position);
-        holder.bindCryptogram(username, crypto, playCryptogram);
+        PlayCryptogram pc = mPlayCryptograms.get(position);
+        holder.itemView.setTag(pc.getCryptogramId());
+        holder.bindCryptogram(username, crypto, pc);
     }
 
     @Override
