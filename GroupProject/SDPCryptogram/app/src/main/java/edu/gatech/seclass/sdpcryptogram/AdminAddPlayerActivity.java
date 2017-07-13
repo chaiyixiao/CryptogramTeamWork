@@ -15,8 +15,14 @@ import android.widget.Toast;
 /**
  * Created by chaiyixiao on 04/07/2017.
  */
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import edu.gatech.seclass.utilities.ExternalWebService;
@@ -36,7 +42,22 @@ public class AdminAddPlayerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(add_player);
         mDatabase = FirebaseGetInstanceClass.GetFirebaseDatabaseInstance().getReference();
-
+        // upload to ExternalWebService
+        mDatabase.child("players").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                List<String> extPlayers = ExternalWebService.getInstance().playernameService();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Player p = snapshot.getValue(Player.class);
+                    if (!extPlayers.contains(p.getUsername())) {
+                        ExternalWebService.getInstance().updateRatingService(p.getUsername(), p.getFirstname(),p.getLastname(), p.getSolvedCount(), p.getStarted(), p.getTotalIncorrect());
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
         Button saveBtn = (Button) findViewById(R.id.save_player);
         Button cancelBtn = (Button) findViewById(R.id.cancel_add_player);
 

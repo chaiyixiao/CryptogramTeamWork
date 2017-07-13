@@ -77,6 +77,7 @@ public class LoginActivity extends AppCompatActivity {
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             Player player = dataSnapshot.getValue(Player.class);
                             if (player != null) {
+                                username.setText("");
                                 Intent login = new Intent(LoginActivity.this, PlayerMenuActivity.class);
                                 login.putExtra("USERNAME", usernameStr);
                                 startActivity(login);

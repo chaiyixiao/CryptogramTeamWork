@@ -16,19 +16,27 @@ import android.widget.Toast;
 /**
  * Created by chaiyixiao on 04/07/2017.
  */
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import edu.gatech.seclass.utilities.ExternalWebService;
 
 import static edu.gatech.seclass.sdpcryptogram.R.layout.add_cryptogram;
 
-public class AdminAddCryptogramActivity extends AppCompatActivity{
+public class AdminAddCryptogramActivity extends AppCompatActivity {
 
     private DatabaseReference mDatabase;
 
     private EditText encodedText;
     private EditText solutionText;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +52,32 @@ public class AdminAddCryptogramActivity extends AppCompatActivity{
         final Context context = getApplicationContext();
         final int duration = Toast.LENGTH_SHORT;
 
+        mDatabase.child("cryptograms").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ArrayList<Cryptogram> mCryptogramList = new ArrayList<Cryptogram>();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Cryptogram cr = snapshot.getValue(Cryptogram.class);
+                    mCryptogramList.add(cr);
+                }
+                // upload local cryptograms to external web service
+                List<String[]> extCrypts = ExternalWebService.getInstance().syncCryptogramService();
+                ArrayList<String> extIds = new ArrayList<>();
+                for (String[] extCrypt : extCrypts) {
+                    List<String> arr = Arrays.asList(extCrypt);
+                    extIds.add(arr.get(0));
+                }
+                for (Cryptogram cr : mCryptogramList) {
+                    if (!extIds.contains(cr.cryptoId)) {
+                        ExternalWebService.getInstance().addCryptogramService(cr.encodedPhrase, cr.solutionPhrase);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
         // button SAVE clicked
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override

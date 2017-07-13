@@ -38,8 +38,8 @@ public class PlayCryptogramAdapter extends RecyclerView.Adapter<PlayCryptogramAd
             mySolutionLetter.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View v, boolean hasFocus) {
-                    
-                    if(hasFocus) {
+
+                    if (hasFocus) {
                         mySolutionLetter.addTextChangedListener(textWatcher);
                     } else {
                         mySolutionLetter.removeTextChangedListener(textWatcher);

@@ -108,6 +108,12 @@ public class AvailableCryptogramsFragment extends Fragment {
             }
         });
 
+//     2
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         mDatabase.child("players").child(username).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -116,7 +122,6 @@ public class AvailableCryptogramsFragment extends Fragment {
                 started.setText(String.valueOf(currentPlayer.getStarted()));
                 totalIncorrect.setText(String.valueOf(currentPlayer.getTotalIncorrect()));
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
@@ -125,11 +130,27 @@ public class AvailableCryptogramsFragment extends Fragment {
         mDatabase.child("cryptograms").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                mCryptogramList.clear();
+                mPlayCryptograms.clear();
+
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Cryptogram cr = snapshot.getValue(Cryptogram.class);
                     PlayCryptogram pc = new PlayCryptogram(username, cr.cryptoId);
+
                     mCryptogramList.add(cr);
                     mPlayCryptograms.add(pc);
+                }
+                // upload local cryptograms to external web service
+                List<String[]> extCrypts = ExternalWebService.getInstance().syncCryptogramService();
+                ArrayList<String> extIds = new ArrayList<>();
+                for (String[] extCrypt : extCrypts) {
+                    List<String> arr = Arrays.asList(extCrypt);
+                    extIds.add(arr.get(0));
+                }
+                for (Cryptogram cr: mCryptogramList) {
+                    if (!extIds.contains(cr.cryptoId)) {
+                        ExternalWebService.getInstance().addCryptogramService(cr.encodedPhrase, cr.solutionPhrase);
+                    }
                 }
                 mAdapter.notifyDataSetChanged();
 
@@ -191,12 +212,14 @@ public class AvailableCryptogramsFragment extends Fragment {
             if (!currentIds.contains(arr.get(0))) {
                 Cryptogram newCryptogram = new Cryptogram(arr.get(1), arr.get(2), arr.get(0));
                 mCryptogramList.add(newCryptogram);
-                PlayCryptogram newPc = new PlayCryptogram(username, arr.get(1));
+                PlayCryptogram newPc = new PlayCryptogram(username, arr.get(0));
                 mPlayCryptograms.add(newPc);
             }
         }
         mAdapter.notifyDataSetChanged();
         storeCryptogramList();
+        for (PlayCryptogram mPlayCryptogram : mPlayCryptograms) {
+        }
         storePlayCryptogramList();
     }
 

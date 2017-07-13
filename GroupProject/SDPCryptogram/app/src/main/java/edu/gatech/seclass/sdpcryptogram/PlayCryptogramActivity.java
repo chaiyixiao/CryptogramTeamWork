@@ -71,6 +71,15 @@ public class PlayCryptogramActivity extends AppCompatActivity {
             username = (String) b.get("USERNAME");
             mDatabase = FirebaseGetInstanceClass.GetFirebaseDatabaseInstance().getReference();
 
+            mDatabase.child("players").child(username).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    currentPlayer = dataSnapshot.getValue(Player.class);
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                }
+            });
             mDatabase.child("playCryptograms").child(username).child(cryptogramId).addListenerForSingleValueEvent(new ValueEventListener() {
 
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -120,14 +129,11 @@ public class PlayCryptogramActivity extends AppCompatActivity {
 
                 if (sb.toString().replace(" ", "").length() == solutionStr.replace(" ", "").length()) {
 
-                    int index = ExternalWebService.getInstance().playernameService().indexOf(username);
-                    ExternalWebService.PlayerRating rating = ExternalWebService.getInstance().syncRatingService().get(index);
-                    currentPlayer = new Player(username, rating);
-
                     if (sb.toString().equals(solutionStr)) {
-                        mPlayCrypt.setProgressComplete();
-                        currentPlayer.addSolvedCount();
-
+                        if (!mPlayCrypt.getProgress().equals("Solved")) {
+                            mPlayCrypt.setProgressComplete();
+                            currentPlayer.addSolvedCount();
+                        }
                         LinearLayout layout = (LinearLayout) findViewById(R.id.right_submit_answer);
                         layout.setVisibility(View.VISIBLE);
 //                    PlayCryptogramActivity.this.finish();

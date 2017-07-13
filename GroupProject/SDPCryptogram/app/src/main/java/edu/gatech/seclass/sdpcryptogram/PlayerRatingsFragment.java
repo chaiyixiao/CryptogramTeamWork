@@ -31,7 +31,7 @@ import edu.gatech.seclass.utilities.ExternalWebService;
 public class PlayerRatingsFragment extends Fragment {
 
 
-//    private TextView totalIncorrect;
+    //    private TextView totalIncorrect;
     private RecyclerView playerRatingsRecyclerView;
     private LinearLayoutManager ratingsLayoutManager;
     private PlayerRatingsAdapter mAdapter;
@@ -46,7 +46,7 @@ public class PlayerRatingsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState)  {
+                             Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.player_ratings_fragment, container, false);
 
@@ -59,6 +59,12 @@ public class PlayerRatingsFragment extends Fragment {
         playerRatingsRecyclerView.setAdapter(mAdapter);
 
         mDatabase = FirebaseGetInstanceClass.GetFirebaseDatabaseInstance().getReference();
+        return v;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         // get the list of player ratings, and the list of player usernames
         mDatabase.child("players").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -67,10 +73,11 @@ public class PlayerRatingsFragment extends Fragment {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Player player = snapshot.getValue(Player.class);
                     // Mark: upload to ExternalWebService
-                    ExternalWebService.getInstance().updateRatingService(player.getUsername(), player.getFirstname(), player.getLastname(), player.getSolvedCount(), player.getStarted(), player.getStarted());
+                    ExternalWebService.getInstance().updateRatingService(player.getUsername(), player.getFirstname(), player.getLastname(), player.getSolvedCount(), player.getStarted(), player.getTotalIncorrect());
                 }
 
                 List<ExternalWebService.PlayerRating> playerRatings = ExternalWebService.getInstance().syncRatingService();
+
                 for (ExternalWebService.PlayerRating pr : playerRatings) {
                     Player newP = new Player("", pr);
                     mPlayers.add(newP);
@@ -110,6 +117,5 @@ public class PlayerRatingsFragment extends Fragment {
             }
         });
 
-        return v;
     }
 }
