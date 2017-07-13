@@ -16,6 +16,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import edu.gatech.seclass.utilities.ExternalWebService;
@@ -34,13 +35,47 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(login);
 
         mDatabase = FirebaseGetInstanceClass.GetFirebaseDatabaseInstance().getReference();
-        // initialize the External Web Service and get the list of usernames
-        // to be deleted !!!!
-        // List<String> usernameList =  ExternalWebService.getInstance().playernameService();
-        // for (String username : usernameList) {
-        //    Log.v("user", username);
-        // }
+        mDatabase.child("players").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                List<String> extPlayers = ExternalWebService.getInstance().playernameService();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Player p = snapshot.getValue(Player.class);
+                    if (!extPlayers.contains(p.getUsername())) {
+                        ExternalWebService.getInstance().updateRatingService(p.getUsername(), p.getFirstname(),p.getLastname(), p.getSolvedCount(), p.getStarted(), p.getTotalIncorrect());
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+        mDatabase.child("cryptograms").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ArrayList<Cryptogram> mCryptogramList = new ArrayList<>();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Cryptogram cr = snapshot.getValue(Cryptogram.class);
+                    mCryptogramList.add(cr);
+                }
+                // upload local cryptograms to external web service
+                List<String[]> extCrypts = ExternalWebService.getInstance().syncCryptogramService();
+                ArrayList<String> extIds = new ArrayList<>();
+                for (String[] extCrypt : extCrypts) {
+                    List<String> arr = Arrays.asList(extCrypt);
+                    extIds.add(arr.get(0));
+                }
+                for (Cryptogram cr : mCryptogramList) {
+                    if (!extIds.contains(cr.cryptoId)) {
+                        ExternalWebService.getInstance().addCryptogramService(cr.encodedPhrase, cr.solutionPhrase);
+                    }
+                }
+            }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
         RadioGroup loginRadios = (RadioGroup) findViewById(R.id.radioGroup);
         final RadioButton admin = (RadioButton) findViewById(R.id.admin_radio);
         final RadioButton player = (RadioButton) findViewById(R.id.player_radio);
@@ -91,24 +126,6 @@ public class LoginActivity extends AppCompatActivity {
 
                         }
                     });
-
-//                    // check whether the username exists
-//                    List<String> usernameList =  ExternalWebService.getInstance().playernameService();
-//
-//                    if (!usernameList.contains(usernameStr)) {
-//                        // popup a message to ask for a valid username
-//                        username.setError("please enter a valid username");
-//                    } else {
-//                        int index = usernameList.indexOf(usernameStr);
-//                        ExternalWebService.PlayerRating rating = ExternalWebService.getInstance().syncRatingService().get(index);
-//                        Player currentPlayer = new Player(usernameStr, rating);
-//                        mDatabase.child("players").child(usernameStr).setValue(currentPlayer);
-//
-//                        Intent login = new Intent(LoginActivity.this, PlayerMenuActivity.class);
-//                        login.putExtra("USERNAME", usernameStr);
-//                        login.putExtra("USERINDEX", index);
-//                        startActivity(login);
-//                    }
                 } else {
                     // ask the user to choose one radio button
                     player.setError("Choose your account type.");

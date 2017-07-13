@@ -52,32 +52,6 @@ public class AdminAddCryptogramActivity extends AppCompatActivity {
         final Context context = getApplicationContext();
         final int duration = Toast.LENGTH_SHORT;
 
-        mDatabase.child("cryptograms").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                ArrayList<Cryptogram> mCryptogramList = new ArrayList<Cryptogram>();
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Cryptogram cr = snapshot.getValue(Cryptogram.class);
-                    mCryptogramList.add(cr);
-                }
-                // upload local cryptograms to external web service
-                List<String[]> extCrypts = ExternalWebService.getInstance().syncCryptogramService();
-                ArrayList<String> extIds = new ArrayList<>();
-                for (String[] extCrypt : extCrypts) {
-                    List<String> arr = Arrays.asList(extCrypt);
-                    extIds.add(arr.get(0));
-                }
-                for (Cryptogram cr : mCryptogramList) {
-                    if (!extIds.contains(cr.cryptoId)) {
-                        ExternalWebService.getInstance().addCryptogramService(cr.encodedPhrase, cr.solutionPhrase);
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
         // button SAVE clicked
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
