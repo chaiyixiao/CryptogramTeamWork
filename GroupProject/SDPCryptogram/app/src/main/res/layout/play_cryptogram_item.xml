@@ -24,6 +24,7 @@
         android:layout_weight="1"
         android:gravity="center"
         android:inputType="text"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
         android:maxLength="1" />
 
 

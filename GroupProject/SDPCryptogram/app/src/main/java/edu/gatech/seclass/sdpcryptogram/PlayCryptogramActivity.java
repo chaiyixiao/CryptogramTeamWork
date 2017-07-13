@@ -76,6 +76,7 @@ public class PlayCryptogramActivity extends AppCompatActivity {
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     currentPlayer = dataSnapshot.getValue(Player.class);
                 }
+
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
                 }
@@ -186,6 +187,7 @@ public class PlayCryptogramActivity extends AppCompatActivity {
         mDatabase.child("playCryptograms").child(username).child(mPlayCrypt.getCryptogramId()).setValue(mPlayCrypt);
         return sb;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
@@ -208,17 +210,12 @@ public class PlayCryptogramActivity extends AppCompatActivity {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-                    ArrayList<String> mySolutionLettersCopy = new ArrayList<>(mySolutionLetters);
                     for (int i = 0; i < mEncodedLetters.size(); i++) {
                         if (mEncodedLetters.get(i).equals(encoded)) {
                             mySolutionLetters.set(i, replace);
                         }
                     }
-                    for (int i = 0; i < mySolutionLetters.size(); i++) {
-                        if (!mySolutionLettersCopy.get(i).equals(mySolutionLetters.get(i))) {
-                            mAdapter.notifyDataSetChanged();
-                        }
-                    }
+                    mAdapter.notifyDataSetChanged();
                 }
             });
         }
