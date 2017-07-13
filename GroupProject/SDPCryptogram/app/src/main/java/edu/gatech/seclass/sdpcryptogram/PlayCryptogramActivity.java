@@ -117,15 +117,7 @@ public class PlayCryptogramActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                StringBuffer sb = new StringBuffer();
-
-                for (String mySolutionLetter : mySolutionLetters) {
-                    if (mySolutionLetter.isEmpty()) {
-                        sb.append(" ");
-                    } else {
-                        sb.append(mySolutionLetter);
-                    }
-                }
+                StringBuffer sb = saveProgress();
 
                 if (sb.toString().replace(" ", "").length() == solutionStr.replace(" ", "").length()) {
 
@@ -139,7 +131,6 @@ public class PlayCryptogramActivity extends AppCompatActivity {
 //                    PlayCryptogramActivity.this.finish();
                     } else {
                         submit.setError("Wrong Answer!");
-                        mPlayCrypt.setPriorSolution(sb.toString());
                         mPlayCrypt.setIncorrectSubmit();
                         currentPlayer.addTotalIncorrect();
                     }
@@ -176,6 +167,26 @@ public class PlayCryptogramActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        saveProgress();
+    }
+
+    private StringBuffer saveProgress() {
+        StringBuffer sb = new StringBuffer();
+
+        for (String mySolutionLetter : mySolutionLetters) {
+            if (mySolutionLetter.isEmpty()) {
+                sb.append(" ");
+            } else {
+                sb.append(mySolutionLetter);
+            }
+        }
+        mPlayCrypt.setPriorSolution(sb.toString());
+        mDatabase.child("playCryptograms").child(username).child(mPlayCrypt.getCryptogramId()).setValue(mPlayCrypt);
+        return sb;
+    }
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
     }
@@ -197,7 +208,7 @@ public class PlayCryptogramActivity extends AppCompatActivity {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-                    ArrayList<String> mySolutionLettersCopy = new ArrayList<String>(mySolutionLetters);
+                    ArrayList<String> mySolutionLettersCopy = new ArrayList<>(mySolutionLetters);
                     for (int i = 0; i < mEncodedLetters.size(); i++) {
                         if (mEncodedLetters.get(i).equals(encoded)) {
                             mySolutionLetters.set(i, replace);

@@ -30,6 +30,7 @@ public class PlayCryptogramAdapter extends RecyclerView.Adapter<PlayCryptogramAd
         private EditText mySolutionLetter;
         private TextView encodedTextView;
         private String text;
+        private int position;
 
         public CryptogramHolder(View v) {
             super(v);
@@ -40,8 +41,10 @@ public class PlayCryptogramAdapter extends RecyclerView.Adapter<PlayCryptogramAd
                 public void onFocusChange(View v, boolean hasFocus) {
 
                     if (hasFocus) {
+                        Log.v("position1", String.valueOf(position));
                         mySolutionLetter.addTextChangedListener(textWatcher);
                     } else {
+                        Log.v("position0", String.valueOf(position));
                         mySolutionLetter.removeTextChangedListener(textWatcher);
                     }
                 }
@@ -49,12 +52,13 @@ public class PlayCryptogramAdapter extends RecyclerView.Adapter<PlayCryptogramAd
 
         }
 
-        public void bindCryptogram(String encodedCryptogram, String mySolutionCryptogram) {
+        public void bindCryptogram(String encodedCryptogram, String mySolutionCryptogram, int position) {
             mySolutionLetter.setEnabled(encodedCryptogram.matches("[a-zA-Z]"));
             mySolutionLetter.setClickable(encodedCryptogram.matches("[a-zA-Z]"));
             encodedTextView.setText(encodedCryptogram);
             mySolutionLetter.setText(mySolutionCryptogram.replace(" ", ""));
             text = encodedCryptogram;
+            this.position = position;
         }
 
         private TextWatcher textWatcher = new TextWatcher() {
@@ -92,7 +96,7 @@ public class PlayCryptogramAdapter extends RecyclerView.Adapter<PlayCryptogramAd
     public void onBindViewHolder(final PlayCryptogramAdapter.CryptogramHolder holder, final int position) {
         final String itemEncoded = encodedLetters.get(position);
         String itemMySolution = mySolutionLetters.get(position);
-        holder.bindCryptogram(itemEncoded, itemMySolution);
+        holder.bindCryptogram(itemEncoded, itemMySolution, position);
     }
 
     @Override
