@@ -128,6 +128,7 @@ public class PlayCryptogramActivity extends AppCompatActivity {
                 if (sb.toString().replace(" ", "").length() == solutionStr.replace(" ", "").length()) {
 
                     if (sb.toString().equals(solutionStr)) {
+                        submit.setError(null);
                         if (!mPlayCrypt.getProgress().equals("Solved")) {
                             mPlayCrypt.setProgressComplete();
                             currentPlayer.addSolvedCount();
@@ -165,6 +166,7 @@ public class PlayCryptogramActivity extends AppCompatActivity {
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                submit.setError(null);
                 resetEmptyMySolutionLetters();
                 mAdapter.notifyDataSetChanged();
             }
@@ -215,9 +217,14 @@ public class PlayCryptogramActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     for (int i = 0; i < mEncodedLetters.size(); i++) {
-                        if (mEncodedLetters.get(i).equals(encoded)) {
-                            mySolutionLetters.set(i, replace);
+                        String iLetter = mEncodedLetters.get(i);
+                        if (iLetter.equals(encoded.toLowerCase())) {
+                            mySolutionLetters.set(i, replace.toLowerCase());
+                        } else if (iLetter.equals(encoded.toUpperCase())) {
+                            mySolutionLetters.set(i, replace.toUpperCase());
+
                         }
+
                     }
                     mAdapter.notifyDataSetChanged();
                 }
