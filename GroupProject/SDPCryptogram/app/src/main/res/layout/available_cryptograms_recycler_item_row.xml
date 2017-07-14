@@ -16,7 +16,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="6"
         android:text="001"
-        android:textSize="18sp"/>
+        android:textSize="18sp"
+        android:textAlignment="center"/>
 
     <TextView
         android:id="@+id/available_cryptogram_progress"

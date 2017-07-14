@@ -10,50 +10,59 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_margin="4dp"
+        android:gravity="center_horizontal"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="4dp"
         android:padding="4dp"
-        android:weightSum="16">
+        android:weightSum="15">
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Solved: " />
+            android:text="Solved: "
+            android:textSize="18sp"/>
 
         <TextView
             android:id="@+id/solved_num"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="5"
-            android:text="10" />
+            android:text="10"
+            android:textSize="18sp"/>
 
 
         <TextView
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Started: " />
+            android:text="Started: "
+            android:textSize="18sp"/>
 
         <TextView
             android:id="@+id/started_num"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="5"
-            android:text="10" />
+            android:text="10"
+            android:textSize="18sp"/>
 
 
         <TextView
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tot. Incorrect: " />
+            android:text="Tot. Incorrect: "
+            android:textSize="18sp"/>
 
         <TextView
             android:id="@+id/incorrect_num"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="5"
-            android:text="10" />
+            android:text="10"
+            android:textSize="18sp"/>
 
     </LinearLayout>
 
@@ -62,25 +71,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="Request New Cryptograms" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="4dp"
-        android:layout_marginTop="8dp"
-        android:layout_gravity="center_horizontal"
-        android:text="Cryptogram List"
-        android:textSize="18sp"/>
+        android:text="Request New Cryptograms"
+        android:textSize="12sp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:padding="8dp"
         android:weightSum="32">
 
         <TextView
@@ -88,7 +87,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="6"
             android:text="ID"
-            android:textSize="18sp"/>
+            android:textSize="18sp"
+            android:textColor="#000000"
+            android:textAlignment="center"/>
 
         <TextView
             android:layout_width="0dp"
@@ -96,6 +97,7 @@
             android:layout_weight="16"
             android:text="Status"
             android:textSize="18sp"
+            android:textColor="#000000"
             android:textAlignment="center"/>
 
         <TextView
@@ -104,6 +106,7 @@
             android:layout_weight="10"
             android:text="Incorrect"
             android:textSize="18sp"
+            android:textColor="#000000"
             android:textAlignment="center"/>
     </LinearLayout>
 
@@ -111,9 +114,6 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/available_cryptograms_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" />
-    <!--android:scrollbars="vertical"-->
+        android:layout_height="wrap_content"/>
+
 </LinearLayout>

@@ -44,8 +44,6 @@
             android:layout_weight="1"
             android:text="Administrator"
             android:textSize="18sp"/>
-            <!--tools:layout_editor_absoluteX="71dp"-->
-            <!--tools:layout_editor_absoluteY="230dp" -->
 
         <RadioButton
             android:id="@+id/player_radio"
@@ -55,10 +53,6 @@
             android:checked="true"
             android:text="Player"
             android:textSize="18sp"/>
-
-        <!--tools:layout_editor_absoluteX="220dp"-->
-            <!--tools:layout_editor_absoluteY="230dp" -->
-
 
     </RadioGroup>
 
