@@ -83,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
         HashMap<String, Cryptogram> cryptoMap = new HashMap();
         for (String[] extCrypt : extCrypts) {
             List<String> arr = Arrays.asList(extCrypt);
-            Cryptogram c = new Cryptogram(arr.get(1), arr.get(2), arr.get(0));
+            Cryptogram c = new Cryptogram(arr);
             cryptoMap.put(c.cryptoId, c);
         }
         mDatabase.child("cryptograms").setValue(cryptoMap);
@@ -100,7 +100,7 @@ public class LoginActivity extends AppCompatActivity {
 
         for (String[] extCrypt : extCrypts) {
             List<String> arr = Arrays.asList(extCrypt);
-            Cryptogram c = new Cryptogram(arr.get(1), arr.get(2), arr.get(0));
+            Cryptogram c = new Cryptogram(arr);
             cryptoMap.put(c.cryptoId, c);
         }
         mDatabase.child("cryptograms").setValue(cryptoMap);

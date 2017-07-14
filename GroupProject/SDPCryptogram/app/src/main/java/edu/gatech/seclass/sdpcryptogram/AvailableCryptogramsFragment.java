@@ -210,7 +210,7 @@ public class AvailableCryptogramsFragment extends Fragment {
         for (String[] newCrypt : newCrypts) {
             List<String> arr = Arrays.asList(newCrypt);
             if (!currentIds.contains(arr.get(0))) {
-                Cryptogram newCryptogram = new Cryptogram(arr.get(1), arr.get(2), arr.get(0));
+                Cryptogram newCryptogram = new Cryptogram(arr);
                 mCryptogramList.add(newCryptogram);
                 PlayCryptogram newPc = new PlayCryptogram(username, arr.get(0));
                 mPlayCryptograms.add(newPc);
