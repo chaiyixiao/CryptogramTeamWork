@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 import edu.gatech.seclass.utilities.ExternalWebService;
 
@@ -167,25 +168,29 @@ public class LoginActivity extends AppCompatActivity {
                 } else if (player.isChecked()) {
                     // log in as a player
                     final String usernameStr = username.getText().toString();
-                    mDatabase.child("players").child(usernameStr).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            Player player = dataSnapshot.getValue(Player.class);
-                            if (player != null) {
-                                username.setText("");
-                                Intent login = new Intent(LoginActivity.this, PlayerMenuActivity.class);
-                                login.putExtra("USERNAME", usernameStr);
-                                startActivity(login);
-                            } else {
-                                username.setError("please enter a valid username");
+                    if (Objects.equals(usernameStr, "")) {
+                        username.setError("please enter a valid username");
+                    } else {
+                        mDatabase.child("players").child(usernameStr).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                Player player = dataSnapshot.getValue(Player.class);
+                                if (player != null) {
+                                    username.setText("");
+                                    Intent login = new Intent(LoginActivity.this, PlayerMenuActivity.class);
+                                    login.putExtra("USERNAME", usernameStr);
+                                    startActivity(login);
+                                } else {
+                                    username.setError("please enter a valid username");
+                                }
                             }
-                        }
 
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
 
-                        }
-                    });
+                            }
+                        });
+                    }
                 } else {
                     // ask the user to choose one radio button
                     player.setError("Choose your account type.");
