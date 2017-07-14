@@ -69,8 +69,8 @@ public class PlayCryptogramActivity extends AppCompatActivity {
             }
             solutionStr = (String) b.get("CRYPTOGRAM_SOLUTION");
             username = (String) b.get("USERNAME");
-            mDatabase = FirebaseGetInstanceClass.GetFirebaseDatabaseInstance().getReference();
 
+            mDatabase = FirebaseGetInstanceClass.GetFirebaseDatabaseInstance().getReference();
             mDatabase.child("players").child(username).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -96,13 +96,18 @@ public class PlayCryptogramActivity extends AppCompatActivity {
                         } else {
                             resetEmptyMySolutionLetters();
                         }
-                        mAdapter = new PlayCryptogramAdapter(mEncodedLetters, mySolutionLetters, listener);
-
                     } else {
                         resetEmptyMySolutionLetters();
-                        mAdapter = new PlayCryptogramAdapter(mEncodedLetters, mySolutionLetters, listener);
                     }
+                    mAdapter = new PlayCryptogramAdapter(mEncodedLetters, mySolutionLetters, listener);
 
+                    mAdapter.setOnLetterChangedListener(new PlayCryptogramAdapter.OnLetterChangedListener() {
+                        @Override
+                        public void OnLetterChanged(int position, String encoded, String mSolution) {
+//                            Log.v("pxx", String.valueOf(position));
+//                            mAdapter.notifyItemChanged(position);
+                        }
+                    });
                     playRecyclerView.setAdapter(mAdapter);
                 }
 
@@ -132,7 +137,7 @@ public class PlayCryptogramActivity extends AppCompatActivity {
 //                    PlayCryptogramActivity.this.finish();
                     } else {
                         submit.setError("Wrong Answer!");
-                        mPlayCrypt.setIncorrectSubmit();
+                        mPlayCrypt.addIncorrectSubmit();
                         currentPlayer.addTotalIncorrect();
                     }
                     mDatabase.child("playCryptograms").child(username).child(mPlayCrypt.getCryptogramId()).setValue(mPlayCrypt);
@@ -164,7 +169,6 @@ public class PlayCryptogramActivity extends AppCompatActivity {
                 mAdapter.notifyDataSetChanged();
             }
         });
-
     }
 
     @Override

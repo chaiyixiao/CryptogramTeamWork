@@ -26,6 +26,17 @@ public class PlayCryptogramAdapter extends RecyclerView.Adapter<PlayCryptogramAd
     private ArrayList<String> mySolutionLetters;
     private OnRefreshRVListener listener;
 
+    private static OnLetterChangedListener mOnLetterChangedListener = null;
+
+    //define interface
+    public interface OnLetterChangedListener {
+        void OnLetterChanged(int position, String encoded, String solution);
+    }
+
+    public void setOnLetterChangedListener(OnLetterChangedListener listener) {
+        this.mOnLetterChangedListener = listener;
+    }
+
     public class CryptogramHolder extends RecyclerView.ViewHolder {
         private EditText mySolutionLetter;
         private TextView encodedTextView;
@@ -46,6 +57,9 @@ public class PlayCryptogramAdapter extends RecyclerView.Adapter<PlayCryptogramAd
                     } else {
                         Log.v("position0", String.valueOf(position));
                         mySolutionLetter.removeTextChangedListener(textWatcher);
+                        if (mOnLetterChangedListener != null) {
+                            mOnLetterChangedListener.OnLetterChanged(position, encodedLetters.get(position), mySolutionLetter.getText().toString());
+                        }
                     }
                 }
             });

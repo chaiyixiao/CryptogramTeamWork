@@ -11,7 +11,7 @@ public class PlayCryptogram {
     private String cryptogramId = "";
     private String progress = "Not started";
     private String priorSolution = "";
-    private int numIncorrectSubmission = 0;
+    private Integer incorrectSubmit = 0;
 
     public PlayCryptogram() {
     }
@@ -44,12 +44,12 @@ public class PlayCryptogram {
         return this.progress;
     }
 
-    public void setIncorrectSubmit() {
-        this.numIncorrectSubmission++;
+    public void addIncorrectSubmit() {
+        this.incorrectSubmit += 1;
     }
 
     public int getIncorrectSubmit() {
-        return this.numIncorrectSubmission;
+        return this.incorrectSubmit;
     }
 
 }
