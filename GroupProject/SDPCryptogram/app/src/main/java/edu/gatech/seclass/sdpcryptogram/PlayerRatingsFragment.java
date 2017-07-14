@@ -37,7 +37,6 @@ public class PlayerRatingsFragment extends Fragment {
     private PlayerRatingsAdapter mAdapter;
 
     private ArrayList<Player> mPlayers = new ArrayList<>();
-    private DatabaseReference mDatabase;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,64 +57,46 @@ public class PlayerRatingsFragment extends Fragment {
         mAdapter = new PlayerRatingsAdapter(mPlayers);
         playerRatingsRecyclerView.setAdapter(mAdapter);
 
-        mDatabase = FirebaseGetInstanceClass.GetFirebaseDatabaseInstance().getReference();
         return v;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        // get the list of player ratings, and the list of player usernames
-        mDatabase.child("players").addListenerForSingleValueEvent(new ValueEventListener() {
+
+        List<ExternalWebService.PlayerRating> playerRatings = ExternalWebService.getInstance().syncRatingService();
+
+        for (ExternalWebService.PlayerRating pr : playerRatings) {
+            Player newP = new Player("", pr);
+            mPlayers.add(newP);
+        }
+        // sort player ratings by solved numbers, then by incorrect numbers, then by started numbers
+        Collections.sort(mPlayers, new Comparator<Player>() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Player player = snapshot.getValue(Player.class);
-                    // Mark: upload to ExternalWebService
-                    ExternalWebService.getInstance().updateRatingService(player.getUsername(), player.getFirstname(), player.getLastname(), player.getSolvedCount(), player.getStarted(), player.getTotalIncorrect());
-                }
-
-                List<ExternalWebService.PlayerRating> playerRatings = ExternalWebService.getInstance().syncRatingService();
-
-                for (ExternalWebService.PlayerRating pr : playerRatings) {
-                    Player newP = new Player("", pr);
-                    mPlayers.add(newP);
-                }
-                // sort player ratings by solved numbers, then by incorrect numbers, then by started numbers
-                Collections.sort(mPlayers, new Comparator<Player>() {
-                    @Override
-                    public int compare(Player p1, Player p2) {
-                        // the player who solved more ranks first
-                        int solvedComp = p2.getSolvedCount().compareTo(p1.getSolvedCount());
-                        if (solvedComp != 0) {
-                            return solvedComp;
-                        } else {
-                            // the player who has less incorrect submission ranks first
-                            int incorrectComp = p1.getTotalIncorrect().compareTo(p2.getTotalIncorrect());
-                            if (incorrectComp != 0) {
-                                return incorrectComp;
-                            } else {
-                                // the player who starts more ranks first
-                                return p2.getStarted().compareTo(p1.getStarted());
-                            }
-                        }
+            public int compare(Player p1, Player p2) {
+                // the player who solved more ranks first
+                int solvedComp = p2.getSolvedCount().compareTo(p1.getSolvedCount());
+                if (solvedComp != 0) {
+                    return solvedComp;
+                } else {
+                    // the player who has less incorrect submission ranks first
+                    int incorrectComp = p1.getTotalIncorrect().compareTo(p2.getTotalIncorrect());
+                    if (incorrectComp != 0) {
+                        return incorrectComp;
+                    } else {
+                        // the player who starts more ranks first
+                        return p2.getStarted().compareTo(p1.getStarted());
                     }
-                });
-
-                // assign ranking numbers to players given the sorted player list
-                for (int i = 0; i < mPlayers.size(); i++) {
-                    Player p = mPlayers.get(i);
-                    p.setRanking(i + 1);
                 }
-                mAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
             }
         });
 
+        // assign ranking numbers to players given the sorted player list
+        for (int i = 0; i < mPlayers.size(); i++) {
+            Player p = mPlayers.get(i);
+            p.setRanking(i + 1);
+        }
+        mAdapter.notifyDataSetChanged();
+        // get the list of player ratings, and the list of player usernames
     }
 }

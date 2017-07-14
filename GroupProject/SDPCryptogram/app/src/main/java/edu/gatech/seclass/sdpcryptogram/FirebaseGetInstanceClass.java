@@ -9,11 +9,13 @@ public class FirebaseGetInstanceClass {
 
     private static FirebaseDatabase firebaseDatabase;
 
+
     public static  FirebaseDatabase GetFirebaseDatabaseInstance(){
 
         if (firebaseDatabase == null){
             firebaseDatabase = FirebaseDatabase.getInstance();
             firebaseDatabase.setPersistenceEnabled(true);
+//            firebaseDatabase.goOffline();
 //            firebaseDatabase.getReference().removeValue();
 //            firebaseDatabase.getReference().keepSynced(true);
         }

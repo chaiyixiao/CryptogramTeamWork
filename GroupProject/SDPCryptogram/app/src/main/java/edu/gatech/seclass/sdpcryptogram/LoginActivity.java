@@ -1,6 +1,7 @@
 package edu.gatech.seclass.sdpcryptogram;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,14 +10,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import edu.gatech.seclass.utilities.ExternalWebService;
@@ -26,25 +30,99 @@ import static edu.gatech.seclass.sdpcryptogram.R.layout.login;
 public class LoginActivity extends AppCompatActivity {
 
     private Button loginButton;
-
+    private RadioGroup loginRadios;
+    private RadioButton admin;
+    private RadioButton player;
+    private EditText username;
     private DatabaseReference mDatabase;
+
+    SharedPreferences prefs = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(login);
+        loginRadios = (RadioGroup) findViewById(R.id.radioGroup);
+        admin = (RadioButton) findViewById(R.id.admin_radio);
+        player = (RadioButton) findViewById(R.id.player_radio);
+        username = (EditText) findViewById(R.id.username);
+        loginButton = (Button) findViewById(R.id.login_button);
+        loginRadios.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId == R.id.admin_radio) {
+                    findViewById(R.id.username_container).setVisibility(View.INVISIBLE);
+                } else if (checkedId == R.id.player_radio) {
+                    findViewById(R.id.username_container).setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        prefs = getSharedPreferences("edu.gatech.seclass.sdpcryptogram", MODE_PRIVATE);
 
         mDatabase = FirebaseGetInstanceClass.GetFirebaseDatabaseInstance().getReference();
+        if (prefs.getBoolean("firstLaunch", true)) {
+            prefs.edit().putBoolean("firstLaunch", false).commit();
+            firstLaunchInit();
+        }
+        commonInit();
+    }
+
+    private void firstLaunchInit () {
+        List<String[]> extCrypts = ExternalWebService.getInstance().syncCryptogramService();
+        List<ExternalWebService.PlayerRating> extPlayerRatings = ExternalWebService.getInstance().syncRatingService();
+        List<String> extPlayerNames = ExternalWebService.getInstance().playernameService();
+
+        HashMap<String, Player> playerMap = new HashMap();
+        for (int i = 0; i < extPlayerNames.size(); i++) {
+            Player p = new Player(extPlayerNames.get(i), extPlayerRatings.get(i));
+            playerMap.put(p.getUsername(), p);
+        }
+        mDatabase.child("players").setValue(playerMap);
+
+        HashMap<String, Cryptogram> cryptoMap = new HashMap();
+        for (String[] extCrypt : extCrypts) {
+            List<String> arr = Arrays.asList(extCrypt);
+            Cryptogram c = new Cryptogram(arr.get(1), arr.get(2), arr.get(0));
+            cryptoMap.put(c.cryptoId, c);
+        }
+        mDatabase.child("cryptograms").setValue(cryptoMap);
+
+        for (String extPlayerName : extPlayerNames) {
+            HashMap<String, PlayCryptogram> pcMap = new HashMap();
+            for (String[] extCrypt : extCrypts) {
+                List<String> arr = Arrays.asList(extCrypt);
+                PlayCryptogram pc = new PlayCryptogram(extPlayerName, arr.get(0));
+                pcMap.put(pc.getCryptogramId(), pc);
+            }
+            mDatabase.child("playCryptograms").child(extPlayerName).setValue(pcMap);
+        }
+
+        for (String[] extCrypt : extCrypts) {
+            List<String> arr = Arrays.asList(extCrypt);
+            Cryptogram c = new Cryptogram(arr.get(1), arr.get(2), arr.get(0));
+            cryptoMap.put(c.cryptoId, c);
+        }
+        mDatabase.child("cryptograms").setValue(cryptoMap);
+        mDatabase.keepSynced(true);
+
+    }
+    private void commonInit () {
         mDatabase.child("players").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
                 List<String> extPlayers = ExternalWebService.getInstance().playernameService();
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Player p = snapshot.getValue(Player.class);
-                    if (!extPlayers.contains(p.getUsername())) {
-                        ExternalWebService.getInstance().updateRatingService(p.getUsername(), p.getFirstname(),p.getLastname(), p.getSolvedCount(), p.getStarted(), p.getTotalIncorrect());
+                if (dataSnapshot.getChildren() != null) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        Player p = snapshot.getValue(Player.class);
+                        if (!extPlayers.contains(p.getUsername())) {
+                            ExternalWebService.getInstance().updateRatingService(p.getUsername(), p.getFirstname(),p.getLastname(), p.getSolvedCount(), p.getStarted(), p.getTotalIncorrect());
+                        }
                     }
+                } else {
                 }
+
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -76,22 +154,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
             }
         });
-        RadioGroup loginRadios = (RadioGroup) findViewById(R.id.radioGroup);
-        final RadioButton admin = (RadioButton) findViewById(R.id.admin_radio);
-        final RadioButton player = (RadioButton) findViewById(R.id.player_radio);
-
-        loginRadios.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (checkedId == R.id.admin_radio) {
-                    findViewById(R.id.username_container).setVisibility(View.INVISIBLE);
-                } else if (checkedId == R.id.player_radio) {
-                    findViewById(R.id.username_container).setVisibility(View.VISIBLE);
-                }
-            }
-        });
-
-        loginButton = (Button) findViewById(R.id.login_button);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,9 +166,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 } else if (player.isChecked()) {
                     // log in as a player
-                    final EditText username = (EditText) findViewById(R.id.username);
                     final String usernameStr = username.getText().toString();
-
                     mDatabase.child("players").child(usernameStr).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
