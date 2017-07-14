@@ -22,7 +22,6 @@ public class Player {
 
     public Player() {
     }
-    //TODO: set ranking
     public Player(String username, String firstname, String lastname) {
         this.username = username;
         this.firstname = firstname;
@@ -30,7 +29,6 @@ public class Player {
     }
 
     public Player(String username, ExternalWebService.PlayerRating rating) {
-        // TODO: why assuming the username list and the rating list are matched by each player in order?
         this.username = username;
         this.firstname = rating.getFirstname();
         this.lastname = rating.getLastname();

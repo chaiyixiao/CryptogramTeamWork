@@ -52,4 +52,7 @@ public class PlayCryptogram {
         return this.incorrectSubmit;
     }
 
+    public String getUsername() {
+        return username;
+    }
 }
