@@ -23,6 +23,7 @@ import static android.support.test.espresso.assertion.ViewAssertions.matches;
 //import android.support.test.espresso.contrib.RecyclerViewActions;
 
 @RunWith(AndroidJUnit4.class)
+@LargeTest
 public class SDPCryptogramTest {
 
     @Rule
