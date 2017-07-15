@@ -61,11 +61,15 @@ public class LoginActivity extends AppCompatActivity {
 
         prefs = getSharedPreferences("edu.gatech.seclass.sdpcryptogram", MODE_PRIVATE);
 
+        // initialization for first launch
+        // sync cryptograms from external web service to firebase
         mDatabase = FirebaseGetInstanceClass.GetFirebaseDatabaseInstance().getReference();
         if (prefs.getBoolean("firstLaunch", true)) {
             prefs.edit().putBoolean("firstLaunch", false).commit();
             firstLaunchInit();
         }
+        // common initialization
+        // upload necessary local info to external webservice as it loses them between runs
         commonInit();
     }
 
@@ -82,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         mDatabase.child("players").setValue(playerMap);
 
-        // REQUEST NEW CRYPTOGRAMS
+        // REQUEST NEW CRYPTOGRAM when the game is first launched
         HashMap<String, Cryptogram> cryptoMap = new HashMap();
         for (String[] extCrypt : extCrypts) {
             List<String> arr = Arrays.asList(extCrypt);
@@ -90,6 +94,7 @@ public class LoginActivity extends AppCompatActivity {
             cryptoMap.put(c.cryptoId, c);
         }
         mDatabase.child("cryptograms").setValue(cryptoMap);
+
 
         // TODO: players in external service are ones created in other local machines, not necessary to sync
         for (String extPlayerName : extPlayerNames) {
@@ -113,6 +118,8 @@ public class LoginActivity extends AppCompatActivity {
 
     }
     private void commonInit () {
+
+        // upload all LOCAL player ratings to the external webservice
         mDatabase.child("players").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -133,6 +140,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
             }
         });
+
+        // upload all LOCAL created cryptograms to the external web service
         mDatabase.child("cryptograms").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -149,6 +158,7 @@ public class LoginActivity extends AppCompatActivity {
                     extIds.add(arr.get(0));
                 }
                 for (Cryptogram cr : mCryptogramList) {
+                    // check whether a cryptogram is already in the external web service
                     if (!extIds.contains(cr.cryptoId)) {
                         ExternalWebService.getInstance().addCryptogramService(cr.encodedPhrase, cr.solutionPhrase);
                     }
