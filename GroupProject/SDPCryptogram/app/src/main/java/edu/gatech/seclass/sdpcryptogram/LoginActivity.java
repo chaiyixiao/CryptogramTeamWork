@@ -74,6 +74,7 @@ public class LoginActivity extends AppCompatActivity {
         List<ExternalWebService.PlayerRating> extPlayerRatings = ExternalWebService.getInstance().syncRatingService();
         List<String> extPlayerNames = ExternalWebService.getInstance().playernameService();
 
+        // TODO: players in external service are ones created in other local machines, not necessary to sync
         HashMap<String, Player> playerMap = new HashMap();
         for (int i = 0; i < extPlayerNames.size(); i++) {
             Player p = new Player(extPlayerNames.get(i), extPlayerRatings.get(i));
@@ -81,6 +82,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         mDatabase.child("players").setValue(playerMap);
 
+        // REQUEST NEW CRYPTOGRAMS
         HashMap<String, Cryptogram> cryptoMap = new HashMap();
         for (String[] extCrypt : extCrypts) {
             List<String> arr = Arrays.asList(extCrypt);
@@ -89,6 +91,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         mDatabase.child("cryptograms").setValue(cryptoMap);
 
+        // TODO: players in external service are ones created in other local machines, not necessary to sync
         for (String extPlayerName : extPlayerNames) {
             HashMap<String, PlayCryptogram> pcMap = new HashMap();
             for (String[] extCrypt : extCrypts) {
@@ -99,6 +102,7 @@ public class LoginActivity extends AppCompatActivity {
             mDatabase.child("playCryptograms").child(extPlayerName).setValue(pcMap);
         }
 
+        // TODO: cryptograms sync for the second time?
         for (String[] extCrypt : extCrypts) {
             List<String> arr = Arrays.asList(extCrypt);
             Cryptogram c = new Cryptogram(arr);
