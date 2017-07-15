@@ -113,9 +113,13 @@ public class Test5PlayCryptogram {
         onView(withId(R.id.play_cryptogram_recycler_view))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(4, setTextWithID(R.id.cryptogram_my_letter, "i")));
 
-        // correct submission
+        // incomplete submission
         onView(withId(R.id.submit_cryptogram_button)).perform(click());
         Thread.sleep(2000);
+
+        // reset input
+        onView(withId(R.id.reset_cryptogram_button)).perform(click());
+        Thread.sleep(1000);
 
         // check the number of solved cryptograms
         onView(withId(R.id.back_cryptogram_button)).perform(click());
@@ -163,9 +167,13 @@ public class Test5PlayCryptogram {
         onView(withId(R.id.play_cryptogram_recycler_view))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(15, setTextWithID(R.id.cryptogram_my_letter, "i")));
 
-        // correct submission
+        // incorrect submission
         onView(withId(R.id.submit_cryptogram_button)).perform(click());
         Thread.sleep(2000);
+
+        // reset input
+        onView(withId(R.id.reset_cryptogram_button)).perform(click());
+        Thread.sleep(1000);
 
         // check the number of solved cryptograms
         onView(withId(R.id.back_cryptogram_button)).perform(click());
