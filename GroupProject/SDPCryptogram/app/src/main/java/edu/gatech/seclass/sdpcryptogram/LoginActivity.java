@@ -61,11 +61,15 @@ public class LoginActivity extends AppCompatActivity {
 
         prefs = getSharedPreferences("edu.gatech.seclass.sdpcryptogram", MODE_PRIVATE);
 
+        // initialization for first launch
+        // sync cryptograms from external web service to firebase
         mDatabase = FirebaseGetInstanceClass.GetFirebaseDatabaseInstance().getReference();
         if (prefs.getBoolean("firstLaunch", true)) {
             prefs.edit().putBoolean("firstLaunch", false).commit();
             firstLaunchInit();
         }
+        // common initialization
+        // upload necessary local info to external webservice as it loses them between runs
         commonInit();
     }
 
@@ -74,6 +78,7 @@ public class LoginActivity extends AppCompatActivity {
         List<ExternalWebService.PlayerRating> extPlayerRatings = ExternalWebService.getInstance().syncRatingService();
         List<String> extPlayerNames = ExternalWebService.getInstance().playernameService();
 
+        // TODO: incorrect! not necessary to store extPlayerName in local database
         HashMap<String, Player> playerMap = new HashMap();
         for (int i = 0; i < extPlayerNames.size(); i++) {
             Player p = new Player(extPlayerNames.get(i), extPlayerRatings.get(i));
@@ -81,6 +86,8 @@ public class LoginActivity extends AppCompatActivity {
         }
         mDatabase.child("players").setValue(playerMap);
 
+        // REQUEST NEW CRYPTOGRAM when the game is first launched
+        // sync cryptograms from the external web service
         HashMap<String, Cryptogram> cryptoMap = new HashMap();
         for (String[] extCrypt : extCrypts) {
             List<String> arr = Arrays.asList(extCrypt);
@@ -89,6 +96,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         mDatabase.child("cryptograms").setValue(cryptoMap);
 
+        // TODO: incorrect! not necessary to store extPlayerName in local database
         for (String extPlayerName : extPlayerNames) {
             HashMap<String, PlayCryptogram> pcMap = new HashMap();
             for (String[] extCrypt : extCrypts) {
@@ -99,6 +107,7 @@ public class LoginActivity extends AppCompatActivity {
             mDatabase.child("playCryptograms").child(extPlayerName).setValue(pcMap);
         }
 
+        // TODO: why sync external cryptograms again?
         for (String[] extCrypt : extCrypts) {
             List<String> arr = Arrays.asList(extCrypt);
             Cryptogram c = new Cryptogram(arr);
@@ -109,6 +118,8 @@ public class LoginActivity extends AppCompatActivity {
 
     }
     private void commonInit () {
+
+        // upload all LOCAL player ratings to the external webservice
         mDatabase.child("players").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -129,6 +140,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
             }
         });
+
+        // upload all LOCAL created cryptograms to the external web service
         mDatabase.child("cryptograms").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -145,6 +158,7 @@ public class LoginActivity extends AppCompatActivity {
                     extIds.add(arr.get(0));
                 }
                 for (Cryptogram cr : mCryptogramList) {
+                    // check whether a cryptogram is already in the external web service
                     if (!extIds.contains(cr.cryptoId)) {
                         ExternalWebService.getInstance().addCryptogramService(cr.encodedPhrase, cr.solutionPhrase);
                     }
