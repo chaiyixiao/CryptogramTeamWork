@@ -1,22 +1,20 @@
 package edu.gatech.seclass.sdpcryptogram;
 
-import edu.gatech.seclass.sdpcryptogram.LoginActivity;
+import android.support.test.rule.ActivityTestRule;
+import android.support.test.runner.AndroidJUnit4;
+import android.test.suitebuilder.annotation.LargeTest;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import android.support.test.espresso.Espresso;
-import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.AndroidJUnit4;
-import static android.support.test.espresso.Espresso.*;
-import static android.support.test.espresso.action.ViewActions.*;
-import static android.support.test.espresso.matcher.ViewMatchers.*;
-import static android.support.test.espresso.assertion.ViewAssertions.*;
-import static org.hamcrest.Matchers.*;
-import android.test.suitebuilder.annotation.LargeTest;
-import android.support.test.runner.AndroidJUnit4;
-
-import org.junit.runner.RunWith;
+import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.typeText;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.hasErrorText;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
 
 /**
  * @author - Basker and Longfei
@@ -37,7 +35,7 @@ public class Test1Login {
         onView(withId(R.id.admin_radio)).perform(click());
         onView(withId(R.id.login_button)).perform(click());
         onView(withId(R.id.add_player)).check(matches(isDisplayed()));
-        Thread.sleep(2000);
+        Thread.sleep(1500);
     }
 
     // check empty username login
@@ -46,7 +44,7 @@ public class Test1Login {
         onView(withId(R.id.player_radio)).perform(click());
         onView(withId(R.id.login_button)).perform(click());
         onView(withId(R.id.username)).check(matches(hasErrorText("please enter a valid username")));
-        Thread.sleep(2000);
+        Thread.sleep(1500);
     }
 
     // check invalid username login
@@ -56,7 +54,24 @@ public class Test1Login {
         onView(withId(R.id.username)).perform(typeText("invalid"));
         onView(withId(R.id.login_button)).perform(click());
         onView(withId(R.id.username)).check(matches(hasErrorText("please enter a valid username")));
-        Thread.sleep(2000);
+        Thread.sleep(1500);
+    }
+
+    // check that players created on other phones cannot login in this phone
+    @Test
+    public void test4_OtherPlayerLogin() throws InterruptedException {
+        onView(withId(R.id.player_radio)).perform(click());
+        onView(withId(R.id.username)).perform(typeText("example555"));
+        onView(withId(R.id.login_button)).perform(click());
+        onView(withId(R.id.username)).check(matches(hasErrorText("please enter a valid username")));
+        Thread.sleep(1500);
+    }
+
+    // check that a valid player can log in
+    @Test
+    public void test5_ValidPlayerLogin() {
+        // This test cannot be carried out before the administrator create a valid player,
+        // so this test is fulfilled in `Test2Administrator`.
     }
 
 }

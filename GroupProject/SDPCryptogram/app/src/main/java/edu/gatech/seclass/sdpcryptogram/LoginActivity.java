@@ -2,20 +2,17 @@ package edu.gatech.seclass.sdpcryptogram;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -86,7 +83,6 @@ public class LoginActivity extends AppCompatActivity {
 //        List<ExternalWebService.PlayerRating> extPlayerRatings = ExternalWebService.getInstance().syncRatingService();
 //        List<String> extPlayerNames = ExternalWebService.getInstance().playernameService();
 
-        // TODO: players in external service are ones created in other local machines, not necessary to sync
         HashMap<String, Player> playerMap = new HashMap();
         mDatabase.child("players").setValue(playerMap);
 
