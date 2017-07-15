@@ -227,7 +227,6 @@ public class PlayCryptogramActivity extends AppCompatActivity {
                             mySolutionLetters.set(i, replace.toUpperCase());
 
                         }
-
                     }
                     mAdapter.notifyDataSetChanged();
                 }

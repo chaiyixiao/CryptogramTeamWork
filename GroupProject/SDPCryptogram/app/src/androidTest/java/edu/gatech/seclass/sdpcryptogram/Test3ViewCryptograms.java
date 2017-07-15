@@ -77,6 +77,12 @@ public class Test3ViewCryptograms {
         Thread.sleep(1000);
         onView(withId(R.id.back_cryptogram_button)).perform(click());
 
+        // view the same cryptogram again
+        onView(withId(R.id.available_cryptograms_recycler_view))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(1, click()));
+        Thread.sleep(1000);
+        onView(withId(R.id.back_cryptogram_button)).perform(click());
+
         // check the in progress number is set to be "4" now
         onView(withId(R.id.started_num)).check(matches(withText("4")));
     }

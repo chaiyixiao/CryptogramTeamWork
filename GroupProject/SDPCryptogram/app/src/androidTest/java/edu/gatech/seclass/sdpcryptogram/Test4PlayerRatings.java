@@ -36,23 +36,16 @@ public class Test4PlayerRatings {
     public final ActivityTestRule<edu.gatech.seclass.sdpcryptogram.LoginActivity> main = new ActivityTestRule<>(edu.gatech.seclass.sdpcryptogram.LoginActivity.class);
 
     // check that the player rating list can be displayed correctly
-    @Test
-    public void test1_ViewPlayerRatings() throws InterruptedException {
-        onView(withId(R.id.username)).perform(click());
-        onView(withId(R.id.username)).perform(clearText(), typeText("randy"));
-        onView(withId(R.id.login_button)).perform(click());
-        onView(withContentDescription("Open navigation drawer")).perform(click());
-        onView(withText("Player Ratings")).perform(click());
-        onView(withId(R.id.player_ratings_recycler_view)).check(matches(isDisplayed()));
-        Thread.sleep (1000);
-    }
-
     // check the ranking order is correct
     @Test
-    public void test2_RatingRanking() {
+    public void test1_PlayerRatingRanking() throws InterruptedException {
 
+        // create a new user with a random username
+        String username = addPlayerRandy("random");
+
+        onView(withId(R.id.player_radio)).perform(click());
         onView(withId(R.id.username)).perform(click());
-        onView(withId(R.id.username)).perform(clearText(), typeText("randy"));
+        onView(withId(R.id.username)).perform(clearText(), typeText(username));
         onView(withId(R.id.login_button)).perform(click());
         onView(withContentDescription("Open navigation drawer")).perform(click());
         onView(withText("Player Ratings")).perform(click());

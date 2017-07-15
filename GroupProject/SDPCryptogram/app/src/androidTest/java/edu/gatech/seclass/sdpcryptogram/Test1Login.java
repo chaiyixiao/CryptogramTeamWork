@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.clearText;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
@@ -38,30 +39,25 @@ public class Test1Login {
         Thread.sleep(1000);
     }
 
-    // check empty username login
+
     @Test
-    public void test2_EmptyPlayerLogin() throws InterruptedException {
+    public void test2_InvalidPlayerLogin() throws InterruptedException {
         onView(withId(R.id.player_radio)).perform(click());
+
+        // check empty username login
+        onView(withId(R.id.username)).perform(clearText());
         onView(withId(R.id.login_button)).perform(click());
         onView(withId(R.id.username)).check(matches(hasErrorText("please enter a valid username")));
         Thread.sleep(1000);
-    }
 
-    // check invalid username login
-    @Test
-    public void test3_InvalidPlayerLogin() throws InterruptedException {
-        onView(withId(R.id.player_radio)).perform(click());
-        onView(withId(R.id.username)).perform(typeText("invalid"));
+        // check non-existing username login
+        onView(withId(R.id.username)).perform(clearText(), typeText("invalid"));
         onView(withId(R.id.login_button)).perform(click());
         onView(withId(R.id.username)).check(matches(hasErrorText("please enter a valid username")));
         Thread.sleep(1000);
-    }
 
-    // check that players created on other phones cannot login in this phone
-    @Test
-    public void test4_OtherPlayerLogin() throws InterruptedException {
-        onView(withId(R.id.player_radio)).perform(click());
-        onView(withId(R.id.username)).perform(typeText("example555"));
+        // check that valid players created on other phones cannot login in this phone
+        onView(withId(R.id.username)).perform(clearText(), typeText("example555"));
         onView(withId(R.id.login_button)).perform(click());
         onView(withId(R.id.username)).check(matches(hasErrorText("please enter a valid username")));
         Thread.sleep(1000);
@@ -69,7 +65,7 @@ public class Test1Login {
 
     // check that a valid player can log in
     @Test
-    public void test5_ValidPlayerLogin() {
+    public void test3_ValidPlayerLogin() {
         // This test cannot be carried out before the administrator create a valid player,
         // so this test is fulfilled in `Test2Administrator`.
     }
