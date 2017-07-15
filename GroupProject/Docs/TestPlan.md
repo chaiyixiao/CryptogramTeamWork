@@ -14,7 +14,10 @@ This test plan is created for the Cryptogram application developed for Boston To
 
 **Test cases directory**
 
+Classes Test:
 - `/SDPCryptogram/app/src/test/java/edu/gatech/seclass/sdpcryptogram/*.java`
+
+Device Test (should connect an Android device or AVD for test):
 - `/SDPCryptogram/app/src/androidTest/java/edu/gatech/seclass/sdpcryptogram/*.java`
 
 ## 1 Testing Strategy
