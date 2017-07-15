@@ -2,10 +2,11 @@
 
 **Author**: Team 19
 
-**Version**: 1.0
+**Version**: 1.1
 
 | Version | Time | Description |
 | --------| -----| ------------|
+| 1.1 | 07/15/2017 | revised for D4 |
 | 1.0 | 07/07/2017 | initial version submitted for D3 |
 
 
@@ -24,11 +25,18 @@ Cryptograms can be fun brain-teasers and mind-melters, or they can quickly leave
 
 ### Installation
 
+** Install from source**
+
 - Import the project into Android Studio.
 - Conncet to an Android device. You can choose one of the following two options
 	- Create and start an Android Virtual Device (AVD)
 	- Connect to a Android phone via a USB cable. Enable developer options.
 - Click "Run app" to install and run the app on the device you choose.
+
+**Install using APK**
+
+- Copy `SDPCryptogram.apk` from the `/APK` directory to an Andorid phone.
+- Open the copied .apk file in the phone and following the instruction to install.
 
 ### For the administrator
 

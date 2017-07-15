@@ -2,13 +2,20 @@
 
 **Author**: Team 19
 
-**Version**: 1.0
+**Version**: 1.2
 
 | Version | Time | Description |
 | --------| -----| ------------|
+| 1.2 | 07/15/2017 | all test results updated |
+| 1.2 | 07/07/2017 | partial test results updated |
 | 1.0 | 06/30/2017 | full doc submitted in D2 |
 
-This test plan is created for the Cryptogram application developed for Boston Towers. The primary goal of the application is to keep the kids busy by solving cryptograms and comparing their progress. 
+This test plan is created for the Cryptogram application developed for Boston Towers. The primary goal of the application is to keep the kids busy by solving cryptograms and comparing their progress.
+
+**Test cases directory**
+
+- `/SDPCryptogram/app/src/test/java/edu/gatech/seclass/sdpcryptogram/*.java`
+- `/SDPCryptogram/app/src/androidTest/java/edu/gatech/seclass/sdpcryptogram/*.java`
 
 ## 1 Testing Strategy
 
