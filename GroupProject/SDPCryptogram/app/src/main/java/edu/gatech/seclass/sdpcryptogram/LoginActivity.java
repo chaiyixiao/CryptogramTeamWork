@@ -73,41 +73,25 @@ public class LoginActivity extends AppCompatActivity {
         commonInit();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // common initialization
+        // upload necessary local info to external webservice as it loses them between runs
+        commonInit();
+    }
+
     private void firstLaunchInit () {
         List<String[]> extCrypts = ExternalWebService.getInstance().syncCryptogramService();
-        List<ExternalWebService.PlayerRating> extPlayerRatings = ExternalWebService.getInstance().syncRatingService();
-        List<String> extPlayerNames = ExternalWebService.getInstance().playernameService();
+//        List<ExternalWebService.PlayerRating> extPlayerRatings = ExternalWebService.getInstance().syncRatingService();
+//        List<String> extPlayerNames = ExternalWebService.getInstance().playernameService();
 
         // TODO: players in external service are ones created in other local machines, not necessary to sync
         HashMap<String, Player> playerMap = new HashMap();
-        for (int i = 0; i < extPlayerNames.size(); i++) {
-            Player p = new Player(extPlayerNames.get(i), extPlayerRatings.get(i));
-            playerMap.put(p.getUsername(), p);
-        }
         mDatabase.child("players").setValue(playerMap);
 
         // REQUEST NEW CRYPTOGRAM when the game is first launched
         HashMap<String, Cryptogram> cryptoMap = new HashMap();
-        for (String[] extCrypt : extCrypts) {
-            List<String> arr = Arrays.asList(extCrypt);
-            Cryptogram c = new Cryptogram(arr);
-            cryptoMap.put(c.cryptoId, c);
-        }
-        mDatabase.child("cryptograms").setValue(cryptoMap);
-
-
-        // TODO: players in external service are ones created in other local machines, not necessary to sync
-        for (String extPlayerName : extPlayerNames) {
-            HashMap<String, PlayCryptogram> pcMap = new HashMap();
-            for (String[] extCrypt : extCrypts) {
-                List<String> arr = Arrays.asList(extCrypt);
-                PlayCryptogram pc = new PlayCryptogram(extPlayerName, arr.get(0));
-                pcMap.put(pc.getCryptogramId(), pc);
-            }
-            mDatabase.child("playCryptograms").child(extPlayerName).setValue(pcMap);
-        }
-
-        // TODO: cryptograms sync for the second time?
         for (String[] extCrypt : extCrypts) {
             List<String> arr = Arrays.asList(extCrypt);
             Cryptogram c = new Cryptogram(arr);

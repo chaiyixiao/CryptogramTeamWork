@@ -218,8 +218,6 @@ public class AvailableCryptogramsFragment extends Fragment {
         }
         mAdapter.notifyDataSetChanged();
         storeCryptogramList();
-        for (PlayCryptogram mPlayCryptogram : mPlayCryptograms) {
-        }
         storePlayCryptogramList();
     }
 

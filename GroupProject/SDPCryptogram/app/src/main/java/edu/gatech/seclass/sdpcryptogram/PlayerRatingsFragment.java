@@ -30,11 +30,11 @@ import edu.gatech.seclass.utilities.ExternalWebService;
 
 public class PlayerRatingsFragment extends Fragment {
 
-
     //    private TextView totalIncorrect;
     private RecyclerView playerRatingsRecyclerView;
     private LinearLayoutManager ratingsLayoutManager;
     private PlayerRatingsAdapter mAdapter;
+    private DatabaseReference mDatabase;
 
     private ArrayList<Player> mPlayers = new ArrayList<>();
 
@@ -57,19 +57,33 @@ public class PlayerRatingsFragment extends Fragment {
         mAdapter = new PlayerRatingsAdapter(mPlayers);
         playerRatingsRecyclerView.setAdapter(mAdapter);
 
-        return v;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
         List<ExternalWebService.PlayerRating> playerRatings = ExternalWebService.getInstance().syncRatingService();
-
         for (ExternalWebService.PlayerRating pr : playerRatings) {
             Player newP = new Player("", pr);
             mPlayers.add(newP);
         }
+
+        mDatabase = FirebaseGetInstanceClass.GetFirebaseDatabaseInstance().getReference();
+        mDatabase.child("players").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                List<String> mPIds = new ArrayList<>();
+                for (Player mPlayer : mPlayers) {
+                    mPIds.add(mPlayer.getUsername());
+                }
+
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Player p = snapshot.getValue(Player.class);
+                    if (!mPIds.contains(p.getUsername())) {
+                        mPlayers.add(p);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
         // sort player ratings by solved numbers, then by incorrect numbers, then by started numbers
         Collections.sort(mPlayers, new Comparator<Player>() {
             @Override
@@ -98,5 +112,11 @@ public class PlayerRatingsFragment extends Fragment {
         }
         mAdapter.notifyDataSetChanged();
         // get the list of player ratings, and the list of player usernames
+        return v;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 }
