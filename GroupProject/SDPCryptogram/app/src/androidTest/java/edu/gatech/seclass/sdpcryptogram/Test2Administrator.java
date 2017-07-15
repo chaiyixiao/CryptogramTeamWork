@@ -77,7 +77,7 @@ public class Test2Administrator {
         onView(withId(R.id.add_first_name)).perform(clearText(), typeText("Randy"));
         onView(withId(R.id.add_last_name)).perform(clearText(), typeText("Marsh"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.save_player)).perform(click());
-        Thread.sleep(2000);
+        Thread.sleep(1500);
         onView(withId(R.id.cancel_add_player)).perform(click());
 
         // check if the new created player can login
@@ -103,7 +103,7 @@ public class Test2Administrator {
         onView(withId(R.id.add_first_name)).perform(clearText(), typeText("Randy"));
         onView(withId(R.id.add_last_name)).perform(clearText(), typeText("Marsh"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.save_player)).perform(click());
-        Thread.sleep(2000);
+        Thread.sleep(1500);
         onView(withId(R.id.cancel_add_player)).perform(click());
     }
 
@@ -118,7 +118,7 @@ public class Test2Administrator {
         onView(withId(R.id.solution_phrase)).perform(clearText(), typeText("This is a cat."));
         onView(withId(R.id.encoded_phrase)).perform(clearText(), typeText("Yjod od s vsy."), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.save_button)).perform(click());
-        Thread.sleep(2500);
+        Thread.sleep(1500);
 
         onView(withId(R.id.cancel_button)).perform(click());
     }
@@ -134,7 +134,7 @@ public class Test2Administrator {
         onView(withId(R.id.solution_phrase)).perform(clearText(), typeText("42 is the @nswer!"));
         onView(withId(R.id.encoded_phrase)).perform(clearText(), typeText("42 od yjr @mdert!"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.save_button)).perform(click());
-        Thread.sleep(2000);
+        Thread.sleep(1500);
         onView(withId(R.id.cancel_button)).perform(click());
     }
 
@@ -148,7 +148,7 @@ public class Test2Administrator {
         onView(withId(R.id.solution_phrase)).perform(clearText(), typeText("This is solution."));
         onView(withId(R.id.encoded_phrase)).perform(clearText(), typeText("Wrong encoded."), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.save_button)).perform(click());
-        Thread.sleep(2000);
+        Thread.sleep(1500);
         onView(withId(R.id.cancel_button)).perform(click());
     }
 }

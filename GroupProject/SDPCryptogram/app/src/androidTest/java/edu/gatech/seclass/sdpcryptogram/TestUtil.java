@@ -81,7 +81,7 @@ public class TestUtil {
         return username;
     }
 
-    public static void addCryptograms() throws InterruptedException {
+    public static void addCryptogramsForTest() throws InterruptedException {
         onView(withId(R.id.admin_radio)).perform(click());
         onView(withId(R.id.login_button)).perform(click());
         onView(withId(R.id.add_cryptogram)).perform(click());

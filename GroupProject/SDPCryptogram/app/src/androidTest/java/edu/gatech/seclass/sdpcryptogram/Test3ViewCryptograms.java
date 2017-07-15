@@ -34,7 +34,8 @@ public class Test3ViewCryptograms {
     public final ActivityTestRule<edu.gatech.seclass.sdpcryptogram.LoginActivity> main = new ActivityTestRule<>(edu.gatech.seclass.sdpcryptogram.LoginActivity.class);
 
 
-    // Test viewing cryptogram list and each cryptogram
+    // Test that cryptogram list and each cryptogram can be viewed correctly
+    // Test that the number of started cryptograms is correct after viewing some cryptograms
     @Test
     public void test1_ViewCryptograms() throws InterruptedException {
         // create a new user with a random username
@@ -55,16 +56,21 @@ public class Test3ViewCryptograms {
                 .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
         Thread.sleep(1000);
         onView(withId(R.id.back_cryptogram_button)).perform(click());
+        onView(withId(R.id.started_num)).check(matches(withText("1")));
 
         onView(withId(R.id.available_cryptograms_recycler_view))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(1, click()));
         Thread.sleep(1000);
         onView(withId(R.id.back_cryptogram_button)).perform(click());
+        onView(withId(R.id.started_num)).check(matches(withText("2")));
+
 
         onView(withId(R.id.available_cryptograms_recycler_view))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(2, click()));
         Thread.sleep(1000);
         onView(withId(R.id.back_cryptogram_button)).perform(click());
+        onView(withId(R.id.started_num)).check(matches(withText("3")));
+
 
         onView(withId(R.id.available_cryptograms_recycler_view))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(3, click()));

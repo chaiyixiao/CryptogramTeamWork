@@ -37,14 +37,14 @@ public class Test4PlayerRatings {
 
     // check that the player rating list can be displayed correctly
     @Test
-    public void test1_ViewPlayerRatings() {
+    public void test1_ViewPlayerRatings() throws InterruptedException {
         onView(withId(R.id.username)).perform(click());
         onView(withId(R.id.username)).perform(clearText(), typeText("randy"));
         onView(withId(R.id.login_button)).perform(click());
         onView(withContentDescription("Open navigation drawer")).perform(click());
         onView(withText("Player Ratings")).perform(click());
         onView(withId(R.id.player_ratings_recycler_view)).check(matches(isDisplayed()));
-
+        Thread.sleep (1000);
     }
 
     // check the ranking order is correct
@@ -67,7 +67,5 @@ public class Test4PlayerRatings {
         onView(withId(R.id.player_ratings_recycler_view))
                 .check(matches(atPosition(2, hasDescendant(withText("John Doe")))));
 
-        onView(withId(R.id.player_ratings_recycler_view))
-                .check(matches(atPosition(3, hasDescendant(withText("James Bond")))));
     }
 }

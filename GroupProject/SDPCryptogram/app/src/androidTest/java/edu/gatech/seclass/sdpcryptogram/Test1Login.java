@@ -35,7 +35,7 @@ public class Test1Login {
         onView(withId(R.id.admin_radio)).perform(click());
         onView(withId(R.id.login_button)).perform(click());
         onView(withId(R.id.add_player)).check(matches(isDisplayed()));
-        Thread.sleep(1500);
+        Thread.sleep(1000);
     }
 
     // check empty username login
@@ -44,7 +44,7 @@ public class Test1Login {
         onView(withId(R.id.player_radio)).perform(click());
         onView(withId(R.id.login_button)).perform(click());
         onView(withId(R.id.username)).check(matches(hasErrorText("please enter a valid username")));
-        Thread.sleep(1500);
+        Thread.sleep(1000);
     }
 
     // check invalid username login
@@ -54,7 +54,7 @@ public class Test1Login {
         onView(withId(R.id.username)).perform(typeText("invalid"));
         onView(withId(R.id.login_button)).perform(click());
         onView(withId(R.id.username)).check(matches(hasErrorText("please enter a valid username")));
-        Thread.sleep(1500);
+        Thread.sleep(1000);
     }
 
     // check that players created on other phones cannot login in this phone
@@ -64,7 +64,7 @@ public class Test1Login {
         onView(withId(R.id.username)).perform(typeText("example555"));
         onView(withId(R.id.login_button)).perform(click());
         onView(withId(R.id.username)).check(matches(hasErrorText("please enter a valid username")));
-        Thread.sleep(1500);
+        Thread.sleep(1000);
     }
 
     // check that a valid player can log in

@@ -1,5 +1,6 @@
 package edu.gatech.seclass.sdpcryptogram;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -8,16 +9,11 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-
-
-/**
- * Created by chaiyixiao on 04/07/2017.
- */
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,12 +21,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import edu.gatech.seclass.utilities.ExternalWebService;
 
 import static edu.gatech.seclass.sdpcryptogram.R.layout.play_cryptogram;
+
+/**
+ * Created by chaiyixiao on 04/07/2017.
+ */
 
 public class PlayCryptogramActivity extends AppCompatActivity {
 
@@ -53,6 +51,9 @@ public class PlayCryptogramActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(play_cryptogram);
+
+        final Context context = getApplicationContext();
+        final int duration = Toast.LENGTH_SHORT;
 
         playRecyclerView = (RecyclerView) findViewById(R.id.play_cryptogram_recycler_view);
         playRecyclerView.setHasFixedSize(true);
@@ -137,6 +138,7 @@ public class PlayCryptogramActivity extends AppCompatActivity {
                         layout.setVisibility(View.VISIBLE);
 //                    PlayCryptogramActivity.this.finish();
                     } else {
+                        Toast.makeText(context, "Wrong Answer!", duration).show();
                         submit.setError("Wrong Answer!");
                         mPlayCrypt.addIncorrectSubmit();
                         currentPlayer.addTotalIncorrect();
@@ -149,6 +151,7 @@ public class PlayCryptogramActivity extends AppCompatActivity {
                 } else {
                     submit.hasFocus();
                     submit.setError("Complete all the letters before submit!");
+                    Toast.makeText(context, "Complete all the letters before submit!", duration).show();
                 }
             }
         });

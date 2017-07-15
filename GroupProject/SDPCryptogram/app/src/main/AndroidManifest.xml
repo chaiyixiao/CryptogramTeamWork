@@ -9,6 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
 
+        android:windowSoftInputMode="stateHidden|adjustPan"
+
         android:theme="@style/AppTheme" >
         <activity android:name=".LoginActivity"
             android:label="SDP Cryptogram">

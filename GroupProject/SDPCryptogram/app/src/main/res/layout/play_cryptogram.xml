@@ -7,7 +7,9 @@
         android:id="@+id/play_cryptogram_recycler_view"
         android:layout_width="match_parent"
         android:layout_weight="1"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:focusableInTouchMode="true"
+        android:descendantFocusability="beforeDescendants"/>
 
     <LinearLayout
         android:id="@+id/buttons_container"
@@ -37,6 +39,7 @@
             android:layout_weight="1"
             android:text="Back" />
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/right_submit_answer"
         android:visibility="gone"
@@ -47,8 +50,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textSize="18sp"
-            android:text="Congratulations! Right answer!"
-            />
+            android:textColor="#FF5733"
+            android:text="Congratulations! Right answer!" />
     </LinearLayout>
 
 </LinearLayout>
